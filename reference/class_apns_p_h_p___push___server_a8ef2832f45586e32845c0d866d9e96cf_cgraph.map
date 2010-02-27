@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory." alt="" coords="416,43,515,72"/>
+<area shape="rect" id="node5" href="$class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger." alt="" coords="901,200,1085,229"/>
+<area shape="rect" id="node7" href="$class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory." alt="" coords="417,96,513,125"/>
+<area shape="rect" id="node9" href="$class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter&#45;process message queue." alt="" coords="205,95,251,124"/>
+<area shape="rect" id="node13" href="$class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service." alt="" coords="147,199,309,228"/>
+<area shape="rect" id="node16" href="$class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server." alt="" coords="359,200,572,229"/>
+<area shape="rect" id="node22" href="$class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server." alt="" coords="621,304,853,333"/>
+<area shape="rect" id="node18" href="$class_apns_p_h_p___abstract.html#a56e16b11db21be37c5f50850d287ff21" title="Connects to Apple Push Notification service server." alt="" coords="627,200,848,229"/>
+</map>
