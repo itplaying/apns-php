@@ -45,6 +45,7 @@
       <li><a href="#index_l"><span>l</span></a></li>
       <li><a href="#index_m"><span>m</span></a></li>
       <li><a href="#index_o"><span>o</span></a></li>
+      <li><a href="#index_p"><span>p</span></a></li>
       <li><a href="#index_r"><span>r</span></a></li>
       <li><a href="#index_s"><span>s</span></a></li>
       <li><a href="#index_t"><span>t</span></a></li>
@@ -72,6 +73,9 @@ Here is a list of all struct and union fields with links to the structures/union
 , <a class="el" href="class_apns_p_h_p___feedback.html#a109431534e6d7a411266096a7c79cf17">ApnsPHP_Feedback</a>
 , <a class="el" href="class_apns_p_h_p___push.html#a109431534e6d7a411266096a7c79cf17">ApnsPHP_Push</a>
 </li>
+<li>$_bAutoAdjustLongPayload
+: <a class="el" href="class_apns_p_h_p___message.html#adad35a90952694cc3584b9cc2f8f250f">ApnsPHP_Message</a>
+</li>
 <li>$_hSem
 : <a class="el" href="class_apns_p_h_p___push___server.html#a7ebaa7af948e302b90ec26b52a9ffba9">ApnsPHP_Push_Server</a>
 </li>
@@ -83,6 +87,9 @@ Here is a list of all struct and union fields with links to the structures/union
 </li>
 <li>$_logger
 : <a class="el" href="class_apns_p_h_p___abstract.html#a571be5a19e4be820a9a496eb8dee140b">ApnsPHP_Abstract</a>
+</li>
+<li>$_mCustomPropertyValue
+: <a class="el" href="class_apns_p_h_p___message.html#ad799bd268de2187ecf13cac02c5a7751">ApnsPHP_Message</a>
 </li>
 <li>$_nBadge
 : <a class="el" href="class_apns_p_h_p___message.html#a4a405915f488f512cef18cad7b225408">ApnsPHP_Message</a>
@@ -117,6 +124,9 @@ Here is a list of all struct and union fields with links to the structures/union
 <li>$_nSocketSelectTimeout
 : <a class="el" href="class_apns_p_h_p___abstract.html#af2c19aa1d01cd567d2bc66815617e142">ApnsPHP_Abstract</a>
 </li>
+<li>$_sCustomPropertyName
+: <a class="el" href="class_apns_p_h_p___message.html#a4e1484d655125ab78b0f09b900057ff9">ApnsPHP_Message</a>
+</li>
 <li>$_sProviderCertificateFile
 : <a class="el" href="class_apns_p_h_p___abstract.html#aa63034430728780713f6583b9cd6dfd1">ApnsPHP_Abstract</a>
 </li>
@@ -146,9 +156,6 @@ Here is a list of all struct and union fields with links to the structures/union
 </li>
 <li>_getBinaryNotification()
 : <a class="el" href="class_apns_p_h_p___push.html#aa8293c674f1cd08cdbacf26bbd0c3d76">ApnsPHP_Push</a>
-</li>
-<li>_getPayload()
-: <a class="el" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51">ApnsPHP_Message</a>
 </li>
 <li>_getQueue()
 : <a class="el" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593">ApnsPHP_Push_Server</a>
@@ -213,6 +220,9 @@ Here is a list of all struct and union fields with links to the structures/union
 
 
 <h3><a class="anchor" id="index_g">- g -</a></h3><ul>
+<li>getAutoAdjustLongPayload()
+: <a class="el" href="class_apns_p_h_p___message.html#abd887414046987385e8c86d650c5c4f2">ApnsPHP_Message</a>
+</li>
 <li>getBadge()
 : <a class="el" href="class_apns_p_h_p___message.html#aba021442e06fe4dcaad192a50ebc9c1f">ApnsPHP_Message</a>
 </li>
@@ -228,12 +238,21 @@ Here is a list of all struct and union fields with links to the structures/union
 <li>getConnectTimeout()
 : <a class="el" href="class_apns_p_h_p___abstract.html#ab18d0742be9db395bfd6226e348a994d">ApnsPHP_Abstract</a>
 </li>
+<li>getCustomPropertyName()
+: <a class="el" href="class_apns_p_h_p___message.html#a131e70d3d121161fed7858f3d77aca29">ApnsPHP_Message</a>
+</li>
+<li>getCustomPropertyValue()
+: <a class="el" href="class_apns_p_h_p___message.html#a79740fb21c2ed34629ddd7d6a95974d0">ApnsPHP_Message</a>
+</li>
 <li>getLogger()
 : <a class="el" href="class_apns_p_h_p___abstract.html#ae82a5c2d611f7d461f0e4c0208b78ce8">ApnsPHP_Abstract</a>
 </li>
+<li>getPayload()
+: <a class="el" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879">ApnsPHP_Message</a>
+</li>
 <li>getQueue()
-: <a class="el" href="class_apns_p_h_p___push.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push</a>
-, <a class="el" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push_Server</a>
+: <a class="el" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push_Server</a>
+, <a class="el" href="class_apns_p_h_p___push.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push</a>
 </li>
 <li>getRecipient()
 : <a class="el" href="class_apns_p_h_p___message.html#a46f33ab42d194e1b7a108f2fb287627b">ApnsPHP_Message</a>
@@ -287,6 +306,13 @@ Here is a list of all struct and union fields with links to the structures/union
 </ul>
 
 
+<h3><a class="anchor" id="index_p">- p -</a></h3><ul>
+<li>PAYLOAD_MAXIMUM_SIZE
+: <a class="el" href="class_apns_p_h_p___message.html#ac293b67346928eb668a67938a0305e33">ApnsPHP_Message</a>
+</li>
+</ul>
+
+
 <h3><a class="anchor" id="index_r">- r -</a></h3><ul>
 <li>receive()
 : <a class="el" href="class_apns_p_h_p___feedback.html#ab391f567994c7c41c08c66f5e4492646">ApnsPHP_Feedback</a>
@@ -301,6 +327,9 @@ Here is a list of all struct and union fields with links to the structures/union
 <li>send()
 : <a class="el" href="class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e">ApnsPHP_Push</a>
 </li>
+<li>setAutoAdjustLongPayload()
+: <a class="el" href="class_apns_p_h_p___message.html#a5e8118de739f391b8ce1a0d59b56645a">ApnsPHP_Message</a>
+</li>
 <li>setBadge()
 : <a class="el" href="class_apns_p_h_p___message.html#a2f7e376465691b665f7f5bdb2f2d93ae">ApnsPHP_Message</a>
 </li>
@@ -312,6 +341,9 @@ Here is a list of all struct and union fields with links to the structures/union
 </li>
 <li>setConnectTimeout()
 : <a class="el" href="class_apns_p_h_p___abstract.html#ad070cb1e77347cd053720a34be084668">ApnsPHP_Abstract</a>
+</li>
+<li>setCustomProperty()
+: <a class="el" href="class_apns_p_h_p___message.html#ab99f4730bb99f4c91bf4c71eac2d4f15">ApnsPHP_Message</a>
 </li>
 <li>setLogger()
 : <a class="el" href="class_apns_p_h_p___abstract.html#a4883e066cf88b31779008a79300b6ac9">ApnsPHP_Abstract</a>
@@ -361,7 +393,7 @@ Here is a list of all struct and union fields with links to the structures/union
 </li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 03:47:01 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 20:47:41 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

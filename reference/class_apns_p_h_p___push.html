@@ -171,10 +171,10 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_push_8php_source.html#l00073">73</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p>References <a class="el" href="_push_8php_source.html#l00181">_getBinaryNotification()</a>, <a class="el" href="_message_8php_source.html#l00078">ApnsPHP_Message::getRecipient()</a>, and <a class="el" href="_message_8php_source.html#l00093">ApnsPHP_Message::getRecipientsNumber()</a>.</p>
+<p>References <a class="el" href="_push_8php_source.html#l00181">_getBinaryNotification()</a>, <a class="el" href="_message_8php_source.html#l00266">ApnsPHP_Message::getPayload()</a>, <a class="el" href="_message_8php_source.html#l00085">ApnsPHP_Message::getRecipient()</a>, and <a class="el" href="_message_8php_source.html#l00100">ApnsPHP_Message::getRecipientsNumber()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00074"></a>00074     {
-<a name="l00075"></a>00075         $sMessagePayload = (string)$message;
+<a name="l00075"></a>00075         $sMessagePayload = $message-&gt;getPayload();
 <a name="l00076"></a>00076         $nRecipients = $message-&gt;getRecipientsNumber();
 <a name="l00077"></a>00077         
 <a name="l00078"></a>00078         <span class="keywordflow">for</span> ($i = 0; $i &lt; $nRecipients; $i++) { 
@@ -195,7 +195,7 @@ Here is the call graph for this function:</div>
 <div class="dynsection">
 <div class="center"><img src="class_apns_p_h_p___push_ac018cd9443834d169616e64dbd91795b_cgraph.png" border="0" usemap="#class_apns_p_h_p___push_ac018cd9443834d169616e64dbd91795b_cgraph_map" alt=""></div>
 <map name="class_apns_p_h_p___push_ac018cd9443834d169616e64dbd91795b_cgraph_map" id="class_apns_p_h_p___push_ac018cd9443834d169616e64dbd91795b_cgraph">
-<area shape="rect" id="node3" href="class_apns_p_h_p___push.html#aa8293c674f1cd08cdbacf26bbd0c3d76" title="Generate a binary notification from a device token and a JSON&#45;encoded payload." alt="" coords="169,5,343,35"/><area shape="rect" id="node5" href="class_apns_p_h_p___message.html#a46f33ab42d194e1b7a108f2fb287627b" title="Get a recipient." alt="" coords="132,59,380,88"/><area shape="rect" id="node7" href="class_apns_p_h_p___message.html#ae6c898739424a186c74c6d8541fbb5f5" title="Get the number of recipients." alt="" coords="103,112,409,141"/></map>
+<area shape="rect" id="node3" href="class_apns_p_h_p___push.html#aa8293c674f1cd08cdbacf26bbd0c3d76" title="Generate a binary notification from a device token and a JSON&#45;encoded payload." alt="" coords="169,5,343,35"/><area shape="rect" id="node5" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON&#45;encoded payload." alt="" coords="139,59,373,88"/><area shape="rect" id="node7" href="class_apns_p_h_p___message.html#a46f33ab42d194e1b7a108f2fb287627b" title="Get a recipient." alt="" coords="132,112,380,141"/><area shape="rect" id="node9" href="class_apns_p_h_p___message.html#ae6c898739424a186c74c6d8541fbb5f5" title="Get the number of recipients." alt="" coords="103,165,409,195"/></map>
 </div>
 </p>
 
@@ -488,7 +488,7 @@ Here is the caller graph for this function:</div>
 <li><a class="el" href="_push_8php_source.html">Push.php</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 03:47:03 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 20:47:43 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

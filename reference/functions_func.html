@@ -65,9 +65,6 @@
 <li>_getBinaryNotification()
 : <a class="el" href="class_apns_p_h_p___push.html#aa8293c674f1cd08cdbacf26bbd0c3d76">ApnsPHP_Push</a>
 </li>
-<li>_getPayload()
-: <a class="el" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51">ApnsPHP_Message</a>
-</li>
 <li>_getQueue()
 : <a class="el" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593">ApnsPHP_Push_Server</a>
 </li>
@@ -112,6 +109,9 @@
 
 
 <h3><a class="anchor" id="index_g">- g -</a></h3><ul>
+<li>getAutoAdjustLongPayload()
+: <a class="el" href="class_apns_p_h_p___message.html#abd887414046987385e8c86d650c5c4f2">ApnsPHP_Message</a>
+</li>
 <li>getBadge()
 : <a class="el" href="class_apns_p_h_p___message.html#aba021442e06fe4dcaad192a50ebc9c1f">ApnsPHP_Message</a>
 </li>
@@ -127,12 +127,21 @@
 <li>getConnectTimeout()
 : <a class="el" href="class_apns_p_h_p___abstract.html#ab18d0742be9db395bfd6226e348a994d">ApnsPHP_Abstract</a>
 </li>
+<li>getCustomPropertyName()
+: <a class="el" href="class_apns_p_h_p___message.html#a131e70d3d121161fed7858f3d77aca29">ApnsPHP_Message</a>
+</li>
+<li>getCustomPropertyValue()
+: <a class="el" href="class_apns_p_h_p___message.html#a79740fb21c2ed34629ddd7d6a95974d0">ApnsPHP_Message</a>
+</li>
 <li>getLogger()
 : <a class="el" href="class_apns_p_h_p___abstract.html#ae82a5c2d611f7d461f0e4c0208b78ce8">ApnsPHP_Abstract</a>
 </li>
+<li>getPayload()
+: <a class="el" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879">ApnsPHP_Message</a>
+</li>
 <li>getQueue()
-: <a class="el" href="class_apns_p_h_p___push.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push</a>
-, <a class="el" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push_Server</a>
+: <a class="el" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push_Server</a>
+, <a class="el" href="class_apns_p_h_p___push.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push</a>
 </li>
 <li>getRecipient()
 : <a class="el" href="class_apns_p_h_p___message.html#a46f33ab42d194e1b7a108f2fb287627b">ApnsPHP_Message</a>
@@ -193,6 +202,9 @@
 <li>send()
 : <a class="el" href="class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e">ApnsPHP_Push</a>
 </li>
+<li>setAutoAdjustLongPayload()
+: <a class="el" href="class_apns_p_h_p___message.html#a5e8118de739f391b8ce1a0d59b56645a">ApnsPHP_Message</a>
+</li>
 <li>setBadge()
 : <a class="el" href="class_apns_p_h_p___message.html#a2f7e376465691b665f7f5bdb2f2d93ae">ApnsPHP_Message</a>
 </li>
@@ -204,6 +216,9 @@
 </li>
 <li>setConnectTimeout()
 : <a class="el" href="class_apns_p_h_p___abstract.html#ad070cb1e77347cd053720a34be084668">ApnsPHP_Abstract</a>
+</li>
+<li>setCustomProperty()
+: <a class="el" href="class_apns_p_h_p___message.html#ab99f4730bb99f4c91bf4c71eac2d4f15">ApnsPHP_Message</a>
 </li>
 <li>setLogger()
 : <a class="el" href="class_apns_p_h_p___abstract.html#a4883e066cf88b31779008a79300b6ac9">ApnsPHP_Abstract</a>
@@ -231,7 +246,7 @@
 </li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 03:47:01 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 20:47:41 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
