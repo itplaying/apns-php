@@ -38,6 +38,8 @@
 </table>
 <hr/><a name="_details"></a><h2>Detailed Description</h2>
 <p>Autoload stuff. </p>
+<p>LICENSE</p>
+<p>This source file is subject to the new BSD license that is bundled with this package in the file LICENSE.txt. It is also available through the world-wide-web at this URL: <a href="http://code.google.com/p/apns-php/wiki/License">http://code.google.com/p/apns-php/wiki/License</a> If you did not receive a copy of the license and are unable to obtain it through the world-wide-web, please send an email to <a href="mailto:aldo.armiento@gmail.com">aldo.armiento@gmail.com</a> so we can send you a copy immediately.</p>
 <dl class="version"><dt><b>Version:</b></dt><dd>$Id$ </dd></dl>
 
 <p>Definition in file <a class="el" href="_autoload_8php_source.html">Autoload.php</a>.</p>
@@ -74,37 +76,37 @@
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_autoload_8php_source.html#l00021">21</a> of file <a class="el" href="_autoload_8php_source.html">Autoload.php</a>.</p>
+<p>Definition at line <a class="el" href="_autoload_8php_source.html#l00031">31</a> of file <a class="el" href="_autoload_8php_source.html">Autoload.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00022"></a>00022 {
-<a name="l00023"></a>00023     <span class="keywordflow">if</span> (empty($sClassName)) {
-<a name="l00024"></a>00024         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&apos;Class name is empty&apos;</span>);
-<a name="l00025"></a>00025     }
-<a name="l00026"></a>00026     
-<a name="l00027"></a>00027     $sPath = dirname(dirname(__FILE__));
-<a name="l00028"></a>00028     <span class="keywordflow">if</span> (empty($sPath)) {
-<a name="l00029"></a>00029         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&apos;Current path is empty&apos;</span>);
-<a name="l00030"></a>00030     }
-<a name="l00031"></a>00031     
-<a name="l00032"></a>00032     $sFile = sprintf(<span class="stringliteral">&apos;%s%s%s.php&apos;</span>, 
-<a name="l00033"></a>00033         $sPath, DIRECTORY_SEPARATOR, 
-<a name="l00034"></a>00034         str_replace(<span class="charliteral">&apos;_&apos;</span>, DIRECTORY_SEPARATOR, $sClassName)
-<a name="l00035"></a>00035     );
-<a name="l00036"></a>00036     <span class="keywordflow">if</span> (!is_file($sFile) || !is_readable($sFile)) {
-<a name="l00037"></a>00037         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&quot;Class file &apos;{$sFile}&apos; does not exists&quot;</span>);
-<a name="l00038"></a>00038     }
-<a name="l00039"></a>00039 
-<a name="l00040"></a>00040     require_once $sFile;
-<a name="l00041"></a>00041 
-<a name="l00042"></a>00042     <span class="keywordflow">if</span> (!class_exists($sClassName, <span class="keyword">false</span>) &amp;&amp; !interface_exists($sClassName, <span class="keyword">false</span>)) {
-<a name="l00043"></a>00043         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&quot;File &apos;{$sFile}&apos; was loaded but class &apos;{$sClassName}&apos; was not found in file&quot;</span>);
-<a name="l00044"></a>00044     }
-<a name="l00045"></a>00045 }</pre></div></p>
+<p><div class="fragment"><pre class="fragment"><a name="l00032"></a>00032 {
+<a name="l00033"></a>00033     <span class="keywordflow">if</span> (empty($sClassName)) {
+<a name="l00034"></a>00034         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&apos;Class name is empty&apos;</span>);
+<a name="l00035"></a>00035     }
+<a name="l00036"></a>00036     
+<a name="l00037"></a>00037     $sPath = dirname(dirname(__FILE__));
+<a name="l00038"></a>00038     <span class="keywordflow">if</span> (empty($sPath)) {
+<a name="l00039"></a>00039         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&apos;Current path is empty&apos;</span>);
+<a name="l00040"></a>00040     }
+<a name="l00041"></a>00041     
+<a name="l00042"></a>00042     $sFile = sprintf(<span class="stringliteral">&apos;%s%s%s.php&apos;</span>, 
+<a name="l00043"></a>00043         $sPath, DIRECTORY_SEPARATOR, 
+<a name="l00044"></a>00044         str_replace(<span class="charliteral">&apos;_&apos;</span>, DIRECTORY_SEPARATOR, $sClassName)
+<a name="l00045"></a>00045     );
+<a name="l00046"></a>00046     <span class="keywordflow">if</span> (!is_file($sFile) || !is_readable($sFile)) {
+<a name="l00047"></a>00047         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&quot;Class file &apos;{$sFile}&apos; does not exists&quot;</span>);
+<a name="l00048"></a>00048     }
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050     require_once $sFile;
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052     <span class="keywordflow">if</span> (!class_exists($sClassName, <span class="keyword">false</span>) &amp;&amp; !interface_exists($sClassName, <span class="keyword">false</span>)) {
+<a name="l00053"></a>00053         <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception(<span class="stringliteral">&quot;File &apos;{$sFile}&apos; was loaded but class &apos;{$sClassName}&apos; was not found in file&quot;</span>);
+<a name="l00054"></a>00054     }
+<a name="l00055"></a>00055 }</pre></div></p>
 
 </div>
 </div>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sat Feb 27 23:39:10 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 00:59:57 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

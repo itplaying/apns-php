@@ -29,109 +29,119 @@
 <a name="l00003"></a>00003 <span class="comment"> * @file</span>
 <a name="l00004"></a>00004 <span class="comment"> * ApnsPHP_Feedback class definition.</span>
 <a name="l00005"></a>00005 <span class="comment"> * </span>
-<a name="l00006"></a>00006 <span class="comment"> * @version $Id$</span>
-<a name="l00007"></a>00007 <span class="comment"> */</span>
-<a name="l00008"></a>00008 <span class="comment"></span>
-<a name="l00009"></a>00009 <span class="comment">/**</span>
-<a name="l00010"></a>00010 <span class="comment"> * @defgroup ApnsPHP_Feedback Feedback</span>
-<a name="l00011"></a>00011 <span class="comment"> * @ingroup ApplePushNotificationService</span>
-<a name="l00012"></a>00012 <span class="comment"> */</span>
-<a name="l00013"></a>00013 <span class="comment"></span>
-<a name="l00014"></a>00014 <span class="comment">/**</span>
-<a name="l00015"></a>00015 <span class="comment"> * The Feedback Service client.</span>
-<a name="l00016"></a>00016 <span class="comment"> * </span>
-<a name="l00017"></a>00017 <span class="comment"> * Apple Push Notification Service includes a feedback service that APNs continually</span>
-<a name="l00018"></a>00018 <span class="comment"> * updates with a per-application list of devices for which there were failed-delivery</span>
-<a name="l00019"></a>00019 <span class="comment"> * attempts. Providers should periodically query the feedback service to get the</span>
-<a name="l00020"></a>00020 <span class="comment"> * list of device tokens for their applications, each of which is identified by</span>
-<a name="l00021"></a>00021 <span class="comment"> * its topic. Then, after verifying that the application hasn’t recently been re-registered</span>
-<a name="l00022"></a>00022 <span class="comment"> * on the identified devices, a provider should stop sending notifications to these</span>
-<a name="l00023"></a>00023 <span class="comment"> * devices.</span>
-<a name="l00024"></a>00024 <span class="comment"> * </span>
-<a name="l00025"></a>00025 <span class="comment"> * @ingroup ApnsPHP_Feedback</span>
-<a name="l00026"></a>00026 <span class="comment"> * @see http://tinyurl.com/ApplePushNotificationFeedback</span>
-<a name="l00027"></a>00027 <span class="comment"> */</span> 
-<a name="l00028"></a><a class="code" href="class_apns_p_h_p___feedback.html">00028</a> <span class="keyword">class </span><a class="code" href="class_apns_p_h_p___feedback.html" title="The Feedback Service client.">ApnsPHP_Feedback</a> <span class="keyword">extends</span> <a class="code" href="class_apns_p_h_p___abstract.html" title="Abstract class: this is the superclass for all Apple Push Notification Service classes...">ApnsPHP_Abstract</a>
-<a name="l00029"></a>00029 {
-<a name="l00030"></a><a class="code" href="class_apns_p_h_p___feedback.html#ae8709f3dd1c8580e9d37c4359ece0f97">00030</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___feedback.html#ae8709f3dd1c8580e9d37c4359ece0f97" title="integer Timestamp binary size in bytes.">TIME_BINARY_SIZE</a> = 4; <span class="comment">/**&lt; @type integer Timestamp binary size in bytes. */</span>
-<a name="l00031"></a><a class="code" href="class_apns_p_h_p___feedback.html#a0e4cf105d485bd60a424614ac9d2df08">00031</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___feedback.html#a0e4cf105d485bd60a424614ac9d2df08" title="integer Token length binary size in bytes.">TOKEN_LENGTH_BINARY_SIZE</a> = 2; <span class="comment">/**&lt; @type integer Token length binary size in bytes. */</span>
-<a name="l00032"></a>00032     
-<a name="l00033"></a><a class="code" href="class_apns_p_h_p___feedback.html#a109431534e6d7a411266096a7c79cf17">00033</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___feedback.html#a109431534e6d7a411266096a7c79cf17" title="array Feedback URLs environments.">$_aServiceURLs</a> = array(
-<a name="l00034"></a>00034         <span class="stringliteral">&apos;ssl://feedback.push.apple.com:2196&apos;</span>, <span class="comment">// Production environment</span>
-<a name="l00035"></a>00035         <span class="stringliteral">&apos;ssl://feedback.sandbox.push.apple.com:2196&apos;</span> <span class="comment">// Sandbox environment</span>
-<a name="l00036"></a>00036     ); <span class="comment">/**&lt; @type array Feedback URLs environments. */</span>
-<a name="l00037"></a>00037     
-<a name="l00038"></a><a class="code" href="class_apns_p_h_p___feedback.html#a61ee5c16edee1541959411f0a1f43fc8">00038</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___feedback.html#a61ee5c16edee1541959411f0a1f43fc8" title="Feedback container.">$_aFeedback</a>; <span class="comment">/**&lt; @type array Feedback container. */</span>
-<a name="l00039"></a>00039     <span class="comment"></span>
-<a name="l00040"></a>00040 <span class="comment">    /**</span>
-<a name="l00041"></a>00041 <span class="comment">     * Receives feedback tuples from Apple Push Notification Service feedback.</span>
-<a name="l00042"></a>00042 <span class="comment">     * </span>
-<a name="l00043"></a>00043 <span class="comment">     * Every tuple (array) contains:</span>
-<a name="l00044"></a>00044 <span class="comment">     * @li @c timestamp indicating when the APNs determined that the application</span>
-<a name="l00045"></a>00045 <span class="comment">     *     no longer exists on the device. This value represents the seconds since</span>
-<a name="l00046"></a>00046 <span class="comment">     *     1970, anchored to UTC. You should use the timestamp to determine if the</span>
-<a name="l00047"></a>00047 <span class="comment">     *     application on the device re-registered with your service since the moment</span>
-<a name="l00048"></a>00048 <span class="comment">     *     the device token was recorded on the feedback service. If it hasn’t,</span>
-<a name="l00049"></a>00049 <span class="comment">     *     you should cease sending push notifications to the device.</span>
-<a name="l00050"></a>00050 <span class="comment">     * @li @c tokenLength The length of the device token (usually 32 bytes).</span>
-<a name="l00051"></a>00051 <span class="comment">     * @li @c deviceToken The device token.</span>
-<a name="l00052"></a>00052 <span class="comment">     *</span>
-<a name="l00053"></a>00053 <span class="comment">     * @return @type array Array of feedback tuples (array).</span>
-<a name="l00054"></a>00054 <span class="comment">     */</span>
-<a name="l00055"></a><a class="code" href="class_apns_p_h_p___feedback.html#ab391f567994c7c41c08c66f5e4492646">00055</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___feedback.html#ab391f567994c7c41c08c66f5e4492646" title="Receives feedback tuples from Apple Push Notification Service feedback.">receive</a>()
-<a name="l00056"></a>00056     {
-<a name="l00057"></a>00057         $nFeedbackTupleLen = self::TIME_BINARY_SIZE + self::TOKEN_LENGTH_BINARY_SIZE + self::DEVICE_BINARY_SIZE;
-<a name="l00058"></a>00058         
-<a name="l00059"></a>00059         $this-&gt;_aFeedback = array();
-<a name="l00060"></a>00060         $sBuffer = <span class="stringliteral">&apos;&apos;</span>;
-<a name="l00061"></a>00061         <span class="keywordflow">while</span> (!feof($this-&gt;_hSocket)) {
-<a name="l00062"></a>00062             $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Reading...&apos;</span>);
-<a name="l00063"></a>00063             $sBuffer .= $sCurrBuffer = fread($this-&gt;_hSocket, 8192);
-<a name="l00064"></a>00064             $nCurrBufferLen = strlen($sCurrBuffer);
-<a name="l00065"></a>00065             <span class="keywordflow">if</span> ($nCurrBufferLen &gt; 0) {
-<a name="l00066"></a>00066                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: {$nCurrBufferLen} bytes read.&quot;</span>);
-<a name="l00067"></a>00067             }
-<a name="l00068"></a>00068             unset($sCurrBuffer, $nCurrBufferLen);
-<a name="l00069"></a>00069             
-<a name="l00070"></a>00070             $nBufferLen = strlen($sBuffer);
-<a name="l00071"></a>00071             <span class="keywordflow">if</span> ($nBufferLen &gt;= $nFeedbackTupleLen) {
-<a name="l00072"></a>00072                 $nFeedbackTuples = floor($nBufferLen / $nFeedbackTupleLen);
-<a name="l00073"></a>00073                 <span class="keywordflow">for</span> ($i = 0; $i &lt; $nFeedbackTuples; $i++) {
-<a name="l00074"></a>00074                     $sFeedbackTuple = substr($sBuffer, 0, $nFeedbackTupleLen);
-<a name="l00075"></a>00075                     $sBuffer = substr($sBuffer, $nFeedbackTupleLen);
-<a name="l00076"></a>00076                     $this-&gt;_aFeedback[] = $aFeedback = $this-&gt;<a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5" title="Parses binary tuples.">_parseBinaryTuple</a>($sFeedbackTuple);
-<a name="l00077"></a>00077                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(sprintf(<span class="stringliteral">&quot;INFO: New feedback tuple: timestamp=%d (%s), tokenLength=%d, deviceToken=%s.&quot;</span>,
-<a name="l00078"></a>00078                         $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>], date(<span class="stringliteral">&apos;Y-m-d H:i:s&apos;</span>, $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>]),
-<a name="l00079"></a>00079                         $aFeedback[<span class="stringliteral">&apos;tokenLength&apos;</span>], $aFeedback[<span class="stringliteral">&apos;deviceToken&apos;</span>]
-<a name="l00080"></a>00080                     ));
-<a name="l00081"></a>00081                     unset($aFeedback);
-<a name="l00082"></a>00082                 }
-<a name="l00083"></a>00083             }
-<a name="l00084"></a>00084             
-<a name="l00085"></a>00085             $read = array($this-&gt;_hSocket);
-<a name="l00086"></a>00086             $null = NULL;
-<a name="l00087"></a>00087             $nChangedStreams = stream_select($read, $null, $null, 0, $this-&gt;_nSocketSelectTimeout);
-<a name="l00088"></a>00088             <span class="keywordflow">if</span> ($nChangedStreams === <span class="keyword">false</span>) {
-<a name="l00089"></a>00089                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Unable to wait for a stream availability.&apos;</span>);
-<a name="l00090"></a>00090                 <span class="keywordflow">break</span>;
-<a name="l00091"></a>00091             }
-<a name="l00092"></a>00092         }
-<a name="l00093"></a>00093         <span class="keywordflow">return</span> $this-&gt;_aFeedback;
-<a name="l00094"></a>00094     }
-<a name="l00095"></a>00095     <span class="comment"></span>
-<a name="l00096"></a>00096 <span class="comment">    /**</span>
-<a name="l00097"></a>00097 <span class="comment">     * Parses binary tuples.</span>
-<a name="l00098"></a>00098 <span class="comment">     *</span>
-<a name="l00099"></a>00099 <span class="comment">     * @param  $sBinaryTuple @type string A binary tuple to parse.</span>
-<a name="l00100"></a>00100 <span class="comment">     * @return @type array Array with timestamp, tokenLength and deviceToken keys.</span>
-<a name="l00101"></a>00101 <span class="comment">     */</span>
-<a name="l00102"></a><a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5">00102</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5" title="Parses binary tuples.">_parseBinaryTuple</a>($sBinaryTuple)
-<a name="l00103"></a>00103     {
-<a name="l00104"></a>00104         <span class="keywordflow">return</span> unpack(<span class="stringliteral">&apos;Ntimestamp/ntokenLength/H*deviceToken&apos;</span>, $sBinaryTuple);
-<a name="l00105"></a>00105     }
-<a name="l00106"></a>00106 }
+<a name="l00006"></a>00006 <span class="comment"> * LICENSE</span>
+<a name="l00007"></a>00007 <span class="comment"> *</span>
+<a name="l00008"></a>00008 <span class="comment"> * This source file is subject to the new BSD license that is bundled</span>
+<a name="l00009"></a>00009 <span class="comment"> * with this package in the file LICENSE.txt.</span>
+<a name="l00010"></a>00010 <span class="comment"> * It is also available through the world-wide-web at this URL:</span>
+<a name="l00011"></a>00011 <span class="comment"> * http://code.google.com/p/apns-php/wiki/License</span>
+<a name="l00012"></a>00012 <span class="comment"> * If you did not receive a copy of the license and are unable to</span>
+<a name="l00013"></a>00013 <span class="comment"> * obtain it through the world-wide-web, please send an email</span>
+<a name="l00014"></a>00014 <span class="comment"> * to aldo.armiento@gmail.com so we can send you a copy immediately.</span>
+<a name="l00015"></a>00015 <span class="comment"> * </span>
+<a name="l00016"></a>00016 <span class="comment"> * @version $Id$</span>
+<a name="l00017"></a>00017 <span class="comment"> */</span>
+<a name="l00018"></a>00018 <span class="comment"></span>
+<a name="l00019"></a>00019 <span class="comment">/**</span>
+<a name="l00020"></a>00020 <span class="comment"> * @defgroup ApnsPHP_Feedback Feedback</span>
+<a name="l00021"></a>00021 <span class="comment"> * @ingroup ApplePushNotificationService</span>
+<a name="l00022"></a>00022 <span class="comment"> */</span>
+<a name="l00023"></a>00023 <span class="comment"></span>
+<a name="l00024"></a>00024 <span class="comment">/**</span>
+<a name="l00025"></a>00025 <span class="comment"> * The Feedback Service client.</span>
+<a name="l00026"></a>00026 <span class="comment"> * </span>
+<a name="l00027"></a>00027 <span class="comment"> * Apple Push Notification Service includes a feedback service that APNs continually</span>
+<a name="l00028"></a>00028 <span class="comment"> * updates with a per-application list of devices for which there were failed-delivery</span>
+<a name="l00029"></a>00029 <span class="comment"> * attempts. Providers should periodically query the feedback service to get the</span>
+<a name="l00030"></a>00030 <span class="comment"> * list of device tokens for their applications, each of which is identified by</span>
+<a name="l00031"></a>00031 <span class="comment"> * its topic. Then, after verifying that the application hasn’t recently been re-registered</span>
+<a name="l00032"></a>00032 <span class="comment"> * on the identified devices, a provider should stop sending notifications to these</span>
+<a name="l00033"></a>00033 <span class="comment"> * devices.</span>
+<a name="l00034"></a>00034 <span class="comment"> * </span>
+<a name="l00035"></a>00035 <span class="comment"> * @ingroup ApnsPHP_Feedback</span>
+<a name="l00036"></a>00036 <span class="comment"> * @see http://tinyurl.com/ApplePushNotificationFeedback</span>
+<a name="l00037"></a>00037 <span class="comment"> */</span> 
+<a name="l00038"></a><a class="code" href="class_apns_p_h_p___feedback.html">00038</a> <span class="keyword">class </span><a class="code" href="class_apns_p_h_p___feedback.html" title="The Feedback Service client.">ApnsPHP_Feedback</a> <span class="keyword">extends</span> <a class="code" href="class_apns_p_h_p___abstract.html" title="Abstract class: this is the superclass for all Apple Push Notification Service classes...">ApnsPHP_Abstract</a>
+<a name="l00039"></a>00039 {
+<a name="l00040"></a><a class="code" href="class_apns_p_h_p___feedback.html#ae8709f3dd1c8580e9d37c4359ece0f97">00040</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___feedback.html#ae8709f3dd1c8580e9d37c4359ece0f97" title="integer Timestamp binary size in bytes.">TIME_BINARY_SIZE</a> = 4; <span class="comment">/**&lt; @type integer Timestamp binary size in bytes. */</span>
+<a name="l00041"></a><a class="code" href="class_apns_p_h_p___feedback.html#a0e4cf105d485bd60a424614ac9d2df08">00041</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___feedback.html#a0e4cf105d485bd60a424614ac9d2df08" title="integer Token length binary size in bytes.">TOKEN_LENGTH_BINARY_SIZE</a> = 2; <span class="comment">/**&lt; @type integer Token length binary size in bytes. */</span>
+<a name="l00042"></a>00042     
+<a name="l00043"></a><a class="code" href="class_apns_p_h_p___feedback.html#a109431534e6d7a411266096a7c79cf17">00043</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___feedback.html#a109431534e6d7a411266096a7c79cf17" title="array Feedback URLs environments.">$_aServiceURLs</a> = array(
+<a name="l00044"></a>00044         <span class="stringliteral">&apos;ssl://feedback.push.apple.com:2196&apos;</span>, <span class="comment">// Production environment</span>
+<a name="l00045"></a>00045         <span class="stringliteral">&apos;ssl://feedback.sandbox.push.apple.com:2196&apos;</span> <span class="comment">// Sandbox environment</span>
+<a name="l00046"></a>00046     ); <span class="comment">/**&lt; @type array Feedback URLs environments. */</span>
+<a name="l00047"></a>00047     
+<a name="l00048"></a><a class="code" href="class_apns_p_h_p___feedback.html#a61ee5c16edee1541959411f0a1f43fc8">00048</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___feedback.html#a61ee5c16edee1541959411f0a1f43fc8" title="Feedback container.">$_aFeedback</a>; <span class="comment">/**&lt; @type array Feedback container. */</span>
+<a name="l00049"></a>00049     <span class="comment"></span>
+<a name="l00050"></a>00050 <span class="comment">    /**</span>
+<a name="l00051"></a>00051 <span class="comment">     * Receives feedback tuples from Apple Push Notification Service feedback.</span>
+<a name="l00052"></a>00052 <span class="comment">     * </span>
+<a name="l00053"></a>00053 <span class="comment">     * Every tuple (array) contains:</span>
+<a name="l00054"></a>00054 <span class="comment">     * @li @c timestamp indicating when the APNs determined that the application</span>
+<a name="l00055"></a>00055 <span class="comment">     *     no longer exists on the device. This value represents the seconds since</span>
+<a name="l00056"></a>00056 <span class="comment">     *     1970, anchored to UTC. You should use the timestamp to determine if the</span>
+<a name="l00057"></a>00057 <span class="comment">     *     application on the device re-registered with your service since the moment</span>
+<a name="l00058"></a>00058 <span class="comment">     *     the device token was recorded on the feedback service. If it hasn’t,</span>
+<a name="l00059"></a>00059 <span class="comment">     *     you should cease sending push notifications to the device.</span>
+<a name="l00060"></a>00060 <span class="comment">     * @li @c tokenLength The length of the device token (usually 32 bytes).</span>
+<a name="l00061"></a>00061 <span class="comment">     * @li @c deviceToken The device token.</span>
+<a name="l00062"></a>00062 <span class="comment">     *</span>
+<a name="l00063"></a>00063 <span class="comment">     * @return @type array Array of feedback tuples (array).</span>
+<a name="l00064"></a>00064 <span class="comment">     */</span>
+<a name="l00065"></a><a class="code" href="class_apns_p_h_p___feedback.html#ab391f567994c7c41c08c66f5e4492646">00065</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___feedback.html#ab391f567994c7c41c08c66f5e4492646" title="Receives feedback tuples from Apple Push Notification Service feedback.">receive</a>()
+<a name="l00066"></a>00066     {
+<a name="l00067"></a>00067         $nFeedbackTupleLen = self::TIME_BINARY_SIZE + self::TOKEN_LENGTH_BINARY_SIZE + self::DEVICE_BINARY_SIZE;
+<a name="l00068"></a>00068         
+<a name="l00069"></a>00069         $this-&gt;_aFeedback = array();
+<a name="l00070"></a>00070         $sBuffer = <span class="stringliteral">&apos;&apos;</span>;
+<a name="l00071"></a>00071         <span class="keywordflow">while</span> (!feof($this-&gt;_hSocket)) {
+<a name="l00072"></a>00072             $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Reading...&apos;</span>);
+<a name="l00073"></a>00073             $sBuffer .= $sCurrBuffer = fread($this-&gt;_hSocket, 8192);
+<a name="l00074"></a>00074             $nCurrBufferLen = strlen($sCurrBuffer);
+<a name="l00075"></a>00075             <span class="keywordflow">if</span> ($nCurrBufferLen &gt; 0) {
+<a name="l00076"></a>00076                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: {$nCurrBufferLen} bytes read.&quot;</span>);
+<a name="l00077"></a>00077             }
+<a name="l00078"></a>00078             unset($sCurrBuffer, $nCurrBufferLen);
+<a name="l00079"></a>00079             
+<a name="l00080"></a>00080             $nBufferLen = strlen($sBuffer);
+<a name="l00081"></a>00081             <span class="keywordflow">if</span> ($nBufferLen &gt;= $nFeedbackTupleLen) {
+<a name="l00082"></a>00082                 $nFeedbackTuples = floor($nBufferLen / $nFeedbackTupleLen);
+<a name="l00083"></a>00083                 <span class="keywordflow">for</span> ($i = 0; $i &lt; $nFeedbackTuples; $i++) {
+<a name="l00084"></a>00084                     $sFeedbackTuple = substr($sBuffer, 0, $nFeedbackTupleLen);
+<a name="l00085"></a>00085                     $sBuffer = substr($sBuffer, $nFeedbackTupleLen);
+<a name="l00086"></a>00086                     $this-&gt;_aFeedback[] = $aFeedback = $this-&gt;<a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5" title="Parses binary tuples.">_parseBinaryTuple</a>($sFeedbackTuple);
+<a name="l00087"></a>00087                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(sprintf(<span class="stringliteral">&quot;INFO: New feedback tuple: timestamp=%d (%s), tokenLength=%d, deviceToken=%s.&quot;</span>,
+<a name="l00088"></a>00088                         $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>], date(<span class="stringliteral">&apos;Y-m-d H:i:s&apos;</span>, $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>]),
+<a name="l00089"></a>00089                         $aFeedback[<span class="stringliteral">&apos;tokenLength&apos;</span>], $aFeedback[<span class="stringliteral">&apos;deviceToken&apos;</span>]
+<a name="l00090"></a>00090                     ));
+<a name="l00091"></a>00091                     unset($aFeedback);
+<a name="l00092"></a>00092                 }
+<a name="l00093"></a>00093             }
+<a name="l00094"></a>00094             
+<a name="l00095"></a>00095             $read = array($this-&gt;_hSocket);
+<a name="l00096"></a>00096             $null = NULL;
+<a name="l00097"></a>00097             $nChangedStreams = stream_select($read, $null, $null, 0, $this-&gt;_nSocketSelectTimeout);
+<a name="l00098"></a>00098             <span class="keywordflow">if</span> ($nChangedStreams === <span class="keyword">false</span>) {
+<a name="l00099"></a>00099                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Unable to wait for a stream availability.&apos;</span>);
+<a name="l00100"></a>00100                 <span class="keywordflow">break</span>;
+<a name="l00101"></a>00101             }
+<a name="l00102"></a>00102         }
+<a name="l00103"></a>00103         <span class="keywordflow">return</span> $this-&gt;_aFeedback;
+<a name="l00104"></a>00104     }
+<a name="l00105"></a>00105     <span class="comment"></span>
+<a name="l00106"></a>00106 <span class="comment">    /**</span>
+<a name="l00107"></a>00107 <span class="comment">     * Parses binary tuples.</span>
+<a name="l00108"></a>00108 <span class="comment">     *</span>
+<a name="l00109"></a>00109 <span class="comment">     * @param  $sBinaryTuple @type string A binary tuple to parse.</span>
+<a name="l00110"></a>00110 <span class="comment">     * @return @type array Array with timestamp, tokenLength and deviceToken keys.</span>
+<a name="l00111"></a>00111 <span class="comment">     */</span>
+<a name="l00112"></a><a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5">00112</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5" title="Parses binary tuples.">_parseBinaryTuple</a>($sBinaryTuple)
+<a name="l00113"></a>00113     {
+<a name="l00114"></a>00114         <span class="keywordflow">return</span> unpack(<span class="stringliteral">&apos;Ntimestamp/ntokenLength/H*deviceToken&apos;</span>, $sBinaryTuple);
+<a name="l00115"></a>00115     }
+<a name="l00116"></a>00116 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sat Feb 27 23:39:10 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 00:59:57 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

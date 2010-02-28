@@ -80,7 +80,7 @@ Collaboration diagram for ApnsPHP_Push:</div>
 <p>The Push Notification Provider. </p>
 <p>The class manages a message queue and sends notifications payload to Apple Push Notification Service. </p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00022">22</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00032">32</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 <hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="aae6a84652eefad4159d44019155cb648"></a><!-- doxytag: member="ApnsPHP_Push::__construct" ref="aae6a84652eefad4159d44019155cb648" args="(integer $nEnvironment, string $sProviderCertificateFile)" -->
 <div class="memitem">
@@ -120,12 +120,12 @@ Collaboration diagram for ApnsPHP_Push:</div>
 
 <p>Reimplemented in <a class="el" href="class_apns_p_h_p___push___server.html#aae6a84652eefad4159d44019155cb648">ApnsPHP_Push_Server</a>.</p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00042">42</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00052">52</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00043"></a>00043     {
-<a name="l00044"></a>00044         <a class="code" href="class_apns_p_h_p___push.html#aae6a84652eefad4159d44019155cb648" title="Constructor.">parent::__construct</a>($nEnvironment, $sProviderCertificateFile);
-<a name="l00045"></a>00045         $this-&gt;_nSendRetryTimes = self::SEND_RETRY_TIMES;
-<a name="l00046"></a>00046     }
+<p><div class="fragment"><pre class="fragment"><a name="l00053"></a>00053     {
+<a name="l00054"></a>00054         <a class="code" href="class_apns_p_h_p___push.html#aae6a84652eefad4159d44019155cb648" title="Constructor.">parent::__construct</a>($nEnvironment, $sProviderCertificateFile);
+<a name="l00055"></a>00055         $this-&gt;_nSendRetryTimes = self::SEND_RETRY_TIMES;
+<a name="l00056"></a>00056     }
 </pre></div></p>
 
 </div>
@@ -167,20 +167,20 @@ Collaboration diagram for ApnsPHP_Push:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>A binary notification. </dd></dl>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00184">184</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00194">194</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_push_8php_source.html#l00076">add()</a>.</p>
+<p>Referenced by <a class="el" href="_push_8php_source.html#l00086">add()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00185"></a>00185     {
-<a name="l00186"></a>00186         $nTokenLength = strlen($sDeviceToken);
-<a name="l00187"></a>00187         $nPayloadLength = strlen($sPayload);
-<a name="l00188"></a>00188 
-<a name="l00189"></a>00189         $sRet  = pack(<span class="stringliteral">&apos;CnH*&apos;</span>, self::COMMAND_PUSH, self::DEVICE_BINARY_SIZE, $sDeviceToken);
-<a name="l00190"></a>00190         $sRet .= pack(<span class="charliteral">&apos;n&apos;</span>, $nPayloadLength);
-<a name="l00191"></a>00191         $sRet .= $sPayload;
-<a name="l00192"></a>00192         
-<a name="l00193"></a>00193         <span class="keywordflow">return</span> $sRet;
-<a name="l00194"></a>00194     }
+<p><div class="fragment"><pre class="fragment"><a name="l00195"></a>00195     {
+<a name="l00196"></a>00196         $nTokenLength = strlen($sDeviceToken);
+<a name="l00197"></a>00197         $nPayloadLength = strlen($sPayload);
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199         $sRet  = pack(<span class="stringliteral">&apos;CnH*&apos;</span>, self::COMMAND_PUSH, self::DEVICE_BINARY_SIZE, $sDeviceToken);
+<a name="l00200"></a>00200         $sRet .= pack(<span class="charliteral">&apos;n&apos;</span>, $nPayloadLength);
+<a name="l00201"></a>00201         $sRet .= $sPayload;
+<a name="l00202"></a>00202         
+<a name="l00203"></a>00203         <span class="keywordflow">return</span> $sRet;
+<a name="l00204"></a>00204     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -220,25 +220,25 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b">ApnsPHP_Push_Server</a>.</p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00076">76</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00086">86</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p>References <a class="el" href="_push_8php_source.html#l00184">_getBinaryNotification()</a>, <a class="el" href="_message_8php_source.html#l00068">ApnsPHP_Message::getRecipient()</a>, and <a class="el" href="_message_8php_source.html#l00083">ApnsPHP_Message::getRecipientsNumber()</a>.</p>
+<p>References <a class="el" href="_push_8php_source.html#l00194">_getBinaryNotification()</a>, <a class="el" href="_message_8php_source.html#l00078">ApnsPHP_Message::getRecipient()</a>, and <a class="el" href="_message_8php_source.html#l00093">ApnsPHP_Message::getRecipientsNumber()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00077"></a>00077     {
-<a name="l00078"></a>00078         $sMessagePayload = (string)$message;
-<a name="l00079"></a>00079         $nRecipients = $message-&gt;getRecipientsNumber();
-<a name="l00080"></a>00080         
-<a name="l00081"></a>00081         <span class="keywordflow">for</span> ($i = 0; $i &lt; $nRecipients; $i++) { 
-<a name="l00082"></a>00082             $this-&gt;_aMessageQueue[] = array(
-<a name="l00083"></a>00083                 <span class="stringliteral">&apos;MESSAGE&apos;</span> =&gt; $message,
-<a name="l00084"></a>00084                 <span class="stringliteral">&apos;BINARY_NOTIFICATION&apos;</span> =&gt; $this-&gt;<a class="code" href="class_apns_p_h_p___push.html#aa8293c674f1cd08cdbacf26bbd0c3d76" title="Generate a binary notification from a device token and a JSON-encoded payload.">_getBinaryNotification</a>(
-<a name="l00085"></a>00085                     $message-&gt;getRecipient($i),
-<a name="l00086"></a>00086                     $sMessagePayload
-<a name="l00087"></a>00087                 ),
-<a name="l00088"></a>00088                 <span class="stringliteral">&apos;RETRY_TIMES&apos;</span> =&gt; 0
-<a name="l00089"></a>00089             );
-<a name="l00090"></a>00090         }
-<a name="l00091"></a>00091     }
+<p><div class="fragment"><pre class="fragment"><a name="l00087"></a>00087     {
+<a name="l00088"></a>00088         $sMessagePayload = (string)$message;
+<a name="l00089"></a>00089         $nRecipients = $message-&gt;getRecipientsNumber();
+<a name="l00090"></a>00090         
+<a name="l00091"></a>00091         <span class="keywordflow">for</span> ($i = 0; $i &lt; $nRecipients; $i++) { 
+<a name="l00092"></a>00092             $this-&gt;_aMessageQueue[] = array(
+<a name="l00093"></a>00093                 <span class="stringliteral">&apos;MESSAGE&apos;</span> =&gt; $message,
+<a name="l00094"></a>00094                 <span class="stringliteral">&apos;BINARY_NOTIFICATION&apos;</span> =&gt; $this-&gt;<a class="code" href="class_apns_p_h_p___push.html#aa8293c674f1cd08cdbacf26bbd0c3d76" title="Generate a binary notification from a device token and a JSON-encoded payload.">_getBinaryNotification</a>(
+<a name="l00095"></a>00095                     $message-&gt;getRecipient($i),
+<a name="l00096"></a>00096                     $sMessagePayload
+<a name="l00097"></a>00097                 ),
+<a name="l00098"></a>00098                 <span class="stringliteral">&apos;RETRY_TIMES&apos;</span> =&gt; 0
+<a name="l00099"></a>00099             );
+<a name="l00100"></a>00100         }
+<a name="l00101"></a>00101     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -280,15 +280,15 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push_Server</a>.</p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00166">166</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00176">176</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00167"></a>00167     {
-<a name="l00168"></a>00168         $aRet = $this-&gt;_aMessageQueue;
-<a name="l00169"></a>00169         <span class="keywordflow">if</span> ($bEmpty) {
-<a name="l00170"></a>00170             $this-&gt;_aMessageQueue = array();
-<a name="l00171"></a>00171         }
-<a name="l00172"></a>00172         <span class="keywordflow">return</span> $aRet;
-<a name="l00173"></a>00173     }
+<p><div class="fragment"><pre class="fragment"><a name="l00177"></a>00177     {
+<a name="l00178"></a>00178         $aRet = $this-&gt;_aMessageQueue;
+<a name="l00179"></a>00179         <span class="keywordflow">if</span> ($bEmpty) {
+<a name="l00180"></a>00180             $this-&gt;_aMessageQueue = array();
+<a name="l00181"></a>00181         }
+<a name="l00182"></a>00182         <span class="keywordflow">return</span> $aRet;
+<a name="l00183"></a>00183     }
 </pre></div></p>
 
 </div>
@@ -311,11 +311,11 @@ Here is the call graph for this function:</div>
 <p>Get the send retry time value. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Send retry times. </dd></dl>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00066">66</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00076">76</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00067"></a>00067     {
-<a name="l00068"></a>00068         <span class="keywordflow">return</span> $this-&gt;_nSendRetryTimes;
-<a name="l00069"></a>00069     }
+<p><div class="fragment"><pre class="fragment"><a name="l00077"></a>00077     {
+<a name="l00078"></a>00078         <span class="keywordflow">return</span> $this-&gt;_nSendRetryTimes;
+<a name="l00079"></a>00079     }
 </pre></div></p>
 
 </div>
@@ -343,67 +343,67 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00099">99</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00109">109</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p>References <a class="el" href="_abstract_8php_source.html#l00353">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_abstract_8php_source.html#l00272">ApnsPHP_Abstract::connect()</a>, and <a class="el" href="_abstract_8php_source.html#l00300">ApnsPHP_Abstract::disconnect()</a>.</p>
+<p>References <a class="el" href="_abstract_8php_source.html#l00363">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_abstract_8php_source.html#l00282">ApnsPHP_Abstract::connect()</a>, and <a class="el" href="_abstract_8php_source.html#l00310">ApnsPHP_Abstract::disconnect()</a>.</p>
 
-<p>Referenced by <a class="el" href="_server_8php_source.html#l00239">ApnsPHP_Push_Server::_mainLoop()</a>.</p>
+<p>Referenced by <a class="el" href="_server_8php_source.html#l00249">ApnsPHP_Push_Server::_mainLoop()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00100"></a>00100     {
-<a name="l00101"></a>00101         <span class="keywordflow">if</span> (!$this-&gt;_hSocket) {
-<a name="l00102"></a>00102             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
-<a name="l00103"></a>00103                 <span class="stringliteral">&apos;Not connected to Push Notification Service&apos;</span>
-<a name="l00104"></a>00104             );
-<a name="l00105"></a>00105         }
-<a name="l00106"></a>00106 
-<a name="l00107"></a>00107         <span class="keywordflow">if</span> (empty($this-&gt;_aMessageQueue)) {
-<a name="l00108"></a>00108             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
-<a name="l00109"></a>00109                 <span class="stringliteral">&apos;No notifications queued to be sent&apos;</span>
-<a name="l00110"></a>00110             );
-<a name="l00111"></a>00111         }
-<a name="l00112"></a>00112 
-<a name="l00113"></a>00113         <span class="keywordflow">foreach</span>($this-&gt;_aMessageQueue as $k =&gt; &amp;$aMessage) {
-<a name="l00114"></a>00114             $bSuccessfulSent = <span class="keyword">false</span>;
-<a name="l00115"></a>00115             <span class="keywordflow">while</span> ($bSuccessfulSent == <span class="keyword">false</span> &amp;&amp; $aMessage[<span class="stringliteral">&apos;RETRY_TIMES&apos;</span>] &lt;= $this-&gt;_nSendRetryTimes) {
-<a name="l00116"></a>00116                 pcntl_signal_dispatch();
-<a name="l00117"></a>00117                 <span class="keywordflow">if</span> ($aMessage[<span class="stringliteral">&apos;RETRY_TIMES&apos;</span>] &gt; 0) {
-<a name="l00118"></a>00118                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(
-<a name="l00119"></a>00119                         <span class="stringliteral">&apos;INFO: Retrying to send message &apos;</span> . ($k+1) . <span class="stringliteral">&quot; (&quot;</span> .
-<a name="l00120"></a>00120                         <span class="stringliteral">&quot;{$aMessage[&apos;RETRY_TIMES&apos;]}/&quot;</span> . $this-&gt;_nSendRetryTimes . <span class="stringliteral">&apos;)...&apos;</span>
-<a name="l00121"></a>00121                     );
-<a name="l00122"></a>00122                 }
-<a name="l00123"></a>00123                 
-<a name="l00124"></a>00124                 $aMessage[<span class="stringliteral">&apos;RETRY_TIMES&apos;</span>]++;
-<a name="l00125"></a>00125                 
-<a name="l00126"></a>00126                 $nLen = strlen($aMessage[<span class="stringliteral">&apos;BINARY_NOTIFICATION&apos;</span>]);
-<a name="l00127"></a>00127                 <span class="keywordflow">if</span> ($nLen !== ($nWritten = (<span class="keywordtype">int</span>)@fwrite($this-&gt;_hSocket, $aMessage[<span class="stringliteral">&apos;BINARY_NOTIFICATION&apos;</span>]))) {
-<a name="l00128"></a>00128                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;ERROR: Unable to send message. Written {$nWritten} bytes instead of {$nLen} bytes&quot;</span>);
-<a name="l00129"></a>00129                     <span class="keywordflow">continue</span>;
-<a name="l00130"></a>00130                 }
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132                 $bSuccessfulSent = <span class="keyword">true</span>;
-<a name="l00133"></a>00133 
-<a name="l00134"></a>00134                 $read = array($this-&gt;_hSocket);
-<a name="l00135"></a>00135                 $null = NULL;
-<a name="l00136"></a>00136                 $nChangedStreams = @stream_select($read, $null, $null, 0, $this-&gt;_nSocketSelectTimeout);
-<a name="l00137"></a>00137                 <span class="keywordflow">if</span> ($nChangedStreams === <span class="keyword">false</span>) {
-<a name="l00138"></a>00138                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Unable to wait for a stream availability.&apos;</span>);
-<a name="l00139"></a>00139                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($nChangedStreams &gt; 0) {
-<a name="l00140"></a>00140                     <span class="keywordflow">if</span> (feof($this-&gt;_hSocket)) {
-<a name="l00141"></a>00141                         $bSuccessfulSent = <span class="keyword">false</span>;
-<a name="l00142"></a>00142                         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;ERROR: Unable to send message &apos;</span> . ($k+1) . <span class="stringliteral">&apos;, stream could be no more connected.&apos;</span>);
-<a name="l00143"></a>00143                         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server.">disconnect</a>();
-<a name="l00144"></a>00144                         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server.">connect</a>();
-<a name="l00145"></a>00145                     }
-<a name="l00146"></a>00146                 }
-<a name="l00147"></a>00147             }
-<a name="l00148"></a>00148 
-<a name="l00149"></a>00149             <span class="keywordflow">if</span> ($bSuccessfulSent) {
-<a name="l00150"></a>00150                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Message &apos;</span> . ($k+1) . <span class="stringliteral">&apos; sent.&apos;</span>);
-<a name="l00151"></a>00151                 unset($this-&gt;_aMessageQueue[$k]);
-<a name="l00152"></a>00152             }
-<a name="l00153"></a>00153         }
-<a name="l00154"></a>00154     }
+<p><div class="fragment"><pre class="fragment"><a name="l00110"></a>00110     {
+<a name="l00111"></a>00111         <span class="keywordflow">if</span> (!$this-&gt;_hSocket) {
+<a name="l00112"></a>00112             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
+<a name="l00113"></a>00113                 <span class="stringliteral">&apos;Not connected to Push Notification Service&apos;</span>
+<a name="l00114"></a>00114             );
+<a name="l00115"></a>00115         }
+<a name="l00116"></a>00116 
+<a name="l00117"></a>00117         <span class="keywordflow">if</span> (empty($this-&gt;_aMessageQueue)) {
+<a name="l00118"></a>00118             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
+<a name="l00119"></a>00119                 <span class="stringliteral">&apos;No notifications queued to be sent&apos;</span>
+<a name="l00120"></a>00120             );
+<a name="l00121"></a>00121         }
+<a name="l00122"></a>00122 
+<a name="l00123"></a>00123         <span class="keywordflow">foreach</span>($this-&gt;_aMessageQueue as $k =&gt; &amp;$aMessage) {
+<a name="l00124"></a>00124             $bSuccessfulSent = <span class="keyword">false</span>;
+<a name="l00125"></a>00125             <span class="keywordflow">while</span> ($bSuccessfulSent == <span class="keyword">false</span> &amp;&amp; $aMessage[<span class="stringliteral">&apos;RETRY_TIMES&apos;</span>] &lt;= $this-&gt;_nSendRetryTimes) {
+<a name="l00126"></a>00126                 pcntl_signal_dispatch();
+<a name="l00127"></a>00127                 <span class="keywordflow">if</span> ($aMessage[<span class="stringliteral">&apos;RETRY_TIMES&apos;</span>] &gt; 0) {
+<a name="l00128"></a>00128                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(
+<a name="l00129"></a>00129                         <span class="stringliteral">&apos;INFO: Retrying to send message &apos;</span> . ($k+1) . <span class="stringliteral">&quot; (&quot;</span> .
+<a name="l00130"></a>00130                         <span class="stringliteral">&quot;{$aMessage[&apos;RETRY_TIMES&apos;]}/&quot;</span> . $this-&gt;_nSendRetryTimes . <span class="stringliteral">&apos;)...&apos;</span>
+<a name="l00131"></a>00131                     );
+<a name="l00132"></a>00132                 }
+<a name="l00133"></a>00133                 
+<a name="l00134"></a>00134                 $aMessage[<span class="stringliteral">&apos;RETRY_TIMES&apos;</span>]++;
+<a name="l00135"></a>00135                 
+<a name="l00136"></a>00136                 $nLen = strlen($aMessage[<span class="stringliteral">&apos;BINARY_NOTIFICATION&apos;</span>]);
+<a name="l00137"></a>00137                 <span class="keywordflow">if</span> ($nLen !== ($nWritten = (<span class="keywordtype">int</span>)@fwrite($this-&gt;_hSocket, $aMessage[<span class="stringliteral">&apos;BINARY_NOTIFICATION&apos;</span>]))) {
+<a name="l00138"></a>00138                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;ERROR: Unable to send message. Written {$nWritten} bytes instead of {$nLen} bytes&quot;</span>);
+<a name="l00139"></a>00139                     <span class="keywordflow">continue</span>;
+<a name="l00140"></a>00140                 }
+<a name="l00141"></a>00141 
+<a name="l00142"></a>00142                 $bSuccessfulSent = <span class="keyword">true</span>;
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144                 $read = array($this-&gt;_hSocket);
+<a name="l00145"></a>00145                 $null = NULL;
+<a name="l00146"></a>00146                 $nChangedStreams = @stream_select($read, $null, $null, 0, $this-&gt;_nSocketSelectTimeout);
+<a name="l00147"></a>00147                 <span class="keywordflow">if</span> ($nChangedStreams === <span class="keyword">false</span>) {
+<a name="l00148"></a>00148                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Unable to wait for a stream availability.&apos;</span>);
+<a name="l00149"></a>00149                 } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($nChangedStreams &gt; 0) {
+<a name="l00150"></a>00150                     <span class="keywordflow">if</span> (feof($this-&gt;_hSocket)) {
+<a name="l00151"></a>00151                         $bSuccessfulSent = <span class="keyword">false</span>;
+<a name="l00152"></a>00152                         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;ERROR: Unable to send message &apos;</span> . ($k+1) . <span class="stringliteral">&apos;, stream could be no more connected.&apos;</span>);
+<a name="l00153"></a>00153                         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server.">disconnect</a>();
+<a name="l00154"></a>00154                         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server.">connect</a>();
+<a name="l00155"></a>00155                     }
+<a name="l00156"></a>00156                 }
+<a name="l00157"></a>00157             }
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159             <span class="keywordflow">if</span> ($bSuccessfulSent) {
+<a name="l00160"></a>00160                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Message &apos;</span> . ($k+1) . <span class="stringliteral">&apos; sent.&apos;</span>);
+<a name="l00161"></a>00161                 unset($this-&gt;_aMessageQueue[$k]);
+<a name="l00162"></a>00162             }
+<a name="l00163"></a>00163         }
+<a name="l00164"></a>00164     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -451,11 +451,11 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00056">56</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00066">66</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00057"></a>00057     {
-<a name="l00058"></a>00058         $this-&gt;_nSendRetryTimes = (int)$nRetryTimes;
-<a name="l00059"></a>00059     }
+<p><div class="fragment"><pre class="fragment"><a name="l00067"></a>00067     {
+<a name="l00068"></a>00068         $this-&gt;_nSendRetryTimes = (int)$nRetryTimes;
+<a name="l00069"></a>00069     }
 </pre></div></p>
 
 </div>
@@ -474,7 +474,7 @@ Here is the caller graph for this function:</div>
 
 <p>Message queue. </p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00033">33</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00043">43</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
 </div>
 </div>
@@ -497,7 +497,7 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_apns_p_h_p___abstract.html#a4dfe522758b48c95d52c2ec5b90fd18f">ApnsPHP_Abstract</a>.</p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00028">28</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00038">38</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
 </div>
 </div>
@@ -514,7 +514,7 @@ Here is the caller graph for this function:</div>
 
 <p>Send retry times. </p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00026">26</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00036">36</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
 </div>
 </div>
@@ -531,7 +531,7 @@ Here is the caller graph for this function:</div>
 
 <p><b>integer</b> Payload command. </p>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00024">24</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00034">34</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
 </div>
 </div>
@@ -539,7 +539,7 @@ Here is the caller graph for this function:</div>
 <li><a class="el" href="_push_8php_source.html">Push.php</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sat Feb 27 23:39:14 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 01:00:01 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
