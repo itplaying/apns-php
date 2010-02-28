@@ -1,4 +1,6 @@
 #summary API Documentation
 #labels Featured,Phase-Implementation
 
-API Documentation can be accessed at this link http://apns-php.googlecode.com/svn/reference/index.html
+=Generated API Documentation=
+
+[http://apns-php.googlecode.com/svn/reference/index.html ApnsPHP API Documentation]
