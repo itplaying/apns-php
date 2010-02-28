@@ -46,9 +46,9 @@ To send Push Notifications to a device, you need a _device token_. Device token 
 #pragma mark -
 #pragma mark Remote notifications
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {  
-  NSLog(@"Did register for remote notifications: %@", deviceToken);
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
   // You can send here, for example, an asynchronous HTTP request to your web-server to store this deviceToken remotely.
+  NSLog(@"Did register for remote notifications: %@", deviceToken);
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
