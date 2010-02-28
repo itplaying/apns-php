@@ -1,0 +1,50 @@
+#summary Standard logger output from the sample programs.
+#labels Featured,Phase-Implementation
+
+==sample_push.php==
+
+{{{
+Sun, 28 Feb 2010 17:33:37 +0100 ApnsPHP[10519]: INFO: Trying ssl://gateway.sandbox.push.apple.com:2195...
+Sun, 28 Feb 2010 17:33:38 +0100 ApnsPHP[10519]: INFO: Connected to ssl://gateway.sandbox.push.apple.com:2195.
+Sun, 28 Feb 2010 17:33:39 +0100 ApnsPHP[10519]: INFO: Message 1 sent.
+Sun, 28 Feb 2010 17:33:39 +0100 ApnsPHP[10519]: INFO: Disconnected.
+}}}
+
+==sample_feedback.php==
+
+{{{
+Sun, 28 Feb 2010 17:34:20 +0100 ApnsPHP[10524]: INFO: Trying ssl://feedback.sandbox.push.apple.com:2196...
+Sun, 28 Feb 2010 17:34:24 +0100 ApnsPHP[10524]: INFO: Connected to ssl://feedback.sandbox.push.apple.com:2196.
+Sun, 28 Feb 2010 17:34:24 +0100 ApnsPHP[10524]: INFO: Disconnected.
+}}}
+
+==sample_server.php==
+
+{{{
+Sun, 28 Feb 2010 17:34:59 +0100 ApnsPHP[10528]: INFO: Forked process PID 10530
+Sun, 28 Feb 2010 17:34:59 +0100 ApnsPHP[10531]: INFO: Trying ssl://gateway.sandbox.push.apple.com:2195...
+Sun, 28 Feb 2010 17:34:59 +0100 ApnsPHP[10530]: INFO: Trying ssl://gateway.sandbox.push.apple.com:2195...
+Sun, 28 Feb 2010 17:34:59 +0100 ApnsPHP[10528]: INFO: Forked process PID 10531
+Sun, 28 Feb 2010 17:35:00 +0100 ApnsPHP[10531]: INFO: Connected to ssl://gateway.sandbox.push.apple.com:2195.
+Sun, 28 Feb 2010 17:35:00 +0100 ApnsPHP[10531]: INFO: Process 2 has 3 messages, sending...
+Sun, 28 Feb 2010 17:35:00 +0100 ApnsPHP[10530]: INFO: Connected to ssl://gateway.sandbox.push.apple.com:2195.
+Sun, 28 Feb 2010 17:35:00 +0100 ApnsPHP[10530]: INFO: Process 1 has 4 messages, sending...
+Sun, 28 Feb 2010 17:35:01 +0100 ApnsPHP[10531]: INFO: Message 1 sent.
+Sun, 28 Feb 2010 17:35:01 +0100 ApnsPHP[10530]: INFO: Message 1 sent.
+Sun, 28 Feb 2010 17:35:01 +0100 ApnsPHP[10531]: INFO: Message 2 sent.
+Sun, 28 Feb 2010 17:35:01 +0100 ApnsPHP[10530]: INFO: Message 2 sent.
+Sun, 28 Feb 2010 17:35:02 +0100 ApnsPHP[10531]: INFO: Message 3 sent.
+Sun, 28 Feb 2010 17:35:02 +0100 ApnsPHP[10531]: INFO: Process 2 has 2 messages, sending...
+Sun, 28 Feb 2010 17:35:02 +0100 ApnsPHP[10530]: INFO: Message 3 sent.
+Sun, 28 Feb 2010 17:35:02 +0100 ApnsPHP[10531]: INFO: Message 1 sent.
+Sun, 28 Feb 2010 17:35:02 +0100 ApnsPHP[10530]: INFO: Message 4 sent.
+Sun, 28 Feb 2010 17:35:02 +0100 ApnsPHP[10530]: INFO: Process 1 has 1 messages, sending...
+Sun, 28 Feb 2010 17:35:03 +0100 ApnsPHP[10531]: INFO: Message 2 sent.
+Sun, 28 Feb 2010 17:35:03 +0100 ApnsPHP[10530]: INFO: Message 1 sent.
+
+^C
+
+Sun, 28 Feb 2010 17:35:19 +0100 ApnsPHP[10531]: INFO: Child 10531 received signal #2, shutdown...
+Sun, 28 Feb 2010 17:35:19 +0100 ApnsPHP[10530]: INFO: Child 10530 received signal #2, shutdown...
+Sun, 28 Feb 2010 17:35:19 +0100 ApnsPHP[10528]: INFO: Parent shutdown, cleaning memory...
+}}}
