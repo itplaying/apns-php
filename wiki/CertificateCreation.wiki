@@ -12,7 +12,7 @@ To generate a certificate on a *Mac OS X*:
   # Create an App ID without a wildcard. For example {{{3L223ZX9Y3.com.armiento.test}}}
   # Click the *Configure* link next to this App ID and then click on the button to start the wizard to generate a new *Development Push SSL Certificate* ([http://developer.apple.com/iphone/prerelease/library/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/ProvisioningDevelopment/ProvisioningDevelopment.html#//apple_ref/doc/uid/TP40008194-CH104-SW4 Apple Documentation: Creating the SSL Certificate and Keys])
   # Download this certificate and double click on {{{aps_developer_identity.cer}}} to import it into your Keychain
-  # Launch *Keychain Assistant* (located in Application, Utilities or search for it with Spotlight) and click on Certificates on the left
+  # Launch *Keychain Assistant* (located in Application, Utilities or search for it with Spotlight) and click on My Certificates on the left
   # Expand *Apple Development Push Services* and select Apple Development Push Services *AND* your private key (just under Apple Development Push Services)
   # Right-click and choose "Export 2 elements..." and save as {{{server_cerificates_bundle_sandbox.p12}}} (don't type a password).
   # Open *Terminal* and change directory to location used to save {{{server_cerificates_bundle_sandbox.p12}}} and convert the PKCS12 certificate bundle into PEM format using this command (press _enter_ when asked for _Import Password_):
@@ -20,3 +20,10 @@ To generate a certificate on a *Mac OS X*:
 openssl pkcs12 -in server_cerificates_bundle_sandbox.p12 -out server_cerificates_bundle_sandbox.pem -nodes -clcerts
 }}}
   # Now you can use this PEM file as your certificate in ApnsPHP!
+
+== Verify peer using Entrust Root Certification Authority ==
+
+To generate a certificate on a *Mac OS X*:
+  # Launch *Keychain Assistant* (located in Application, Utilities or search for it with Spotlight) and click on System Root Certificate on top-left and Certificates on the bottom-left
+  # Right-click on *Entrust Root Certification Authority* and export with {{{Entrust_Root_Certification_Authority.pem}}} file name and choose as Document Format *Privacy Enhanced Mail (.pem)*.
+  # Now you can use this PEM file as Entrust Root Certification Authority in ApnsPHP to verify Apple Peer!
