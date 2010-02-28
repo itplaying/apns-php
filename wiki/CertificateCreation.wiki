@@ -1,4 +1,5 @@
 #summary How to create a Push Notification certificate in iPhone Developer Program Portal
+#labels Featured,Phase-Deploy
 
 = Introduction =
 
