@@ -50,14 +50,14 @@
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get all recipients.  <a href="#ab3e5aa6903328a411c0c75a023572a50"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">integer&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#ae6c898739424a186c74c6d8541fbb5f5">getRecipientsNumber</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the number of recipients.  <a href="#ae6c898739424a186c74c6d8541fbb5f5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a5af523d69804d2c9d5dbbe450cb8de09">getSound</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the sound to play.  <a href="#a5af523d69804d2c9d5dbbe450cb8de09"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a787a8b4145449843adff9e020d9a4ffb">getText</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the alert message to display to the user.  <a href="#a787a8b4145449843adff9e020d9a4ffb"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a2f7e376465691b665f7f5bdb2f2d93ae">setBadge</a> (integer $nBadge)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the number to badge the application icon with.  <a href="#a2f7e376465691b665f7f5bdb2f2d93ae"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">string&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a57cc6887988badf0c87e5d4feb5d6b4b">setSound</a> ($sSound)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the sound to play.  <a href="#a57cc6887988badf0c87e5d4feb5d6b4b"></a><br/></td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a2c08dc1019623112cdb127e46b76eed5">setSound</a> (string $sSound)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the sound to play.  <a href="#a2c08dc1019623112cdb127e46b76eed5"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#ae3f83c2a07a47889bd28b4db3586932d">setSound</a> (string $sSound= 'default')</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the sound to play.  <a href="#ae3f83c2a07a47889bd28b4db3586932d"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a001bba041871312a31ea7030dec50503">setText</a> (string $sText)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the alert message to display to the user.  <a href="#a001bba041871312a31ea7030dec50503"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
@@ -146,13 +146,13 @@ Here is the call graph for this function:</div>
 <p>When an object is "converted" to a string, JSON-encoded payload is returned.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>JSON-encoded payload. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00181">181</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00182">182</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>References <a class="el" href="_message_8php_source.html#l00191">_getPayload()</a>.</p>
+<p>References <a class="el" href="_message_8php_source.html#l00192">_getPayload()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00182"></a>00182     {
-<a name="l00183"></a>00183         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51" title="Convert the message in a JSON-encoded payload.">_getPayload</a>();
-<a name="l00184"></a>00184     }
+<p><div class="fragment"><pre class="fragment"><a name="l00183"></a>00183     {
+<a name="l00184"></a>00184         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51" title="Convert the message in a JSON-encoded payload.">_getPayload</a>();
+<a name="l00185"></a>00185     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -184,25 +184,25 @@ Here is the call graph for this function:</div>
 <p>Convert the message in a JSON-encoded payload. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>JSON-encoded payload. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00191">191</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00192">192</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_message_8php_source.html#l00181">__toString()</a>.</p>
+<p>Referenced by <a class="el" href="_message_8php_source.html#l00182">__toString()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00192"></a>00192     {
-<a name="l00193"></a>00193         $payload[<span class="stringliteral">&apos;aps&apos;</span>] = array();
-<a name="l00194"></a>00194         $p = &amp;$payload[<span class="stringliteral">&apos;aps&apos;</span>];
-<a name="l00195"></a>00195         
-<a name="l00196"></a>00196         <span class="keywordflow">if</span> (isset($this-&gt;_sText)) {
-<a name="l00197"></a>00197             $p[<span class="stringliteral">&apos;alert&apos;</span>] = (string)$this-&gt;_sText;
-<a name="l00198"></a>00198         }
-<a name="l00199"></a>00199         <span class="keywordflow">if</span> (isset($this-&gt;_nBadge) &amp;&amp; $this-&gt;_nBadge &gt; 0) {
-<a name="l00200"></a>00200             $p[<span class="stringliteral">&apos;badge&apos;</span>] = (int)$this-&gt;_nBadge;
-<a name="l00201"></a>00201         }
-<a name="l00202"></a>00202         <span class="keywordflow">if</span> (isset($this-&gt;_sSound)) {
-<a name="l00203"></a>00203             $p[<span class="stringliteral">&apos;sound&apos;</span>] = (string)$this-&gt;_sSound;
-<a name="l00204"></a>00204         }
-<a name="l00205"></a>00205         <span class="keywordflow">return</span> json_encode($payload, JSON_FORCE_OBJECT);
-<a name="l00206"></a>00206     }
+<p><div class="fragment"><pre class="fragment"><a name="l00193"></a>00193     {
+<a name="l00194"></a>00194         $payload[<span class="stringliteral">&apos;aps&apos;</span>] = array();
+<a name="l00195"></a>00195         $p = &amp;$payload[<span class="stringliteral">&apos;aps&apos;</span>];
+<a name="l00196"></a>00196         
+<a name="l00197"></a>00197         <span class="keywordflow">if</span> (isset($this-&gt;_sText)) {
+<a name="l00198"></a>00198             $p[<span class="stringliteral">&apos;alert&apos;</span>] = (string)$this-&gt;_sText;
+<a name="l00199"></a>00199         }
+<a name="l00200"></a>00200         <span class="keywordflow">if</span> (isset($this-&gt;_nBadge) &amp;&amp; $this-&gt;_nBadge &gt; 0) {
+<a name="l00201"></a>00201             $p[<span class="stringliteral">&apos;badge&apos;</span>] = (int)$this-&gt;_nBadge;
+<a name="l00202"></a>00202         }
+<a name="l00203"></a>00203         <span class="keywordflow">if</span> (isset($this-&gt;_sSound)) {
+<a name="l00204"></a>00204             $p[<span class="stringliteral">&apos;sound&apos;</span>] = (string)$this-&gt;_sSound;
+<a name="l00205"></a>00205         }
+<a name="l00206"></a>00206         <span class="keywordflow">return</span> json_encode($payload, JSON_FORCE_OBJECT);
+<a name="l00207"></a>00207     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -331,7 +331,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_message_8php_source.html#l00078">78</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_push_8php_source.html#l00086">ApnsPHP_Push::add()</a>.</p>
+<p>Referenced by <a class="el" href="_push_8php_source.html#l00073">ApnsPHP_Push::add()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00079"></a>00079     {
 <a name="l00080"></a>00080         <span class="keywordflow">if</span> (!isset($this-&gt;_aDeviceTokens[$nRecipient])) {
@@ -401,7 +401,7 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_message_8php_source.html#l00093">93</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_push_8php_source.html#l00086">ApnsPHP_Push::add()</a>.</p>
+<p>Referenced by <a class="el" href="_push_8php_source.html#l00073">ApnsPHP_Push::add()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00094"></a>00094     {
 <a name="l00095"></a>00095         <span class="keywordflow">return</span> count($this-&gt;_aDeviceTokens);
@@ -416,6 +416,33 @@ Here is the caller graph for this function:</div>
 <area shape="rect" id="node3" href="class_apns_p_h_p___push.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the message queue." alt="" coords="224,5,379,35"/></map>
 </div>
 </p>
+
+</div>
+</div>
+<a class="anchor" id="a5af523d69804d2c9d5dbbe450cb8de09"></a><!-- doxytag: member="ApnsPHP_Message::getSound" ref="a5af523d69804d2c9d5dbbe450cb8de09" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string getSound </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the sound to play. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The sound to play. </dd></dl>
+
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00171">171</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00172"></a>00172     {
+<a name="l00173"></a>00173         <span class="keywordflow">return</span> $this-&gt;_sSound;
+<a name="l00174"></a>00174     }
+</pre></div></p>
 
 </div>
 </div>
@@ -490,35 +517,7 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a57cc6887988badf0c87e5d4feb5d6b4b"></a><!-- doxytag: member="ApnsPHP_Message::setSound" ref="a57cc6887988badf0c87e5d4feb5d6b4b" args="($sSound)" -->
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">string setSound </td>
-          <td>(</td>
-          <td class="paramtype">$&nbsp;</td>
-          <td class="paramname"> <em>sSound</em></td>
-          <td>&nbsp;)&nbsp;</td>
-          <td></td>
-        </tr>
-      </table>
-</div>
-<div class="memdoc">
-
-<p>Get the sound to play. </p>
-<dl class="return"><dt><b>Returns:</b></dt><dd>The sound to play. </dd></dl>
-
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00170">170</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
-
-<p><div class="fragment"><pre class="fragment"><a name="l00171"></a>00171     {
-<a name="l00172"></a>00172         $this-&gt;_sSound = $sSound;
-<a name="l00173"></a>00173     }
-</pre></div></p>
-
-</div>
-</div>
-<a class="anchor" id="a2c08dc1019623112cdb127e46b76eed5"></a><!-- doxytag: member="ApnsPHP_Message::setSound" ref="a2c08dc1019623112cdb127e46b76eed5" args="(string $sSound)" -->
+<a class="anchor" id="ae3f83c2a07a47889bd28b4db3586932d"></a><!-- doxytag: member="ApnsPHP_Message::setSound" ref="ae3f83c2a07a47889bd28b4db3586932d" args="(string $sSound= 'default')" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -526,7 +525,7 @@ Here is the caller graph for this function:</div>
           <td class="memname">void setSound </td>
           <td>(</td>
           <td class="paramtype">string $&nbsp;</td>
-          <td class="paramname"> <em>sSound</em></td>
+          <td class="paramname"> <em>sSound</em> = <code>'default'</code></td>
           <td>&nbsp;)&nbsp;</td>
           <td></td>
         </tr>
@@ -537,16 +536,16 @@ Here is the caller graph for this function:</div>
 <p>Set the sound to play. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>$sSound</em>&nbsp;</td><td>A sound to play. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>$sSound</em>&nbsp;</td><td>[optional] A sound to play ('default sound' is the default sound). </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00160">160</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00161">161</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00161"></a>00161     {
-<a name="l00162"></a>00162         $this-&gt;_sSound = $sSound;
-<a name="l00163"></a>00163     }
+<p><div class="fragment"><pre class="fragment"><a name="l00162"></a>00162     {
+<a name="l00163"></a>00163         $this-&gt;_sSound = $sSound;
+<a name="l00164"></a>00164     }
 </pre></div></p>
 
 </div>
@@ -657,7 +656,7 @@ Here is the caller graph for this function:</div>
 <li><a class="el" href="_message_8php_source.html">Message.php</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 01:32:55 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 03:47:03 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

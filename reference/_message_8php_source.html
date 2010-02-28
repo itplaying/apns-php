@@ -181,58 +181,59 @@
 <a name="l00155"></a>00155 <span class="comment">    /**</span>
 <a name="l00156"></a>00156 <span class="comment">     * Set the sound to play.</span>
 <a name="l00157"></a>00157 <span class="comment">     *</span>
-<a name="l00158"></a>00158 <span class="comment">     * @param  $sSound @type string A sound to play.</span>
-<a name="l00159"></a>00159 <span class="comment">     */</span>
-<a name="l00160"></a><a class="code" href="class_apns_p_h_p___message.html#a2c08dc1019623112cdb127e46b76eed5">00160</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___message.html#a2c08dc1019623112cdb127e46b76eed5" title="Set the sound to play.">setSound</a>($sSound)
-<a name="l00161"></a>00161     {
-<a name="l00162"></a>00162         $this-&gt;_sSound = $sSound;
-<a name="l00163"></a>00163     }
-<a name="l00164"></a>00164 <span class="comment"></span>
-<a name="l00165"></a>00165 <span class="comment">    /**</span>
-<a name="l00166"></a>00166 <span class="comment">     * Get the sound to play.</span>
-<a name="l00167"></a>00167 <span class="comment">     *</span>
-<a name="l00168"></a>00168 <span class="comment">     * @return @type string The sound to play.</span>
-<a name="l00169"></a>00169 <span class="comment">     */</span>
-<a name="l00170"></a><a class="code" href="class_apns_p_h_p___message.html#a57cc6887988badf0c87e5d4feb5d6b4b">00170</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___message.html#a2c08dc1019623112cdb127e46b76eed5" title="Set the sound to play.">setSound</a>($sSound)
-<a name="l00171"></a>00171     {
-<a name="l00172"></a>00172         $this-&gt;_sSound = $sSound;
-<a name="l00173"></a>00173     }
-<a name="l00174"></a>00174     <span class="comment"></span>
-<a name="l00175"></a>00175 <span class="comment">    /**</span>
-<a name="l00176"></a>00176 <span class="comment">     * PHP Magic Method. When an object is &quot;converted&quot; to a string, JSON-encoded</span>
-<a name="l00177"></a>00177 <span class="comment">     * payload is returned.</span>
-<a name="l00178"></a>00178 <span class="comment">     *</span>
-<a name="l00179"></a>00179 <span class="comment">     * @return @type string JSON-encoded payload.</span>
-<a name="l00180"></a>00180 <span class="comment">     */</span>
-<a name="l00181"></a><a class="code" href="class_apns_p_h_p___message.html#afcde9cf027709d7d475480f9bf5ddf7f">00181</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___message.html#afcde9cf027709d7d475480f9bf5ddf7f" title="PHP Magic Method.">__toString</a>()
-<a name="l00182"></a>00182     {
-<a name="l00183"></a>00183         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51" title="Convert the message in a JSON-encoded payload.">_getPayload</a>();
-<a name="l00184"></a>00184     }
-<a name="l00185"></a>00185     <span class="comment"></span>
-<a name="l00186"></a>00186 <span class="comment">    /**</span>
-<a name="l00187"></a>00187 <span class="comment">     * Convert the message in a JSON-encoded payload.</span>
-<a name="l00188"></a>00188 <span class="comment">     *</span>
-<a name="l00189"></a>00189 <span class="comment">     * @return @type string JSON-encoded payload.</span>
-<a name="l00190"></a>00190 <span class="comment">     */</span>
-<a name="l00191"></a><a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51">00191</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51" title="Convert the message in a JSON-encoded payload.">_getPayload</a>()
-<a name="l00192"></a>00192     {
-<a name="l00193"></a>00193         $payload[<span class="stringliteral">&apos;aps&apos;</span>] = array();
-<a name="l00194"></a>00194         $p = &amp;$payload[<span class="stringliteral">&apos;aps&apos;</span>];
-<a name="l00195"></a>00195         
-<a name="l00196"></a>00196         <span class="keywordflow">if</span> (isset($this-&gt;_sText)) {
-<a name="l00197"></a>00197             $p[<span class="stringliteral">&apos;alert&apos;</span>] = (string)$this-&gt;_sText;
-<a name="l00198"></a>00198         }
-<a name="l00199"></a>00199         <span class="keywordflow">if</span> (isset($this-&gt;_nBadge) &amp;&amp; $this-&gt;_nBadge &gt; 0) {
-<a name="l00200"></a>00200             $p[<span class="stringliteral">&apos;badge&apos;</span>] = (int)$this-&gt;_nBadge;
-<a name="l00201"></a>00201         }
-<a name="l00202"></a>00202         <span class="keywordflow">if</span> (isset($this-&gt;_sSound)) {
-<a name="l00203"></a>00203             $p[<span class="stringliteral">&apos;sound&apos;</span>] = (string)$this-&gt;_sSound;
-<a name="l00204"></a>00204         }
-<a name="l00205"></a>00205         <span class="keywordflow">return</span> json_encode($payload, JSON_FORCE_OBJECT);
-<a name="l00206"></a>00206     }
-<a name="l00207"></a>00207 }
+<a name="l00158"></a>00158 <span class="comment">     * @param  $sSound @type string @optional A sound to play (&apos;default sound&apos; is</span>
+<a name="l00159"></a>00159 <span class="comment">     *         the default sound).</span>
+<a name="l00160"></a>00160 <span class="comment">     */</span>
+<a name="l00161"></a><a class="code" href="class_apns_p_h_p___message.html#ae3f83c2a07a47889bd28b4db3586932d">00161</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___message.html#ae3f83c2a07a47889bd28b4db3586932d" title="Set the sound to play.">setSound</a>($sSound = <span class="stringliteral">&apos;default&apos;</span>)
+<a name="l00162"></a>00162     {
+<a name="l00163"></a>00163         $this-&gt;_sSound = $sSound;
+<a name="l00164"></a>00164     }
+<a name="l00165"></a>00165 <span class="comment"></span>
+<a name="l00166"></a>00166 <span class="comment">    /**</span>
+<a name="l00167"></a>00167 <span class="comment">     * Get the sound to play.</span>
+<a name="l00168"></a>00168 <span class="comment">     *</span>
+<a name="l00169"></a>00169 <span class="comment">     * @return @type string The sound to play.</span>
+<a name="l00170"></a>00170 <span class="comment">     */</span>
+<a name="l00171"></a><a class="code" href="class_apns_p_h_p___message.html#a5af523d69804d2c9d5dbbe450cb8de09">00171</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___message.html#a5af523d69804d2c9d5dbbe450cb8de09" title="Get the sound to play.">getSound</a>()
+<a name="l00172"></a>00172     {
+<a name="l00173"></a>00173         <span class="keywordflow">return</span> $this-&gt;_sSound;
+<a name="l00174"></a>00174     }
+<a name="l00175"></a>00175     <span class="comment"></span>
+<a name="l00176"></a>00176 <span class="comment">    /**</span>
+<a name="l00177"></a>00177 <span class="comment">     * PHP Magic Method. When an object is &quot;converted&quot; to a string, JSON-encoded</span>
+<a name="l00178"></a>00178 <span class="comment">     * payload is returned.</span>
+<a name="l00179"></a>00179 <span class="comment">     *</span>
+<a name="l00180"></a>00180 <span class="comment">     * @return @type string JSON-encoded payload.</span>
+<a name="l00181"></a>00181 <span class="comment">     */</span>
+<a name="l00182"></a><a class="code" href="class_apns_p_h_p___message.html#afcde9cf027709d7d475480f9bf5ddf7f">00182</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___message.html#afcde9cf027709d7d475480f9bf5ddf7f" title="PHP Magic Method.">__toString</a>()
+<a name="l00183"></a>00183     {
+<a name="l00184"></a>00184         <span class="keywordflow">return</span> $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51" title="Convert the message in a JSON-encoded payload.">_getPayload</a>();
+<a name="l00185"></a>00185     }
+<a name="l00186"></a>00186     <span class="comment"></span>
+<a name="l00187"></a>00187 <span class="comment">    /**</span>
+<a name="l00188"></a>00188 <span class="comment">     * Convert the message in a JSON-encoded payload.</span>
+<a name="l00189"></a>00189 <span class="comment">     *</span>
+<a name="l00190"></a>00190 <span class="comment">     * @return @type string JSON-encoded payload.</span>
+<a name="l00191"></a>00191 <span class="comment">     */</span>
+<a name="l00192"></a><a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51">00192</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___message.html#a98b287dc9f563c2bf7492ef5d1418a51" title="Convert the message in a JSON-encoded payload.">_getPayload</a>()
+<a name="l00193"></a>00193     {
+<a name="l00194"></a>00194         $payload[<span class="stringliteral">&apos;aps&apos;</span>] = array();
+<a name="l00195"></a>00195         $p = &amp;$payload[<span class="stringliteral">&apos;aps&apos;</span>];
+<a name="l00196"></a>00196         
+<a name="l00197"></a>00197         <span class="keywordflow">if</span> (isset($this-&gt;_sText)) {
+<a name="l00198"></a>00198             $p[<span class="stringliteral">&apos;alert&apos;</span>] = (string)$this-&gt;_sText;
+<a name="l00199"></a>00199         }
+<a name="l00200"></a>00200         <span class="keywordflow">if</span> (isset($this-&gt;_nBadge) &amp;&amp; $this-&gt;_nBadge &gt; 0) {
+<a name="l00201"></a>00201             $p[<span class="stringliteral">&apos;badge&apos;</span>] = (int)$this-&gt;_nBadge;
+<a name="l00202"></a>00202         }
+<a name="l00203"></a>00203         <span class="keywordflow">if</span> (isset($this-&gt;_sSound)) {
+<a name="l00204"></a>00204             $p[<span class="stringliteral">&apos;sound&apos;</span>] = (string)$this-&gt;_sSound;
+<a name="l00205"></a>00205         }
+<a name="l00206"></a>00206         <span class="keywordflow">return</span> json_encode($payload, JSON_FORCE_OBJECT);
+<a name="l00207"></a>00207     }
+<a name="l00208"></a>00208 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 01:32:53 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 03:47:01 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
