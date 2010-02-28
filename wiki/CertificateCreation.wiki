@@ -24,7 +24,7 @@ openssl pkcs12 -in server_cerificates_bundle_sandbox.p12 -out server_cerificates
 
 == Verify peer using Entrust Root Certification Authority ==
 
-To generate a certificate on a *Mac OS X*:
+To export the Entrust Root Authority certificate on a *Mac OS X*:
   # Launch *Keychain Assistant* (located in Application, Utilities or search for it with Spotlight) and click on System Root Certificate on top-left and Certificates on the bottom-left
   # Right-click on *Entrust Root Certification Authority* and export with {{{Entrust_Root_Certification_Authority.pem}}} file name and choose as Document Format *Privacy Enhanced Mail (.pem)*.
   # Now you can use this PEM file as Entrust Root Certification Authority in ApnsPHP to verify Apple Peer!
