@@ -1,0 +1,5 @@
+#summary Todo
+
+= Todo =
+
+  * _Advanced usage_: add support for Child properties of the alert property (see the Table 2-2 paragraph *The Notification Payload* at http://tinyurl.com/ApplePushNotificationPayload)
