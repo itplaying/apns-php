@@ -1,0 +1,5 @@
+#summary API Documentation
+
+= API Documentation =
+
+API Documentation can be accessed at this link http://apns-php.googlecode.com/svn/reference/index.html
