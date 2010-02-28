@@ -4,7 +4,7 @@
 
 To send Push notification to an application/device couple you need an unique device token (see the [http://code.google.com/p/apns-php/wiki/ObjectiveC ObjectiveC page]) and a certificate.
 
-= Generate a Push Certificate =
+== Generate a Push Certificate ==
 
 To generate a certificate on a *Mac OS X*:
   # Log-in to the [http://developer.apple.com/iphone/manage/overview/index.action iPhone Developer Program Portal]
