@@ -71,7 +71,7 @@ Collaboration diagram for ApnsPHP_Feedback:</div>
 <p>Apple Push Notification Service includes a feedback service that APNs continually updates with a per-application list of devices for which there were failed-delivery attempts. Providers should periodically query the feedback service to get the list of device tokens for their applications, each of which is identified by its topic. Then, after verifying that the application hasn’t recently been re-registered on the identified devices, a provider should stop sending notifications to these devices.</p>
 <dl class="see"><dt><b>See also:</b></dt><dd><a href="http://tinyurl.com/ApplePushNotificationFeedback">http://tinyurl.com/ApplePushNotificationFeedback</a> </dd></dl>
 
-<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00038">38</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
+<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00039">39</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
 <hr/><h2>Member Function Documentation</h2>
 <a class="anchor" id="a2a912ccb0fc02911001a99eb6559b4c5"></a><!-- doxytag: member="ApnsPHP_Feedback::_parseBinaryTuple" ref="a2a912ccb0fc02911001a99eb6559b4c5" args="(string $sBinaryTuple)" -->
 <div class="memitem">
@@ -98,13 +98,13 @@ Collaboration diagram for ApnsPHP_Feedback:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Array with timestamp, tokenLength and deviceToken keys. </dd></dl>
 
-<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00112">112</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
+<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00113">113</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_feedback_8php_source.html#l00065">receive()</a>.</p>
+<p>Referenced by <a class="el" href="_feedback_8php_source.html#l00066">receive()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00113"></a>00113     {
-<a name="l00114"></a>00114         <span class="keywordflow">return</span> unpack(<span class="stringliteral">&apos;Ntimestamp/ntokenLength/H*deviceToken&apos;</span>, $sBinaryTuple);
-<a name="l00115"></a>00115     }
+<p><div class="fragment"><pre class="fragment"><a name="l00114"></a>00114     {
+<a name="l00115"></a>00115         <span class="keywordflow">return</span> unpack(<span class="stringliteral">&apos;Ntimestamp/ntokenLength/H*deviceToken&apos;</span>, $sBinaryTuple);
+<a name="l00116"></a>00116     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -142,49 +142,49 @@ Here is the caller graph for this function:</div>
 </ul>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Array of feedback tuples (array). </dd></dl>
 
-<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00065">65</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
+<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00066">66</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
 
-<p>References <a class="el" href="_abstract_8php_source.html#l00369">ApnsPHP_Abstract::_log()</a>, and <a class="el" href="_feedback_8php_source.html#l00112">_parseBinaryTuple()</a>.</p>
+<p>References <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, and <a class="el" href="_feedback_8php_source.html#l00113">_parseBinaryTuple()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00066"></a>00066     {
-<a name="l00067"></a>00067         $nFeedbackTupleLen = self::TIME_BINARY_SIZE + self::TOKEN_LENGTH_BINARY_SIZE + self::DEVICE_BINARY_SIZE;
-<a name="l00068"></a>00068         
-<a name="l00069"></a>00069         $this-&gt;_aFeedback = array();
-<a name="l00070"></a>00070         $sBuffer = <span class="stringliteral">&apos;&apos;</span>;
-<a name="l00071"></a>00071         <span class="keywordflow">while</span> (!feof($this-&gt;_hSocket)) {
-<a name="l00072"></a>00072             $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Reading...&apos;</span>);
-<a name="l00073"></a>00073             $sBuffer .= $sCurrBuffer = fread($this-&gt;_hSocket, 8192);
-<a name="l00074"></a>00074             $nCurrBufferLen = strlen($sCurrBuffer);
-<a name="l00075"></a>00075             <span class="keywordflow">if</span> ($nCurrBufferLen &gt; 0) {
-<a name="l00076"></a>00076                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: {$nCurrBufferLen} bytes read.&quot;</span>);
-<a name="l00077"></a>00077             }
-<a name="l00078"></a>00078             unset($sCurrBuffer, $nCurrBufferLen);
-<a name="l00079"></a>00079             
-<a name="l00080"></a>00080             $nBufferLen = strlen($sBuffer);
-<a name="l00081"></a>00081             <span class="keywordflow">if</span> ($nBufferLen &gt;= $nFeedbackTupleLen) {
-<a name="l00082"></a>00082                 $nFeedbackTuples = floor($nBufferLen / $nFeedbackTupleLen);
-<a name="l00083"></a>00083                 <span class="keywordflow">for</span> ($i = 0; $i &lt; $nFeedbackTuples; $i++) {
-<a name="l00084"></a>00084                     $sFeedbackTuple = substr($sBuffer, 0, $nFeedbackTupleLen);
-<a name="l00085"></a>00085                     $sBuffer = substr($sBuffer, $nFeedbackTupleLen);
-<a name="l00086"></a>00086                     $this-&gt;_aFeedback[] = $aFeedback = $this-&gt;<a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5" title="Parses binary tuples.">_parseBinaryTuple</a>($sFeedbackTuple);
-<a name="l00087"></a>00087                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(sprintf(<span class="stringliteral">&quot;INFO: New feedback tuple: timestamp=%d (%s), tokenLength=%d, deviceToken=%s.&quot;</span>,
-<a name="l00088"></a>00088                         $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>], date(<span class="stringliteral">&apos;Y-m-d H:i:s&apos;</span>, $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>]),
-<a name="l00089"></a>00089                         $aFeedback[<span class="stringliteral">&apos;tokenLength&apos;</span>], $aFeedback[<span class="stringliteral">&apos;deviceToken&apos;</span>]
-<a name="l00090"></a>00090                     ));
-<a name="l00091"></a>00091                     unset($aFeedback);
-<a name="l00092"></a>00092                 }
-<a name="l00093"></a>00093             }
-<a name="l00094"></a>00094             
-<a name="l00095"></a>00095             $read = array($this-&gt;_hSocket);
-<a name="l00096"></a>00096             $null = NULL;
-<a name="l00097"></a>00097             $nChangedStreams = stream_select($read, $null, $null, 0, $this-&gt;_nSocketSelectTimeout);
-<a name="l00098"></a>00098             <span class="keywordflow">if</span> ($nChangedStreams === <span class="keyword">false</span>) {
-<a name="l00099"></a>00099                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Unable to wait for a stream availability.&apos;</span>);
-<a name="l00100"></a>00100                 <span class="keywordflow">break</span>;
-<a name="l00101"></a>00101             }
-<a name="l00102"></a>00102         }
-<a name="l00103"></a>00103         <span class="keywordflow">return</span> $this-&gt;_aFeedback;
-<a name="l00104"></a>00104     }
+<p><div class="fragment"><pre class="fragment"><a name="l00067"></a>00067     {
+<a name="l00068"></a>00068         $nFeedbackTupleLen = self::TIME_BINARY_SIZE + self::TOKEN_LENGTH_BINARY_SIZE + self::DEVICE_BINARY_SIZE;
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070         $this-&gt;_aFeedback = array();
+<a name="l00071"></a>00071         $sBuffer = <span class="stringliteral">&apos;&apos;</span>;
+<a name="l00072"></a>00072         <span class="keywordflow">while</span> (!feof($this-&gt;_hSocket)) {
+<a name="l00073"></a>00073             $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Reading...&apos;</span>);
+<a name="l00074"></a>00074             $sBuffer .= $sCurrBuffer = fread($this-&gt;_hSocket, 8192);
+<a name="l00075"></a>00075             $nCurrBufferLen = strlen($sCurrBuffer);
+<a name="l00076"></a>00076             <span class="keywordflow">if</span> ($nCurrBufferLen &gt; 0) {
+<a name="l00077"></a>00077                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: {$nCurrBufferLen} bytes read.&quot;</span>);
+<a name="l00078"></a>00078             }
+<a name="l00079"></a>00079             unset($sCurrBuffer, $nCurrBufferLen);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081             $nBufferLen = strlen($sBuffer);
+<a name="l00082"></a>00082             <span class="keywordflow">if</span> ($nBufferLen &gt;= $nFeedbackTupleLen) {
+<a name="l00083"></a>00083                 $nFeedbackTuples = floor($nBufferLen / $nFeedbackTupleLen);
+<a name="l00084"></a>00084                 <span class="keywordflow">for</span> ($i = 0; $i &lt; $nFeedbackTuples; $i++) {
+<a name="l00085"></a>00085                     $sFeedbackTuple = substr($sBuffer, 0, $nFeedbackTupleLen);
+<a name="l00086"></a>00086                     $sBuffer = substr($sBuffer, $nFeedbackTupleLen);
+<a name="l00087"></a>00087                     $this-&gt;_aFeedback[] = $aFeedback = $this-&gt;<a class="code" href="class_apns_p_h_p___feedback.html#a2a912ccb0fc02911001a99eb6559b4c5" title="Parses binary tuples.">_parseBinaryTuple</a>($sFeedbackTuple);
+<a name="l00088"></a>00088                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(sprintf(<span class="stringliteral">&quot;INFO: New feedback tuple: timestamp=%d (%s), tokenLength=%d, deviceToken=%s.&quot;</span>,
+<a name="l00089"></a>00089                         $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>], date(<span class="stringliteral">&apos;Y-m-d H:i:s&apos;</span>, $aFeedback[<span class="stringliteral">&apos;timestamp&apos;</span>]),
+<a name="l00090"></a>00090                         $aFeedback[<span class="stringliteral">&apos;tokenLength&apos;</span>], $aFeedback[<span class="stringliteral">&apos;deviceToken&apos;</span>]
+<a name="l00091"></a>00091                     ));
+<a name="l00092"></a>00092                     unset($aFeedback);
+<a name="l00093"></a>00093                 }
+<a name="l00094"></a>00094             }
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096             $read = array($this-&gt;_hSocket);
+<a name="l00097"></a>00097             $null = NULL;
+<a name="l00098"></a>00098             $nChangedStreams = stream_select($read, $null, $null, 0, $this-&gt;_nSocketSelectTimeout);
+<a name="l00099"></a>00099             <span class="keywordflow">if</span> ($nChangedStreams === <span class="keyword">false</span>) {
+<a name="l00100"></a>00100                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Unable to wait for a stream availability.&apos;</span>);
+<a name="l00101"></a>00101                 <span class="keywordflow">break</span>;
+<a name="l00102"></a>00102             }
+<a name="l00103"></a>00103         }
+<a name="l00104"></a>00104         <span class="keywordflow">return</span> $this-&gt;_aFeedback;
+<a name="l00105"></a>00105     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -212,7 +212,7 @@ Here is the call graph for this function:</div>
 
 <p>Feedback container. </p>
 
-<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00048">48</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
+<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00049">49</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
 
 </div>
 </div>
@@ -235,7 +235,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented from <a class="el" href="class_apns_p_h_p___abstract.html#a4dfe522758b48c95d52c2ec5b90fd18f">ApnsPHP_Abstract</a>.</p>
 
-<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00043">43</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
+<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00044">44</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
 
 </div>
 </div>
@@ -252,7 +252,7 @@ Here is the call graph for this function:</div>
 
 <p><b>integer</b> Timestamp binary size in bytes. </p>
 
-<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00040">40</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
+<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00041">41</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
 
 </div>
 </div>
@@ -269,7 +269,7 @@ Here is the call graph for this function:</div>
 
 <p><b>integer</b> Token length binary size in bytes. </p>
 
-<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00041">41</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
+<p>Definition at line <a class="el" href="_feedback_8php_source.html#l00042">42</a> of file <a class="el" href="_feedback_8php_source.html">Feedback.php</a>.</p>
 
 </div>
 </div>
@@ -277,7 +277,7 @@ Here is the call graph for this function:</div>
 <li><a class="el" href="_feedback_8php_source.html">Feedback.php</a></li>
 </ul>
 </div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 20:47:42 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Mar 1 22:50:54 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>

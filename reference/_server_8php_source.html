@@ -32,7 +32,7 @@
 <a name="l00002"></a>00002 <span class="comment">/**</span>
 <a name="l00003"></a>00003 <span class="comment"> * @file</span>
 <a name="l00004"></a>00004 <span class="comment"> * ApnsPHP_Push_Server class definition.</span>
-<a name="l00005"></a>00005 <span class="comment"> * </span>
+<a name="l00005"></a>00005 <span class="comment"> *</span>
 <a name="l00006"></a>00006 <span class="comment"> * LICENSE</span>
 <a name="l00007"></a>00007 <span class="comment"> *</span>
 <a name="l00008"></a>00008 <span class="comment"> * This source file is subject to the new BSD license that is bundled</span>
@@ -42,308 +42,309 @@
 <a name="l00012"></a>00012 <span class="comment"> * If you did not receive a copy of the license and are unable to</span>
 <a name="l00013"></a>00013 <span class="comment"> * obtain it through the world-wide-web, please send an email</span>
 <a name="l00014"></a>00014 <span class="comment"> * to aldo.armiento@gmail.com so we can send you a copy immediately.</span>
-<a name="l00015"></a>00015 <span class="comment"> * </span>
-<a name="l00016"></a>00016 <span class="comment"> * @version $Id$</span>
-<a name="l00017"></a>00017 <span class="comment"> */</span>
-<a name="l00018"></a>00018 <span class="comment"></span>
-<a name="l00019"></a>00019 <span class="comment">/**</span>
-<a name="l00020"></a>00020 <span class="comment"> * @defgroup ApnsPHP_Push_Server Server</span>
-<a name="l00021"></a>00021 <span class="comment"> * @ingroup ApnsPHP_Push</span>
-<a name="l00022"></a>00022 <span class="comment"> */</span>
-<a name="l00023"></a>00023 <span class="comment"></span>
-<a name="l00024"></a>00024 <span class="comment">/**</span>
-<a name="l00025"></a>00025 <span class="comment"> * The Push Notification Server Provider.</span>
-<a name="l00026"></a>00026 <span class="comment"> * </span>
-<a name="l00027"></a>00027 <span class="comment"> * The class manages multiple Push Notification Providers and an inter-process message</span>
-<a name="l00028"></a>00028 <span class="comment"> * queue. This class is useful to parallelize and speed-up send activities to Apple</span>
-<a name="l00029"></a>00029 <span class="comment"> * Push Notification service.</span>
-<a name="l00030"></a>00030 <span class="comment"> * </span>
-<a name="l00031"></a>00031 <span class="comment"> * @ingroup ApnsPHP_Push_Server</span>
-<a name="l00032"></a>00032 <span class="comment"> */</span> 
-<a name="l00033"></a><a class="code" href="class_apns_p_h_p___push___server.html">00033</a> <span class="keyword">class </span><a class="code" href="class_apns_p_h_p___push___server.html" title="The Push Notification Server Provider.">ApnsPHP_Push_Server</a> <span class="keyword">extends</span> <a class="code" href="class_apns_p_h_p___push.html" title="The Push Notification Provider.">ApnsPHP_Push</a>
-<a name="l00034"></a>00034 {
-<a name="l00035"></a><a class="code" href="class_apns_p_h_p___push___server.html#a7f4bfcfe5c736ddf91a9ac098b8f96aa">00035</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#a7f4bfcfe5c736ddf91a9ac098b8f96aa" title="integer Main loop sleep time in micro seconds.">MAIN_LOOP_USLEEP</a> = 200000; <span class="comment">/**&lt; @type integer Main loop sleep time in micro seconds. */</span>
-<a name="l00036"></a><a class="code" href="class_apns_p_h_p___push___server.html#afdabdf2d03ec5d511b382e6d109ce7e8">00036</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#afdabdf2d03ec5d511b382e6d109ce7e8" title="integer Shared memory size in bytes useful to store message queues.">SHM_SIZE</a> = 524288; <span class="comment">/**&lt; @type integer Shared memory size in bytes useful to store message queues. */</span>
-<a name="l00037"></a><a class="code" href="class_apns_p_h_p___push___server.html#a6cce92ee3cdd95468ba03a37580f8e4b">00037</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#a6cce92ee3cdd95468ba03a37580f8e4b" title="integer Message queue start identifier for messages.">SHM_MESSAGES_QUEUE_KEY_START</a> = 1000; <span class="comment">/**&lt; @type integer Message queue start identifier for messages. For every process 1 is added to this number. */</span>
-<a name="l00038"></a><a class="code" href="class_apns_p_h_p___push___server.html#a2f528373736399140c3b2c4fbef3b40a">00038</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#a2f528373736399140c3b2c4fbef3b40a" title="integer Message queue identifier for not delivered messages.">SHM_ERROR_MESSAGES_QUEUE_KEY</a> = 999; <span class="comment">/**&lt; @type integer Message queue identifier for not delivered messages. */</span>
-<a name="l00039"></a>00039     
-<a name="l00040"></a><a class="code" href="class_apns_p_h_p___push___server.html#a74a94f66f642e3a4712676b43043b4c8">00040</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a74a94f66f642e3a4712676b43043b4c8" title="The number of processes to start.">$_nProcesses</a> = 3; <span class="comment">/**&lt; @type integer The number of processes to start. */</span>
-<a name="l00041"></a><a class="code" href="class_apns_p_h_p___push___server.html#a723840e00e96a379957438436eb618fb">00041</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a723840e00e96a379957438436eb618fb" title="Array of process PIDs.">$_aPids</a> = array(); <span class="comment">/**&lt; @type array Array of process PIDs. */</span>
-<a name="l00042"></a><a class="code" href="class_apns_p_h_p___push___server.html#ad7f049a723109fa9ae2ae43d7259162d">00042</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#ad7f049a723109fa9ae2ae43d7259162d" title="The parent process id.">$_nParentPid</a>; <span class="comment">/**&lt; @type integer The parent process id. */</span>
-<a name="l00043"></a><a class="code" href="class_apns_p_h_p___push___server.html#a5aa916da7a00764a155cda6a974c99b2">00043</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a5aa916da7a00764a155cda6a974c99b2" title="Cardinal process number (0, 1, 2, .">$_nCurrentProcess</a>; <span class="comment">/**&lt; @type integer Cardinal process number (0, 1, 2, ...). */</span>
-<a name="l00044"></a><a class="code" href="class_apns_p_h_p___push___server.html#a8d5212c995652fcfc909cb8e235f4624">00044</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a8d5212c995652fcfc909cb8e235f4624" title="The number of running processes.">$_nRunningProcesses</a>; <span class="comment">/**&lt; @type integer The number of running processes. */</span>
-<a name="l00045"></a>00045     
-<a name="l00046"></a><a class="code" href="class_apns_p_h_p___push___server.html#a5deafbc61d7d63c9d9d360e34255adef">00046</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a5deafbc61d7d63c9d9d360e34255adef" title="Shared memory.">$_hShm</a>; <span class="comment">/**&lt; @type resource Shared memory. */</span>
-<a name="l00047"></a><a class="code" href="class_apns_p_h_p___push___server.html#a7ebaa7af948e302b90ec26b52a9ffba9">00047</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a7ebaa7af948e302b90ec26b52a9ffba9" title="Semaphore.">$_hSem</a>; <span class="comment">/**&lt; @type resource Semaphore. */</span>
-<a name="l00048"></a>00048 <span class="comment"></span>
-<a name="l00049"></a>00049 <span class="comment">    /**</span>
-<a name="l00050"></a>00050 <span class="comment">     * Constructor.</span>
-<a name="l00051"></a>00051 <span class="comment">     *</span>
-<a name="l00052"></a>00052 <span class="comment">     * @param  $nEnvironment @type integer Environment.</span>
-<a name="l00053"></a>00053 <span class="comment">     * @param  $sProviderCertificateFile @type string Provider certificate file</span>
-<a name="l00054"></a>00054 <span class="comment">     *         with key (Bundled PEM).</span>
-<a name="l00055"></a>00055 <span class="comment">     * @throws ApnsPHP_Push_Server_Exception if is unable to</span>
-<a name="l00056"></a>00056 <span class="comment">     *         get Shared Memory Segment or Semaphore ID.</span>
-<a name="l00057"></a>00057 <span class="comment">     */</span>
-<a name="l00058"></a><a class="code" href="class_apns_p_h_p___push___server.html#aae6a84652eefad4159d44019155cb648">00058</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#aae6a84652eefad4159d44019155cb648" title="Constructor.">__construct</a>($nEnvironment, $sProviderCertificateFile)
-<a name="l00059"></a>00059     {
-<a name="l00060"></a>00060         <a class="code" href="class_apns_p_h_p___push___server.html#aae6a84652eefad4159d44019155cb648" title="Constructor.">parent::__construct</a>($nEnvironment, $sProviderCertificateFile);
-<a name="l00061"></a>00061         
-<a name="l00062"></a>00062         $this-&gt;_nParentPid = posix_getpid();
-<a name="l00063"></a>00063         $this-&gt;_hShm = shm_attach(mt_rand(), self::SHM_SIZE);
-<a name="l00064"></a>00064         <span class="keywordflow">if</span> ($this-&gt;_hShm === <span class="keyword">false</span>) {
-<a name="l00065"></a>00065             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___server___exception.html" title="Exception class.">ApnsPHP_Push_Server_Exception</a>(
-<a name="l00066"></a>00066                 <span class="stringliteral">&apos;Unable to get shared memory segment&apos;</span>
-<a name="l00067"></a>00067             );
-<a name="l00068"></a>00068         }
-<a name="l00069"></a>00069         
-<a name="l00070"></a>00070         $this-&gt;_hSem = sem_get(mt_rand());
-<a name="l00071"></a>00071         <span class="keywordflow">if</span> ($this-&gt;_hSem === <span class="keyword">false</span>) {
-<a name="l00072"></a>00072             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___server___exception.html" title="Exception class.">ApnsPHP_Push_Server_Exception</a>(
-<a name="l00073"></a>00073                 <span class="stringliteral">&apos;Unable to get semaphore id&apos;</span>
-<a name="l00074"></a>00074             );
-<a name="l00075"></a>00075         }
-<a name="l00076"></a>00076         
-<a name="l00077"></a>00077         register_shutdown_function(array($this, <span class="stringliteral">&apos;onShutdown&apos;</span>));
-<a name="l00078"></a>00078 
-<a name="l00079"></a>00079         pcntl_signal(SIGCHLD, array($this, <span class="stringliteral">&apos;onChildExited&apos;</span>));
-<a name="l00080"></a>00080         <span class="keywordflow">foreach</span>(array(SIGTERM, SIGQUIT, SIGINT) as $nSignal) {
-<a name="l00081"></a>00081             pcntl_signal($nSignal, array($this, <span class="stringliteral">&apos;onSignal&apos;</span>));
-<a name="l00082"></a>00082         }
-<a name="l00083"></a>00083     }
-<a name="l00084"></a>00084 <span class="comment"></span>
-<a name="l00085"></a>00085 <span class="comment">    /**</span>
-<a name="l00086"></a>00086 <span class="comment">     * Checks if the server is running and calls signal handlers for pending signals.</span>
-<a name="l00087"></a>00087 <span class="comment">     * </span>
-<a name="l00088"></a>00088 <span class="comment">     * Example:</span>
-<a name="l00089"></a>00089 <span class="comment">     * @code</span>
-<a name="l00090"></a>00090 <span class="comment">     * while ($Server-&gt;run()) {</span>
-<a name="l00091"></a>00091 <span class="comment">     *     // do somethings...</span>
-<a name="l00092"></a>00092 <span class="comment">     *     usleep(200000);</span>
-<a name="l00093"></a>00093 <span class="comment">     * }</span>
-<a name="l00094"></a>00094 <span class="comment">     * @endcode</span>
-<a name="l00095"></a>00095 <span class="comment">     *</span>
-<a name="l00096"></a>00096 <span class="comment">     * @return @type boolean True if the server is running.</span>
-<a name="l00097"></a>00097 <span class="comment">     */</span>
-<a name="l00098"></a><a class="code" href="class_apns_p_h_p___push___server.html#a796cea1b5e989f25cfb84d01f3a6cc36">00098</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a796cea1b5e989f25cfb84d01f3a6cc36" title="Checks if the server is running and calls signal handlers for pending signals.">run</a>()
-<a name="l00099"></a>00099     {
-<a name="l00100"></a>00100         pcntl_signal_dispatch();
-<a name="l00101"></a>00101         <span class="keywordflow">return</span> $this-&gt;_nRunningProcesses &gt; 0;
-<a name="l00102"></a>00102     }
-<a name="l00103"></a>00103 <span class="comment"></span>
-<a name="l00104"></a>00104 <span class="comment">    /**</span>
-<a name="l00105"></a>00105 <span class="comment">     * Waits until a forked process has exited and decreases the current running</span>
-<a name="l00106"></a>00106 <span class="comment">     * process number.</span>
-<a name="l00107"></a>00107 <span class="comment">     */</span>
-<a name="l00108"></a><a class="code" href="class_apns_p_h_p___push___server.html#a5aa74697c323200103bf095f299b7b10">00108</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a5aa74697c323200103bf095f299b7b10" title="Waits until a forked process has exited and decreases the current running process...">onChildExited</a>()
-<a name="l00109"></a>00109     {
-<a name="l00110"></a>00110         <span class="keywordflow">while</span> (pcntl_waitpid(-1, $nStatus, WNOHANG) &gt; 0) {
-<a name="l00111"></a>00111             $this-&gt;_nRunningProcesses--;
-<a name="l00112"></a>00112         }
-<a name="l00113"></a>00113     }
-<a name="l00114"></a>00114 <span class="comment"></span>
-<a name="l00115"></a>00115 <span class="comment">    /**</span>
-<a name="l00116"></a>00116 <span class="comment">     * When a child (not the parent) receive a signal of type TERM, QUIT or INT</span>
-<a name="l00117"></a>00117 <span class="comment">     * exits from the current process and decreases the current running process number.</span>
-<a name="l00118"></a>00118 <span class="comment">     *</span>
-<a name="l00119"></a>00119 <span class="comment">     * @param  $nSignal @type integer Signal number.</span>
-<a name="l00120"></a>00120 <span class="comment">     */</span>
-<a name="l00121"></a><a class="code" href="class_apns_p_h_p___push___server.html#a68866943ec8207ba552e5fe306b6abd7">00121</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a68866943ec8207ba552e5fe306b6abd7" title="When a child (not the parent) receive a signal of type TERM, QUIT or INT exits from...">onSignal</a>($nSignal)
-<a name="l00122"></a>00122     {
-<a name="l00123"></a>00123         <span class="keywordflow">switch</span> ($nSignal) {
-<a name="l00124"></a>00124             <span class="keywordflow">case</span> SIGTERM:
-<a name="l00125"></a>00125             <span class="keywordflow">case</span> SIGQUIT:
-<a name="l00126"></a>00126             <span class="keywordflow">case</span> SIGINT:
-<a name="l00127"></a>00127                 <span class="keywordflow">if</span> (($nPid = posix_getpid()) != $this-&gt;_nParentPid) {
-<a name="l00128"></a>00128                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Child $nPid received signal #{$nSignal}, shutdown...&quot;</span>);
-<a name="l00129"></a>00129                     $this-&gt;_nRunningProcesses--;
-<a name="l00130"></a>00130                     exit(0);
-<a name="l00131"></a>00131                 }
-<a name="l00132"></a>00132                 <span class="keywordflow">break</span>;
-<a name="l00133"></a>00133             <span class="keywordflow">default</span>:
-<a name="l00134"></a>00134                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Ignored signal #{$nSignal}.&quot;</span>);
-<a name="l00135"></a>00135                 <span class="keywordflow">break</span>;
-<a name="l00136"></a>00136         }
-<a name="l00137"></a>00137     }
-<a name="l00138"></a>00138 <span class="comment"></span>
-<a name="l00139"></a>00139 <span class="comment">    /**</span>
-<a name="l00140"></a>00140 <span class="comment">     * When the parent process exits, cleans shared memory and semaphore.</span>
-<a name="l00141"></a>00141 <span class="comment">     * </span>
-<a name="l00142"></a>00142 <span class="comment">     * This is called using &apos;register_shutdown_function&apos; pattern.</span>
-<a name="l00143"></a>00143 <span class="comment">     * @see http://php.net/register_shutdown_function</span>
-<a name="l00144"></a>00144 <span class="comment">     */</span>
-<a name="l00145"></a><a class="code" href="class_apns_p_h_p___push___server.html#a43459575d6a948917ed75d899660ddc5">00145</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a43459575d6a948917ed75d899660ddc5" title="When the parent process exits, cleans shared memory and semaphore.">onShutdown</a>()
-<a name="l00146"></a>00146     {
-<a name="l00147"></a>00147         <span class="keywordflow">if</span> (posix_getpid() == $this-&gt;_nParentPid) {
-<a name="l00148"></a>00148             $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Parent shutdown, cleaning memory...&apos;</span>);
-<a name="l00149"></a>00149             @shm_remove($this-&gt;_hShm) &amp;&amp; @shm_detach($this-&gt;_hShm);
-<a name="l00150"></a>00150             @sem_remove($this-&gt;_hSem);
-<a name="l00151"></a>00151         }
-<a name="l00152"></a>00152     }
-<a name="l00153"></a>00153 <span class="comment"></span>
-<a name="l00154"></a>00154 <span class="comment">    /**</span>
-<a name="l00155"></a>00155 <span class="comment">     * Set the total processes to start, default is 3.</span>
-<a name="l00156"></a>00156 <span class="comment">     *</span>
-<a name="l00157"></a>00157 <span class="comment">     * @param  $nProcesses @type integer Processes to start up.</span>
-<a name="l00158"></a>00158 <span class="comment">     */</span>
-<a name="l00159"></a><a class="code" href="class_apns_p_h_p___push___server.html#ac543f33bf95cabb3b63b2dd981f957a1">00159</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#ac543f33bf95cabb3b63b2dd981f957a1" title="Set the total processes to start, default is 3.">setProcesses</a>($nProcesses)
-<a name="l00160"></a>00160     {
-<a name="l00161"></a>00161         $nProcesses = (int)$nProcesses;
-<a name="l00162"></a>00162         <span class="keywordflow">if</span> ($nProcesses &lt;= 0) {
-<a name="l00163"></a>00163             <span class="keywordflow">return</span>;
-<a name="l00164"></a>00164         }
-<a name="l00165"></a>00165         $this-&gt;_nProcesses = $nProcesses;
-<a name="l00166"></a>00166     }
-<a name="l00167"></a>00167     <span class="comment"></span>
-<a name="l00168"></a>00168 <span class="comment">    /**</span>
-<a name="l00169"></a>00169 <span class="comment">     * Starts the server forking all processes and return immediately.</span>
-<a name="l00170"></a>00170 <span class="comment">     * </span>
-<a name="l00171"></a>00171 <span class="comment">     * Every forked process is connected to Apple Push Notification Service on start</span>
-<a name="l00172"></a>00172 <span class="comment">     * and enter on the main loop.</span>
-<a name="l00173"></a>00173 <span class="comment">     */</span>
-<a name="l00174"></a><a class="code" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669">00174</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately.">start</a>()
-<a name="l00175"></a>00175     {
-<a name="l00176"></a>00176         <span class="keywordflow">for</span> ($i = 0; $i &lt; $this-&gt;_nProcesses; $i++) {
-<a name="l00177"></a>00177             $this-&gt;_nCurrentProcess = $i;
-<a name="l00178"></a>00178             $this-&gt;_aPids[$i] = $nPid = pcntl_fork();
-<a name="l00179"></a>00179             <span class="keywordflow">if</span> ($nPid == -1) {
-<a name="l00180"></a>00180                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Could not fork&apos;</span>);
-<a name="l00181"></a>00181             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($nPid &gt; 0) {
-<a name="l00182"></a>00182                 <span class="comment">// Parent process</span>
-<a name="l00183"></a>00183                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Forked process PID {$nPid}&quot;</span>);
-<a name="l00184"></a>00184                 $this-&gt;_nRunningProcesses++;
-<a name="l00185"></a>00185             } <span class="keywordflow">else</span> {
-<a name="l00186"></a>00186                 <span class="comment">// Child process</span>
-<a name="l00187"></a>00187                 <span class="keywordflow">try</span> {
-<a name="l00188"></a>00188                     <a class="code" href="class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server.">parent::connect</a>();
-<a name="l00189"></a>00189                 } <span class="keywordflow">catch</span> (<a class="code" href="class_apns_p_h_p___exception.html" title="Exception class.">ApnsPHP_Exception</a> $e) {
-<a name="l00190"></a>00190                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;ERROR: &apos;</span> . $e-&gt;getMessage() . <span class="stringliteral">&apos;, exiting...&apos;</span>);
-<a name="l00191"></a>00191                     exit(1);
-<a name="l00192"></a>00192                 }
-<a name="l00193"></a>00193                 $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop.">_mainLoop</a>();
-<a name="l00194"></a>00194                 <a class="code" href="class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server.">parent::disconnect</a>();
-<a name="l00195"></a>00195                 exit(0);
-<a name="l00196"></a>00196             }
-<a name="l00197"></a>00197         }
-<a name="l00198"></a>00198     }
-<a name="l00199"></a>00199     <span class="comment"></span>
-<a name="l00200"></a>00200 <span class="comment">    /**</span>
-<a name="l00201"></a>00201 <span class="comment">     * Adds a message to the inter-process message queue.</span>
-<a name="l00202"></a>00202 <span class="comment">     * </span>
-<a name="l00203"></a>00203 <span class="comment">     * Messages are added to the queues in a round-robin fashion starting from the</span>
-<a name="l00204"></a>00204 <span class="comment">     * first process to the last.</span>
-<a name="l00205"></a>00205 <span class="comment">     *</span>
-<a name="l00206"></a>00206 <span class="comment">     * @param  $message @type ApnsPHP_Message The message.</span>
-<a name="l00207"></a>00207 <span class="comment">     */</span>
-<a name="l00208"></a><a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b">00208</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter-process message queue.">add</a>(<a class="code" href="class_apns_p_h_p___message.html" title="The Push Notification Message.">ApnsPHP_Message</a> $message)
-<a name="l00209"></a>00209     {
-<a name="l00210"></a>00210         <span class="keyword">static</span> $n = 0;
-<a name="l00211"></a>00211         <span class="keywordflow">if</span> ($n &gt;= $this-&gt;_nProcesses) {
-<a name="l00212"></a>00212             $n = 0;
-<a name="l00213"></a>00213         }
-<a name="l00214"></a>00214         sem_acquire($this-&gt;_hSem);
-<a name="l00215"></a>00215         $aQueue = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $n);
-<a name="l00216"></a>00216         $aQueue[] = $message;
-<a name="l00217"></a>00217         $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $n, $aQueue);
-<a name="l00218"></a>00218         sem_release($this-&gt;_hSem);
-<a name="l00219"></a>00219         $n++;
-<a name="l00220"></a>00220     }
-<a name="l00221"></a>00221 <span class="comment"></span>
-<a name="l00222"></a>00222 <span class="comment">    /**</span>
-<a name="l00223"></a>00223 <span class="comment">     * Returns the error message queue.</span>
-<a name="l00224"></a>00224 <span class="comment">     * </span>
-<a name="l00225"></a>00225 <span class="comment">     * Error message queue contains all messages not delivered to the end user by</span>
-<a name="l00226"></a>00226 <span class="comment">     * all of the server processes.</span>
-<a name="l00227"></a>00227 <span class="comment">     *</span>
-<a name="l00228"></a>00228 <span class="comment">     * @param  $bEmpty @type boolean @optional Empty message queue.</span>
-<a name="l00229"></a>00229 <span class="comment">     * @return @type array Array of messages not delivered to the end user.</span>
-<a name="l00230"></a>00230 <span class="comment">     */</span>
-<a name="l00231"></a><a class="code" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">00231</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b" title="Returns the error message queue.">getQueue</a>($bEmpty = <span class="keyword">true</span>)
-<a name="l00232"></a>00232     {
-<a name="l00233"></a>00233         sem_acquire($this-&gt;_hSem);
-<a name="l00234"></a>00234         $aRet = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY);
-<a name="l00235"></a>00235         <span class="keywordflow">if</span> ($bEmpty) {
-<a name="l00236"></a>00236             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0, array());
-<a name="l00237"></a>00237         }
-<a name="l00238"></a>00238         sem_release($this-&gt;_hSem);
-<a name="l00239"></a>00239         <span class="keywordflow">return</span> $aRet;
-<a name="l00240"></a>00240     }
-<a name="l00241"></a>00241 <span class="comment"></span>
-<a name="l00242"></a>00242 <span class="comment">    /**</span>
-<a name="l00243"></a>00243 <span class="comment">     * The process main loop.</span>
-<a name="l00244"></a>00244 <span class="comment">     * </span>
-<a name="l00245"></a>00245 <span class="comment">     * During the main loop: the per-process error queue is read and the common error message</span>
-<a name="l00246"></a>00246 <span class="comment">     * queue is populated; the per-process message queue is spooled (message from</span>
-<a name="l00247"></a>00247 <span class="comment">     * this queue is added to ApnsPHP_Push queue and delivered).</span>
-<a name="l00248"></a>00248 <span class="comment">     */</span>
-<a name="l00249"></a><a class="code" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf">00249</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop.">_mainLoop</a>()
-<a name="l00250"></a>00250     {
-<a name="l00251"></a>00251         <span class="keywordflow">while</span> (<span class="keyword">true</span>) {
-<a name="l00252"></a>00252             pcntl_signal_dispatch();
-<a name="l00253"></a>00253 
-<a name="l00254"></a>00254             <span class="keywordflow">if</span> (posix_getppid() != $this-&gt;_nParentPid) {
-<a name="l00255"></a>00255                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Parent process {$this-&gt;_nParentPid} died unexpectedly, exiting...&quot;</span>);
-<a name="l00256"></a>00256                 <span class="keywordflow">break</span>;
-<a name="l00257"></a>00257             }
-<a name="l00258"></a>00258 
-<a name="l00259"></a>00259             sem_acquire($this-&gt;_hSem);
-<a name="l00260"></a>00260             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0, 
-<a name="l00261"></a>00261                 array_merge($this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY), parent::getQueue())
-<a name="l00262"></a>00262             );
-<a name="l00263"></a>00263 
-<a name="l00264"></a>00264             $aQueue = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
-<a name="l00265"></a>00265             <span class="keywordflow">foreach</span>($aQueue as $message) {
-<a name="l00266"></a>00266                 <a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter-process message queue.">parent::add</a>($message);
-<a name="l00267"></a>00267             }
-<a name="l00268"></a>00268             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
-<a name="l00269"></a>00269             sem_release($this-&gt;_hSem);
-<a name="l00270"></a>00270 
-<a name="l00271"></a>00271             $nMessages = count($aQueue);
-<a name="l00272"></a>00272             <span class="keywordflow">if</span> ($nMessages &gt; 0) {
-<a name="l00273"></a>00273                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Process &apos;</span> . ($this-&gt;_nCurrentProcess + 1) . <span class="stringliteral">&quot; has {$nMessages} messages, sending...&quot;</span>);
-<a name="l00274"></a>00274                 <a class="code" href="class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service.">parent::send</a>();
-<a name="l00275"></a>00275             } <span class="keywordflow">else</span> {
-<a name="l00276"></a>00276                 usleep(self::MAIN_LOOP_USLEEP);
-<a name="l00277"></a>00277             }
-<a name="l00278"></a>00278         }
-<a name="l00279"></a>00279     }
-<a name="l00280"></a>00280     <span class="comment"></span>
-<a name="l00281"></a>00281 <span class="comment">    /**</span>
-<a name="l00282"></a>00282 <span class="comment">     * Returns the queue from the shared memory.</span>
-<a name="l00283"></a>00283 <span class="comment">     *</span>
-<a name="l00284"></a>00284 <span class="comment">     * @param  $nQueueKey @type integer The key of the queue stored in the shared</span>
-<a name="l00285"></a>00285 <span class="comment">     *         memory.</span>
-<a name="l00286"></a>00286 <span class="comment">     * @param  $nProcess @type integer @optional The process cardinal number.</span>
-<a name="l00287"></a>00287 <span class="comment">     * @return @type array Array of messages from the queue.</span>
-<a name="l00288"></a>00288 <span class="comment">     */</span>
-<a name="l00289"></a><a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593">00289</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>($nQueueKey, $nProcess = 0)
-<a name="l00290"></a>00290     {
-<a name="l00291"></a>00291         <span class="keywordflow">if</span> (!shm_has_var($this-&gt;_hShm, $nQueueKey + $nProcess)) {
-<a name="l00292"></a>00292             <span class="keywordflow">return</span> array();
-<a name="l00293"></a>00293         }
-<a name="l00294"></a>00294         <span class="keywordflow">return</span> shm_get_var($this-&gt;_hShm, $nQueueKey + $nProcess);
-<a name="l00295"></a>00295     }
-<a name="l00296"></a>00296     <span class="comment"></span>
-<a name="l00297"></a>00297 <span class="comment">    /**</span>
-<a name="l00298"></a>00298 <span class="comment">     * Store the queue into the shared memory.</span>
-<a name="l00299"></a>00299 <span class="comment">     *</span>
-<a name="l00300"></a>00300 <span class="comment">     * @param  $nQueueKey @type integer The key of the queue to store in the shared</span>
-<a name="l00301"></a>00301 <span class="comment">     *         memory.</span>
-<a name="l00302"></a>00302 <span class="comment">     * @param  $nProcess @type integer @optional The process cardinal number.</span>
-<a name="l00303"></a>00303 <span class="comment">     * @param  $aQueue @type array @optional The queue to store into shared memory.</span>
-<a name="l00304"></a>00304 <span class="comment">     *         The default value is an empty array, useful to empty the queue.</span>
-<a name="l00305"></a>00305 <span class="comment">     * @return @type boolean True on success, false otherwise.</span>
-<a name="l00306"></a>00306 <span class="comment">     */</span>
-<a name="l00307"></a><a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e">00307</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>($nQueueKey, $nProcess = 0, $aQueue = array())
-<a name="l00308"></a>00308     {
-<a name="l00309"></a>00309         <span class="keywordflow">if</span> (!is_array($aQueue)) {
-<a name="l00310"></a>00310             $aQueue = array();
-<a name="l00311"></a>00311         }
-<a name="l00312"></a>00312         <span class="keywordflow">return</span> shm_put_var($this-&gt;_hShm, $nQueueKey + $nProcess, $aQueue);
-<a name="l00313"></a>00313     }
-<a name="l00314"></a>00314 }
+<a name="l00015"></a>00015 <span class="comment"> *</span>
+<a name="l00016"></a>00016 <span class="comment"> * @author (C) 2010 Aldo Armiento (aldo.armiento@gmail.com)</span>
+<a name="l00017"></a>00017 <span class="comment"> * @version $Id: Server.php 50 2010-03-01 21:45:23Z aldo.armiento $</span>
+<a name="l00018"></a>00018 <span class="comment"> */</span>
+<a name="l00019"></a>00019 <span class="comment"></span>
+<a name="l00020"></a>00020 <span class="comment">/**</span>
+<a name="l00021"></a>00021 <span class="comment"> * @defgroup ApnsPHP_Push_Server Server</span>
+<a name="l00022"></a>00022 <span class="comment"> * @ingroup ApnsPHP_Push</span>
+<a name="l00023"></a>00023 <span class="comment"> */</span>
+<a name="l00024"></a>00024 <span class="comment"></span>
+<a name="l00025"></a>00025 <span class="comment">/**</span>
+<a name="l00026"></a>00026 <span class="comment"> * The Push Notification Server Provider.</span>
+<a name="l00027"></a>00027 <span class="comment"> *</span>
+<a name="l00028"></a>00028 <span class="comment"> * The class manages multiple Push Notification Providers and an inter-process message</span>
+<a name="l00029"></a>00029 <span class="comment"> * queue. This class is useful to parallelize and speed-up send activities to Apple</span>
+<a name="l00030"></a>00030 <span class="comment"> * Push Notification service.</span>
+<a name="l00031"></a>00031 <span class="comment"> *</span>
+<a name="l00032"></a>00032 <span class="comment"> * @ingroup ApnsPHP_Push_Server</span>
+<a name="l00033"></a>00033 <span class="comment"> */</span>
+<a name="l00034"></a><a class="code" href="class_apns_p_h_p___push___server.html">00034</a> <span class="keyword">class </span><a class="code" href="class_apns_p_h_p___push___server.html" title="The Push Notification Server Provider.">ApnsPHP_Push_Server</a> <span class="keyword">extends</span> <a class="code" href="class_apns_p_h_p___push.html" title="The Push Notification Provider.">ApnsPHP_Push</a>
+<a name="l00035"></a>00035 {
+<a name="l00036"></a><a class="code" href="class_apns_p_h_p___push___server.html#a7f4bfcfe5c736ddf91a9ac098b8f96aa">00036</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#a7f4bfcfe5c736ddf91a9ac098b8f96aa" title="integer Main loop sleep time in micro seconds.">MAIN_LOOP_USLEEP</a> = 200000; <span class="comment">/**&lt; @type integer Main loop sleep time in micro seconds. */</span>
+<a name="l00037"></a><a class="code" href="class_apns_p_h_p___push___server.html#afdabdf2d03ec5d511b382e6d109ce7e8">00037</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#afdabdf2d03ec5d511b382e6d109ce7e8" title="integer Shared memory size in bytes useful to store message queues.">SHM_SIZE</a> = 524288; <span class="comment">/**&lt; @type integer Shared memory size in bytes useful to store message queues. */</span>
+<a name="l00038"></a><a class="code" href="class_apns_p_h_p___push___server.html#a6cce92ee3cdd95468ba03a37580f8e4b">00038</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#a6cce92ee3cdd95468ba03a37580f8e4b" title="integer Message queue start identifier for messages.">SHM_MESSAGES_QUEUE_KEY_START</a> = 1000; <span class="comment">/**&lt; @type integer Message queue start identifier for messages. For every process 1 is added to this number. */</span>
+<a name="l00039"></a><a class="code" href="class_apns_p_h_p___push___server.html#a2f528373736399140c3b2c4fbef3b40a">00039</a>     <span class="keyword">const</span> <a class="code" href="class_apns_p_h_p___push___server.html#a2f528373736399140c3b2c4fbef3b40a" title="integer Message queue identifier for not delivered messages.">SHM_ERROR_MESSAGES_QUEUE_KEY</a> = 999; <span class="comment">/**&lt; @type integer Message queue identifier for not delivered messages. */</span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="class_apns_p_h_p___push___server.html#a74a94f66f642e3a4712676b43043b4c8">00041</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a74a94f66f642e3a4712676b43043b4c8" title="The number of processes to start.">$_nProcesses</a> = 3; <span class="comment">/**&lt; @type integer The number of processes to start. */</span>
+<a name="l00042"></a><a class="code" href="class_apns_p_h_p___push___server.html#a723840e00e96a379957438436eb618fb">00042</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a723840e00e96a379957438436eb618fb" title="Array of process PIDs.">$_aPids</a> = array(); <span class="comment">/**&lt; @type array Array of process PIDs. */</span>
+<a name="l00043"></a><a class="code" href="class_apns_p_h_p___push___server.html#ad7f049a723109fa9ae2ae43d7259162d">00043</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#ad7f049a723109fa9ae2ae43d7259162d" title="The parent process id.">$_nParentPid</a>; <span class="comment">/**&lt; @type integer The parent process id. */</span>
+<a name="l00044"></a><a class="code" href="class_apns_p_h_p___push___server.html#a5aa916da7a00764a155cda6a974c99b2">00044</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a5aa916da7a00764a155cda6a974c99b2" title="Cardinal process number (0, 1, 2, .">$_nCurrentProcess</a>; <span class="comment">/**&lt; @type integer Cardinal process number (0, 1, 2, ...). */</span>
+<a name="l00045"></a><a class="code" href="class_apns_p_h_p___push___server.html#a8d5212c995652fcfc909cb8e235f4624">00045</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a8d5212c995652fcfc909cb8e235f4624" title="The number of running processes.">$_nRunningProcesses</a>; <span class="comment">/**&lt; @type integer The number of running processes. */</span>
+<a name="l00046"></a>00046 
+<a name="l00047"></a><a class="code" href="class_apns_p_h_p___push___server.html#a5deafbc61d7d63c9d9d360e34255adef">00047</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a5deafbc61d7d63c9d9d360e34255adef" title="Shared memory.">$_hShm</a>; <span class="comment">/**&lt; @type resource Shared memory. */</span>
+<a name="l00048"></a><a class="code" href="class_apns_p_h_p___push___server.html#a7ebaa7af948e302b90ec26b52a9ffba9">00048</a>     <span class="keyword">protected</span> <a class="code" href="class_apns_p_h_p___push___server.html#a7ebaa7af948e302b90ec26b52a9ffba9" title="Semaphore.">$_hSem</a>; <span class="comment">/**&lt; @type resource Semaphore. */</span>
+<a name="l00049"></a>00049 <span class="comment"></span>
+<a name="l00050"></a>00050 <span class="comment">    /**</span>
+<a name="l00051"></a>00051 <span class="comment">     * Constructor.</span>
+<a name="l00052"></a>00052 <span class="comment">     *</span>
+<a name="l00053"></a>00053 <span class="comment">     * @param  $nEnvironment @type integer Environment.</span>
+<a name="l00054"></a>00054 <span class="comment">     * @param  $sProviderCertificateFile @type string Provider certificate file</span>
+<a name="l00055"></a>00055 <span class="comment">     *         with key (Bundled PEM).</span>
+<a name="l00056"></a>00056 <span class="comment">     * @throws ApnsPHP_Push_Server_Exception if is unable to</span>
+<a name="l00057"></a>00057 <span class="comment">     *         get Shared Memory Segment or Semaphore ID.</span>
+<a name="l00058"></a>00058 <span class="comment">     */</span>
+<a name="l00059"></a><a class="code" href="class_apns_p_h_p___push___server.html#aae6a84652eefad4159d44019155cb648">00059</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#aae6a84652eefad4159d44019155cb648" title="Constructor.">__construct</a>($nEnvironment, $sProviderCertificateFile)
+<a name="l00060"></a>00060     {
+<a name="l00061"></a>00061         <a class="code" href="class_apns_p_h_p___push___server.html#aae6a84652eefad4159d44019155cb648" title="Constructor.">parent::__construct</a>($nEnvironment, $sProviderCertificateFile);
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063         $this-&gt;_nParentPid = posix_getpid();
+<a name="l00064"></a>00064         $this-&gt;_hShm = shm_attach(mt_rand(), self::SHM_SIZE);
+<a name="l00065"></a>00065         <span class="keywordflow">if</span> ($this-&gt;_hShm === <span class="keyword">false</span>) {
+<a name="l00066"></a>00066             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___server___exception.html" title="Exception class.">ApnsPHP_Push_Server_Exception</a>(
+<a name="l00067"></a>00067                 <span class="stringliteral">&apos;Unable to get shared memory segment&apos;</span>
+<a name="l00068"></a>00068             );
+<a name="l00069"></a>00069         }
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071         $this-&gt;_hSem = sem_get(mt_rand());
+<a name="l00072"></a>00072         <span class="keywordflow">if</span> ($this-&gt;_hSem === <span class="keyword">false</span>) {
+<a name="l00073"></a>00073             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___server___exception.html" title="Exception class.">ApnsPHP_Push_Server_Exception</a>(
+<a name="l00074"></a>00074                 <span class="stringliteral">&apos;Unable to get semaphore id&apos;</span>
+<a name="l00075"></a>00075             );
+<a name="l00076"></a>00076         }
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078         register_shutdown_function(array($this, <span class="stringliteral">&apos;onShutdown&apos;</span>));
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080         pcntl_signal(SIGCHLD, array($this, <span class="stringliteral">&apos;onChildExited&apos;</span>));
+<a name="l00081"></a>00081         <span class="keywordflow">foreach</span>(array(SIGTERM, SIGQUIT, SIGINT) as $nSignal) {
+<a name="l00082"></a>00082             pcntl_signal($nSignal, array($this, <span class="stringliteral">&apos;onSignal&apos;</span>));
+<a name="l00083"></a>00083         }
+<a name="l00084"></a>00084     }
+<a name="l00085"></a>00085 <span class="comment"></span>
+<a name="l00086"></a>00086 <span class="comment">    /**</span>
+<a name="l00087"></a>00087 <span class="comment">     * Checks if the server is running and calls signal handlers for pending signals.</span>
+<a name="l00088"></a>00088 <span class="comment">     *</span>
+<a name="l00089"></a>00089 <span class="comment">     * Example:</span>
+<a name="l00090"></a>00090 <span class="comment">     * @code</span>
+<a name="l00091"></a>00091 <span class="comment">     * while ($Server-&gt;run()) {</span>
+<a name="l00092"></a>00092 <span class="comment">     *     // do somethings...</span>
+<a name="l00093"></a>00093 <span class="comment">     *     usleep(200000);</span>
+<a name="l00094"></a>00094 <span class="comment">     * }</span>
+<a name="l00095"></a>00095 <span class="comment">     * @endcode</span>
+<a name="l00096"></a>00096 <span class="comment">     *</span>
+<a name="l00097"></a>00097 <span class="comment">     * @return @type boolean True if the server is running.</span>
+<a name="l00098"></a>00098 <span class="comment">     */</span>
+<a name="l00099"></a><a class="code" href="class_apns_p_h_p___push___server.html#a796cea1b5e989f25cfb84d01f3a6cc36">00099</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a796cea1b5e989f25cfb84d01f3a6cc36" title="Checks if the server is running and calls signal handlers for pending signals.">run</a>()
+<a name="l00100"></a>00100     {
+<a name="l00101"></a>00101         pcntl_signal_dispatch();
+<a name="l00102"></a>00102         <span class="keywordflow">return</span> $this-&gt;_nRunningProcesses &gt; 0;
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104 <span class="comment"></span>
+<a name="l00105"></a>00105 <span class="comment">    /**</span>
+<a name="l00106"></a>00106 <span class="comment">     * Waits until a forked process has exited and decreases the current running</span>
+<a name="l00107"></a>00107 <span class="comment">     * process number.</span>
+<a name="l00108"></a>00108 <span class="comment">     */</span>
+<a name="l00109"></a><a class="code" href="class_apns_p_h_p___push___server.html#a5aa74697c323200103bf095f299b7b10">00109</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a5aa74697c323200103bf095f299b7b10" title="Waits until a forked process has exited and decreases the current running process...">onChildExited</a>()
+<a name="l00110"></a>00110     {
+<a name="l00111"></a>00111         <span class="keywordflow">while</span> (pcntl_waitpid(-1, $nStatus, WNOHANG) &gt; 0) {
+<a name="l00112"></a>00112             $this-&gt;_nRunningProcesses--;
+<a name="l00113"></a>00113         }
+<a name="l00114"></a>00114     }
+<a name="l00115"></a>00115 <span class="comment"></span>
+<a name="l00116"></a>00116 <span class="comment">    /**</span>
+<a name="l00117"></a>00117 <span class="comment">     * When a child (not the parent) receive a signal of type TERM, QUIT or INT</span>
+<a name="l00118"></a>00118 <span class="comment">     * exits from the current process and decreases the current running process number.</span>
+<a name="l00119"></a>00119 <span class="comment">     *</span>
+<a name="l00120"></a>00120 <span class="comment">     * @param  $nSignal @type integer Signal number.</span>
+<a name="l00121"></a>00121 <span class="comment">     */</span>
+<a name="l00122"></a><a class="code" href="class_apns_p_h_p___push___server.html#a68866943ec8207ba552e5fe306b6abd7">00122</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a68866943ec8207ba552e5fe306b6abd7" title="When a child (not the parent) receive a signal of type TERM, QUIT or INT exits from...">onSignal</a>($nSignal)
+<a name="l00123"></a>00123     {
+<a name="l00124"></a>00124         <span class="keywordflow">switch</span> ($nSignal) {
+<a name="l00125"></a>00125             <span class="keywordflow">case</span> SIGTERM:
+<a name="l00126"></a>00126             <span class="keywordflow">case</span> SIGQUIT:
+<a name="l00127"></a>00127             <span class="keywordflow">case</span> SIGINT:
+<a name="l00128"></a>00128                 <span class="keywordflow">if</span> (($nPid = posix_getpid()) != $this-&gt;_nParentPid) {
+<a name="l00129"></a>00129                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Child $nPid received signal #{$nSignal}, shutdown...&quot;</span>);
+<a name="l00130"></a>00130                     $this-&gt;_nRunningProcesses--;
+<a name="l00131"></a>00131                     exit(0);
+<a name="l00132"></a>00132                 }
+<a name="l00133"></a>00133                 <span class="keywordflow">break</span>;
+<a name="l00134"></a>00134             <span class="keywordflow">default</span>:
+<a name="l00135"></a>00135                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Ignored signal #{$nSignal}.&quot;</span>);
+<a name="l00136"></a>00136                 <span class="keywordflow">break</span>;
+<a name="l00137"></a>00137         }
+<a name="l00138"></a>00138     }
+<a name="l00139"></a>00139 <span class="comment"></span>
+<a name="l00140"></a>00140 <span class="comment">    /**</span>
+<a name="l00141"></a>00141 <span class="comment">     * When the parent process exits, cleans shared memory and semaphore.</span>
+<a name="l00142"></a>00142 <span class="comment">     *</span>
+<a name="l00143"></a>00143 <span class="comment">     * This is called using &apos;register_shutdown_function&apos; pattern.</span>
+<a name="l00144"></a>00144 <span class="comment">     * @see http://php.net/register_shutdown_function</span>
+<a name="l00145"></a>00145 <span class="comment">     */</span>
+<a name="l00146"></a><a class="code" href="class_apns_p_h_p___push___server.html#a43459575d6a948917ed75d899660ddc5">00146</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a43459575d6a948917ed75d899660ddc5" title="When the parent process exits, cleans shared memory and semaphore.">onShutdown</a>()
+<a name="l00147"></a>00147     {
+<a name="l00148"></a>00148         <span class="keywordflow">if</span> (posix_getpid() == $this-&gt;_nParentPid) {
+<a name="l00149"></a>00149             $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Parent shutdown, cleaning memory...&apos;</span>);
+<a name="l00150"></a>00150             @shm_remove($this-&gt;_hShm) &amp;&amp; @shm_detach($this-&gt;_hShm);
+<a name="l00151"></a>00151             @sem_remove($this-&gt;_hSem);
+<a name="l00152"></a>00152         }
+<a name="l00153"></a>00153     }
+<a name="l00154"></a>00154 <span class="comment"></span>
+<a name="l00155"></a>00155 <span class="comment">    /**</span>
+<a name="l00156"></a>00156 <span class="comment">     * Set the total processes to start, default is 3.</span>
+<a name="l00157"></a>00157 <span class="comment">     *</span>
+<a name="l00158"></a>00158 <span class="comment">     * @param  $nProcesses @type integer Processes to start up.</span>
+<a name="l00159"></a>00159 <span class="comment">     */</span>
+<a name="l00160"></a><a class="code" href="class_apns_p_h_p___push___server.html#ac543f33bf95cabb3b63b2dd981f957a1">00160</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#ac543f33bf95cabb3b63b2dd981f957a1" title="Set the total processes to start, default is 3.">setProcesses</a>($nProcesses)
+<a name="l00161"></a>00161     {
+<a name="l00162"></a>00162         $nProcesses = (int)$nProcesses;
+<a name="l00163"></a>00163         <span class="keywordflow">if</span> ($nProcesses &lt;= 0) {
+<a name="l00164"></a>00164             <span class="keywordflow">return</span>;
+<a name="l00165"></a>00165         }
+<a name="l00166"></a>00166         $this-&gt;_nProcesses = $nProcesses;
+<a name="l00167"></a>00167     }
+<a name="l00168"></a>00168 <span class="comment"></span>
+<a name="l00169"></a>00169 <span class="comment">    /**</span>
+<a name="l00170"></a>00170 <span class="comment">     * Starts the server forking all processes and return immediately.</span>
+<a name="l00171"></a>00171 <span class="comment">     *</span>
+<a name="l00172"></a>00172 <span class="comment">     * Every forked process is connected to Apple Push Notification Service on start</span>
+<a name="l00173"></a>00173 <span class="comment">     * and enter on the main loop.</span>
+<a name="l00174"></a>00174 <span class="comment">     */</span>
+<a name="l00175"></a><a class="code" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669">00175</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately.">start</a>()
+<a name="l00176"></a>00176     {
+<a name="l00177"></a>00177         <span class="keywordflow">for</span> ($i = 0; $i &lt; $this-&gt;_nProcesses; $i++) {
+<a name="l00178"></a>00178             $this-&gt;_nCurrentProcess = $i;
+<a name="l00179"></a>00179             $this-&gt;_aPids[$i] = $nPid = pcntl_fork();
+<a name="l00180"></a>00180             <span class="keywordflow">if</span> ($nPid == -1) {
+<a name="l00181"></a>00181                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;WARNING: Could not fork&apos;</span>);
+<a name="l00182"></a>00182             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($nPid &gt; 0) {
+<a name="l00183"></a>00183                 <span class="comment">// Parent process</span>
+<a name="l00184"></a>00184                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Forked process PID {$nPid}&quot;</span>);
+<a name="l00185"></a>00185                 $this-&gt;_nRunningProcesses++;
+<a name="l00186"></a>00186             } <span class="keywordflow">else</span> {
+<a name="l00187"></a>00187                 <span class="comment">// Child process</span>
+<a name="l00188"></a>00188                 <span class="keywordflow">try</span> {
+<a name="l00189"></a>00189                     <a class="code" href="class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server.">parent::connect</a>();
+<a name="l00190"></a>00190                 } <span class="keywordflow">catch</span> (<a class="code" href="class_apns_p_h_p___exception.html" title="Exception class.">ApnsPHP_Exception</a> $e) {
+<a name="l00191"></a>00191                     $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;ERROR: &apos;</span> . $e-&gt;getMessage() . <span class="stringliteral">&apos;, exiting...&apos;</span>);
+<a name="l00192"></a>00192                     exit(1);
+<a name="l00193"></a>00193                 }
+<a name="l00194"></a>00194                 $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop.">_mainLoop</a>();
+<a name="l00195"></a>00195                 <a class="code" href="class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server.">parent::disconnect</a>();
+<a name="l00196"></a>00196                 exit(0);
+<a name="l00197"></a>00197             }
+<a name="l00198"></a>00198         }
+<a name="l00199"></a>00199     }
+<a name="l00200"></a>00200 <span class="comment"></span>
+<a name="l00201"></a>00201 <span class="comment">    /**</span>
+<a name="l00202"></a>00202 <span class="comment">     * Adds a message to the inter-process message queue.</span>
+<a name="l00203"></a>00203 <span class="comment">     *</span>
+<a name="l00204"></a>00204 <span class="comment">     * Messages are added to the queues in a round-robin fashion starting from the</span>
+<a name="l00205"></a>00205 <span class="comment">     * first process to the last.</span>
+<a name="l00206"></a>00206 <span class="comment">     *</span>
+<a name="l00207"></a>00207 <span class="comment">     * @param  $message @type ApnsPHP_Message The message.</span>
+<a name="l00208"></a>00208 <span class="comment">     */</span>
+<a name="l00209"></a><a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b">00209</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter-process message queue.">add</a>(<a class="code" href="class_apns_p_h_p___message.html" title="The Push Notification Message.">ApnsPHP_Message</a> $message)
+<a name="l00210"></a>00210     {
+<a name="l00211"></a>00211         <span class="keyword">static</span> $n = 0;
+<a name="l00212"></a>00212         <span class="keywordflow">if</span> ($n &gt;= $this-&gt;_nProcesses) {
+<a name="l00213"></a>00213             $n = 0;
+<a name="l00214"></a>00214         }
+<a name="l00215"></a>00215         sem_acquire($this-&gt;_hSem);
+<a name="l00216"></a>00216         $aQueue = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $n);
+<a name="l00217"></a>00217         $aQueue[] = $message;
+<a name="l00218"></a>00218         $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $n, $aQueue);
+<a name="l00219"></a>00219         sem_release($this-&gt;_hSem);
+<a name="l00220"></a>00220         $n++;
+<a name="l00221"></a>00221     }
+<a name="l00222"></a>00222 <span class="comment"></span>
+<a name="l00223"></a>00223 <span class="comment">    /**</span>
+<a name="l00224"></a>00224 <span class="comment">     * Returns the error message queue.</span>
+<a name="l00225"></a>00225 <span class="comment">     *</span>
+<a name="l00226"></a>00226 <span class="comment">     * Error message queue contains all messages not delivered to the end user by</span>
+<a name="l00227"></a>00227 <span class="comment">     * all of the server processes.</span>
+<a name="l00228"></a>00228 <span class="comment">     *</span>
+<a name="l00229"></a>00229 <span class="comment">     * @param  $bEmpty @type boolean @optional Empty message queue.</span>
+<a name="l00230"></a>00230 <span class="comment">     * @return @type array Array of messages not delivered to the end user.</span>
+<a name="l00231"></a>00231 <span class="comment">     */</span>
+<a name="l00232"></a><a class="code" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">00232</a>     <span class="keyword">public</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b" title="Returns the error message queue.">getQueue</a>($bEmpty = <span class="keyword">true</span>)
+<a name="l00233"></a>00233     {
+<a name="l00234"></a>00234         sem_acquire($this-&gt;_hSem);
+<a name="l00235"></a>00235         $aRet = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY);
+<a name="l00236"></a>00236         <span class="keywordflow">if</span> ($bEmpty) {
+<a name="l00237"></a>00237             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0, array());
+<a name="l00238"></a>00238         }
+<a name="l00239"></a>00239         sem_release($this-&gt;_hSem);
+<a name="l00240"></a>00240         <span class="keywordflow">return</span> $aRet;
+<a name="l00241"></a>00241     }
+<a name="l00242"></a>00242 <span class="comment"></span>
+<a name="l00243"></a>00243 <span class="comment">    /**</span>
+<a name="l00244"></a>00244 <span class="comment">     * The process main loop.</span>
+<a name="l00245"></a>00245 <span class="comment">     *</span>
+<a name="l00246"></a>00246 <span class="comment">     * During the main loop: the per-process error queue is read and the common error message</span>
+<a name="l00247"></a>00247 <span class="comment">     * queue is populated; the per-process message queue is spooled (message from</span>
+<a name="l00248"></a>00248 <span class="comment">     * this queue is added to ApnsPHP_Push queue and delivered).</span>
+<a name="l00249"></a>00249 <span class="comment">     */</span>
+<a name="l00250"></a><a class="code" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf">00250</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop.">_mainLoop</a>()
+<a name="l00251"></a>00251     {
+<a name="l00252"></a>00252         <span class="keywordflow">while</span> (<span class="keyword">true</span>) {
+<a name="l00253"></a>00253             pcntl_signal_dispatch();
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255             <span class="keywordflow">if</span> (posix_getppid() != $this-&gt;_nParentPid) {
+<a name="l00256"></a>00256                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Parent process {$this-&gt;_nParentPid} died unexpectedly, exiting...&quot;</span>);
+<a name="l00257"></a>00257                 <span class="keywordflow">break</span>;
+<a name="l00258"></a>00258             }
+<a name="l00259"></a>00259 
+<a name="l00260"></a>00260             sem_acquire($this-&gt;_hSem);
+<a name="l00261"></a>00261             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0,
+<a name="l00262"></a>00262                 array_merge($this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY), parent::getQueue())
+<a name="l00263"></a>00263             );
+<a name="l00264"></a>00264 
+<a name="l00265"></a>00265             $aQueue = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
+<a name="l00266"></a>00266             <span class="keywordflow">foreach</span>($aQueue as $message) {
+<a name="l00267"></a>00267                 <a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter-process message queue.">parent::add</a>($message);
+<a name="l00268"></a>00268             }
+<a name="l00269"></a>00269             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
+<a name="l00270"></a>00270             sem_release($this-&gt;_hSem);
+<a name="l00271"></a>00271 
+<a name="l00272"></a>00272             $nMessages = count($aQueue);
+<a name="l00273"></a>00273             <span class="keywordflow">if</span> ($nMessages &gt; 0) {
+<a name="l00274"></a>00274                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&apos;INFO: Process &apos;</span> . ($this-&gt;_nCurrentProcess + 1) . <span class="stringliteral">&quot; has {$nMessages} messages, sending...&quot;</span>);
+<a name="l00275"></a>00275                 <a class="code" href="class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service.">parent::send</a>();
+<a name="l00276"></a>00276             } <span class="keywordflow">else</span> {
+<a name="l00277"></a>00277                 usleep(self::MAIN_LOOP_USLEEP);
+<a name="l00278"></a>00278             }
+<a name="l00279"></a>00279         }
+<a name="l00280"></a>00280     }
+<a name="l00281"></a>00281 <span class="comment"></span>
+<a name="l00282"></a>00282 <span class="comment">    /**</span>
+<a name="l00283"></a>00283 <span class="comment">     * Returns the queue from the shared memory.</span>
+<a name="l00284"></a>00284 <span class="comment">     *</span>
+<a name="l00285"></a>00285 <span class="comment">     * @param  $nQueueKey @type integer The key of the queue stored in the shared</span>
+<a name="l00286"></a>00286 <span class="comment">     *         memory.</span>
+<a name="l00287"></a>00287 <span class="comment">     * @param  $nProcess @type integer @optional The process cardinal number.</span>
+<a name="l00288"></a>00288 <span class="comment">     * @return @type array Array of messages from the queue.</span>
+<a name="l00289"></a>00289 <span class="comment">     */</span>
+<a name="l00290"></a><a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593">00290</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>($nQueueKey, $nProcess = 0)
+<a name="l00291"></a>00291     {
+<a name="l00292"></a>00292         <span class="keywordflow">if</span> (!shm_has_var($this-&gt;_hShm, $nQueueKey + $nProcess)) {
+<a name="l00293"></a>00293             <span class="keywordflow">return</span> array();
+<a name="l00294"></a>00294         }
+<a name="l00295"></a>00295         <span class="keywordflow">return</span> shm_get_var($this-&gt;_hShm, $nQueueKey + $nProcess);
+<a name="l00296"></a>00296     }
+<a name="l00297"></a>00297 <span class="comment"></span>
+<a name="l00298"></a>00298 <span class="comment">    /**</span>
+<a name="l00299"></a>00299 <span class="comment">     * Store the queue into the shared memory.</span>
+<a name="l00300"></a>00300 <span class="comment">     *</span>
+<a name="l00301"></a>00301 <span class="comment">     * @param  $nQueueKey @type integer The key of the queue to store in the shared</span>
+<a name="l00302"></a>00302 <span class="comment">     *         memory.</span>
+<a name="l00303"></a>00303 <span class="comment">     * @param  $nProcess @type integer @optional The process cardinal number.</span>
+<a name="l00304"></a>00304 <span class="comment">     * @param  $aQueue @type array @optional The queue to store into shared memory.</span>
+<a name="l00305"></a>00305 <span class="comment">     *         The default value is an empty array, useful to empty the queue.</span>
+<a name="l00306"></a>00306 <span class="comment">     * @return @type boolean True on success, false otherwise.</span>
+<a name="l00307"></a>00307 <span class="comment">     */</span>
+<a name="l00308"></a><a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e">00308</a>     <span class="keyword">protected</span> function <a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>($nQueueKey, $nProcess = 0, $aQueue = array())
+<a name="l00309"></a>00309     {
+<a name="l00310"></a>00310         <span class="keywordflow">if</span> (!is_array($aQueue)) {
+<a name="l00311"></a>00311             $aQueue = array();
+<a name="l00312"></a>00312         }
+<a name="l00313"></a>00313         <span class="keywordflow">return</span> shm_put_var($this-&gt;_hShm, $nQueueKey + $nProcess, $aQueue);
+<a name="l00314"></a>00314     }
+<a name="l00315"></a>00315 }
 </pre></div></div>
-<hr size="1"/><address style="text-align: right;"><small>Generated on Sun Feb 28 20:47:41 2010 for apns-php by&nbsp;
+<hr size="1"/><address style="text-align: right;"><small>Generated on Mon Mar 1 22:50:51 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.1 </small></address>
 </body>
