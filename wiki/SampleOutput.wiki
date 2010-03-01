@@ -18,9 +18,12 @@ Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: Connected to ssl://feedback.
 Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: Reading...
 Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: Reading...
 Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: 114 bytes read.
-Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478249 (2010-03-01 22:17:29), tokenLength=32, deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
-Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478253 (2010-03-01 22:17:33), tokenLength=32, deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
-Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478256 (2010-03-01 22:17:36), tokenLength=32, deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478249 (2010-03-01 22:17:29), tokenLength=32,
+                                                    deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478253 (2010-03-01 22:17:33), tokenLength=32,
+                                                    deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478256 (2010-03-01 22:17:36), tokenLength=32,
+                                                    deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
 
 [var_dump]
 
