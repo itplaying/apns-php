@@ -13,9 +13,18 @@ Sun, 28 Feb 2010 17:33:39 +0100 ApnsPHP[10519]: INFO: Disconnected.
 ==sample_feedback.php==
 
 {{{
-Sun, 28 Feb 2010 17:34:20 +0100 ApnsPHP[10524]: INFO: Trying ssl://feedback.sandbox.push.apple.com:2196...
-Sun, 28 Feb 2010 17:34:24 +0100 ApnsPHP[10524]: INFO: Connected to ssl://feedback.sandbox.push.apple.com:2196.
-Sun, 28 Feb 2010 17:34:24 +0100 ApnsPHP[10524]: INFO: Disconnected.
+Mon, 01 Mar 2010 22:17:41 +0100 ApnsPHP[421]: INFO: Trying ssl://feedback.sandbox.push.apple.com:2196...
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: Connected to ssl://feedback.sandbox.push.apple.com:2196.
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: Reading...
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: Reading...
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: 114 bytes read.
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478249 (2010-03-01 22:17:29), tokenLength=32, deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478253 (2010-03-01 22:17:33), tokenLength=32, deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: New feedback tuple: timestamp=1267478256 (2010-03-01 22:17:36), tokenLength=32, deviceToken=e3434b98811836079119bbb8617373073292d045dc195e87de5765ebae5e50d7.
+
+[var_dump]
+
+Mon, 01 Mar 2010 22:17:44 +0100 ApnsPHP[421]: INFO: Disconnected.
 }}}
 
 ==sample_server.php==
