@@ -54,8 +54,10 @@ Collaboration diagram for ApnsPHP_Push_Server:</div>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Constructor.  <a href="#aae6a84652eefad4159d44019155cb648"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b">add</a> (<a class="el" href="class_apns_p_h_p___message.html">ApnsPHP_Message</a> $message)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Adds a message to the inter-process message queue.  <a href="#ac018cd9443834d169616e64dbd91795b"></a><br/></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">array&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___push___server.html#a768eb6c89cb999d16b9469ca584d7ce9">getErrors</a> (boolean $bEmpty=true)</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns messages not delivered to the end user because one (or more) error occurred.  <a href="#a768eb6c89cb999d16b9469ca584d7ce9"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">array&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b">getQueue</a> (boolean $bEmpty=true)</td></tr>
-<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns the error message queue.  <a href="#a28cb5e78a1805b9a1b643142033dc23b"></a><br/></td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Returns messages in the message queue.  <a href="#a28cb5e78a1805b9a1b643142033dc23b"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___push___server.html#a5aa74697c323200103bf095f299b7b10">onChildExited</a> ()</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Waits until a forked process has exited and decreases the current running process number.  <a href="#a5aa74697c323200103bf095f299b7b10"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___push___server.html#a43459575d6a948917ed75d899660ddc5">onShutdown</a> ()</td></tr>
@@ -215,16 +217,16 @@ Collaboration diagram for ApnsPHP_Push_Server:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Array of messages from the queue. </dd></dl>
 
-<p>Definition at line <a class="el" href="_server_8php_source.html#l00290">290</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
+<p>Definition at line <a class="el" href="_server_8php_source.html#l00313">313</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_server_8php_source.html#l00250">_mainLoop()</a>, <a class="el" href="_server_8php_source.html#l00209">add()</a>, and <a class="el" href="_server_8php_source.html#l00232">getQueue()</a>.</p>
+<p>Referenced by <a class="el" href="_server_8php_source.html#l00273">_mainLoop()</a>, <a class="el" href="_server_8php_source.html#l00209">add()</a>, <a class="el" href="_server_8php_source.html#l00255">getErrors()</a>, and <a class="el" href="_server_8php_source.html#l00233">getQueue()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00291"></a>00291     {
-<a name="l00292"></a>00292         <span class="keywordflow">if</span> (!shm_has_var($this-&gt;_hShm, $nQueueKey + $nProcess)) {
-<a name="l00293"></a>00293             <span class="keywordflow">return</span> array();
-<a name="l00294"></a>00294         }
-<a name="l00295"></a>00295         <span class="keywordflow">return</span> shm_get_var($this-&gt;_hShm, $nQueueKey + $nProcess);
-<a name="l00296"></a>00296     }
+<p><div class="fragment"><pre class="fragment"><a name="l00314"></a>00314     {
+<a name="l00315"></a>00315         <span class="keywordflow">if</span> (!shm_has_var($this-&gt;_hShm, $nQueueKey + $nProcess)) {
+<a name="l00316"></a>00316             <span class="keywordflow">return</span> array();
+<a name="l00317"></a>00317         }
+<a name="l00318"></a>00318         <span class="keywordflow">return</span> shm_get_var($this-&gt;_hShm, $nQueueKey + $nProcess);
+<a name="l00319"></a>00319     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -232,7 +234,7 @@ Here is the caller graph for this function:</div>
 <div class="dynsection">
 <div class="center"><img src="class_apns_p_h_p___push___server_add4bfc6ebbbdbf02245ec8c9d4d53593_icgraph.png" border="0" usemap="#class_apns_p_h_p___push___server_add4bfc6ebbbdbf02245ec8c9d4d53593_icgraph_map" alt=""></div>
 <map name="class_apns_p_h_p___push___server_add4bfc6ebbbdbf02245ec8c9d4d53593_icgraph_map" id="class_apns_p_h_p___push___server_add4bfc6ebbbdbf02245ec8c9d4d53593_icgraph">
-<area shape="rect" id="node3" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop." alt="" coords="291,5,384,35"/><area shape="rect" id="node7" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter&#45;process message queue." alt="" coords="175,31,220,60"/><area shape="rect" id="node10" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b" title="Returns the error message queue." alt="" coords="152,84,243,113"/><area shape="rect" id="node5" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately." alt="" coords="432,5,488,35"/></map>
+<area shape="rect" id="node3" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop." alt="" coords="291,5,384,35"/><area shape="rect" id="node7" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter&#45;process message queue." alt="" coords="175,31,220,60"/><area shape="rect" id="node10" href="class_apns_p_h_p___push___server.html#a768eb6c89cb999d16b9469ca584d7ce9" title="Returns messages not delivered to the end user because one (or more) error occurred..." alt="" coords="155,84,240,113"/><area shape="rect" id="node12" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b" title="Returns messages in the message queue." alt="" coords="152,137,243,167"/><area shape="rect" id="node5" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately." alt="" coords="432,5,488,35"/></map>
 </div>
 </p>
 
@@ -254,44 +256,44 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 
 <p>The process main loop. </p>
-<p>During the main loop: the per-process error queue is read and the common error message queue is populated; the per-process message queue is spooled (message from this queue is added to <a class="el" href="class_apns_p_h_p___push.html" title="The Push Notification Provider.">ApnsPHP_Push</a> queue and delivered). </p>
+<p>During the main loop: the per-process error queue is read and the common error message container is populated; the per-process message queue is spooled (message from this queue is added to <a class="el" href="class_apns_p_h_p___push.html" title="The Push Notification Provider.">ApnsPHP_Push</a> queue and delivered). </p>
 
-<p>Definition at line <a class="el" href="_server_8php_source.html#l00250">250</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
+<p>Definition at line <a class="el" href="_server_8php_source.html#l00273">273</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
 
-<p>References <a class="el" href="_server_8php_source.html#l00290">_getQueue()</a>, <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_server_8php_source.html#l00308">_setQueue()</a>, <a class="el" href="_server_8php_source.html#l00209">add()</a>, and <a class="el" href="_push_8php_source.html#l00117">ApnsPHP_Push::send()</a>.</p>
+<p>References <a class="el" href="_server_8php_source.html#l00313">_getQueue()</a>, <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_server_8php_source.html#l00331">_setQueue()</a>, <a class="el" href="_server_8php_source.html#l00209">add()</a>, and <a class="el" href="_push_8php_source.html#l00117">ApnsPHP_Push::send()</a>.</p>
 
 <p>Referenced by <a class="el" href="_server_8php_source.html#l00175">start()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00251"></a>00251     {
-<a name="l00252"></a>00252         <span class="keywordflow">while</span> (<span class="keyword">true</span>) {
-<a name="l00253"></a>00253             pcntl_signal_dispatch();
-<a name="l00254"></a>00254 
-<a name="l00255"></a>00255             <span class="keywordflow">if</span> (posix_getppid() != $this-&gt;_nParentPid) {
-<a name="l00256"></a>00256                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Parent process {$this-&gt;_nParentPid} died unexpectedly, exiting...&quot;</span>);
-<a name="l00257"></a>00257                 <span class="keywordflow">break</span>;
-<a name="l00258"></a>00258             }
-<a name="l00259"></a>00259 
-<a name="l00260"></a>00260             sem_acquire($this-&gt;_hSem);
-<a name="l00261"></a>00261             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0,
-<a name="l00262"></a>00262                 array_merge($this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY), parent::getQueue())
-<a name="l00263"></a>00263             );
-<a name="l00264"></a>00264 
-<a name="l00265"></a>00265             $aQueue = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
-<a name="l00266"></a>00266             <span class="keywordflow">foreach</span>($aQueue as $message) {
-<a name="l00267"></a>00267                 <a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter-process message queue.">parent::add</a>($message);
-<a name="l00268"></a>00268             }
-<a name="l00269"></a>00269             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
-<a name="l00270"></a>00270             sem_release($this-&gt;_hSem);
-<a name="l00271"></a>00271 
-<a name="l00272"></a>00272             $nMessages = count($aQueue);
-<a name="l00273"></a>00273             <span class="keywordflow">if</span> ($nMessages &gt; 0) {
-<a name="l00274"></a>00274                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&#39;INFO: Process &#39;</span> . ($this-&gt;_nCurrentProcess + 1) . <span class="stringliteral">&quot; has {$nMessages} messages, sending...&quot;</span>);
-<a name="l00275"></a>00275                 <a class="code" href="class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service.">parent::send</a>();
-<a name="l00276"></a>00276             } <span class="keywordflow">else</span> {
-<a name="l00277"></a>00277                 usleep(self::MAIN_LOOP_USLEEP);
-<a name="l00278"></a>00278             }
-<a name="l00279"></a>00279         }
-<a name="l00280"></a>00280     }
+<p><div class="fragment"><pre class="fragment"><a name="l00274"></a>00274     {
+<a name="l00275"></a>00275         <span class="keywordflow">while</span> (<span class="keyword">true</span>) {
+<a name="l00276"></a>00276             pcntl_signal_dispatch();
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278             <span class="keywordflow">if</span> (posix_getppid() != $this-&gt;_nParentPid) {
+<a name="l00279"></a>00279                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&quot;INFO: Parent process {$this-&gt;_nParentPid} died unexpectedly, exiting...&quot;</span>);
+<a name="l00280"></a>00280                 <span class="keywordflow">break</span>;
+<a name="l00281"></a>00281             }
+<a name="l00282"></a>00282 
+<a name="l00283"></a>00283             sem_acquire($this-&gt;_hSem);
+<a name="l00284"></a>00284             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0,
+<a name="l00285"></a>00285                 array_merge($this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY), parent::getErrors())
+<a name="l00286"></a>00286             );
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288             $aQueue = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
+<a name="l00289"></a>00289             <span class="keywordflow">foreach</span>($aQueue as $message) {
+<a name="l00290"></a>00290                 <a class="code" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter-process message queue.">parent::add</a>($message);
+<a name="l00291"></a>00291             }
+<a name="l00292"></a>00292             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $this-&gt;_nCurrentProcess);
+<a name="l00293"></a>00293             sem_release($this-&gt;_hSem);
+<a name="l00294"></a>00294 
+<a name="l00295"></a>00295             $nMessages = count($aQueue);
+<a name="l00296"></a>00296             <span class="keywordflow">if</span> ($nMessages &gt; 0) {
+<a name="l00297"></a>00297                 $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&#39;INFO: Process &#39;</span> . ($this-&gt;_nCurrentProcess + 1) . <span class="stringliteral">&quot; has {$nMessages} messages, sending...&quot;</span>);
+<a name="l00298"></a>00298                 <a class="code" href="class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service.">parent::send</a>();
+<a name="l00299"></a>00299             } <span class="keywordflow">else</span> {
+<a name="l00300"></a>00300                 usleep(self::MAIN_LOOP_USLEEP);
+<a name="l00301"></a>00301             }
+<a name="l00302"></a>00302         }
+<a name="l00303"></a>00303     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -356,16 +358,16 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True on success, false otherwise. </dd></dl>
 
-<p>Definition at line <a class="el" href="_server_8php_source.html#l00308">308</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
+<p>Definition at line <a class="el" href="_server_8php_source.html#l00331">331</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_server_8php_source.html#l00250">_mainLoop()</a>, <a class="el" href="_server_8php_source.html#l00209">add()</a>, and <a class="el" href="_server_8php_source.html#l00232">getQueue()</a>.</p>
+<p>Referenced by <a class="el" href="_server_8php_source.html#l00273">_mainLoop()</a>, <a class="el" href="_server_8php_source.html#l00209">add()</a>, <a class="el" href="_server_8php_source.html#l00255">getErrors()</a>, and <a class="el" href="_server_8php_source.html#l00233">getQueue()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00309"></a>00309     {
-<a name="l00310"></a>00310         <span class="keywordflow">if</span> (!is_array($aQueue)) {
-<a name="l00311"></a>00311             $aQueue = array();
-<a name="l00312"></a>00312         }
-<a name="l00313"></a>00313         <span class="keywordflow">return</span> shm_put_var($this-&gt;_hShm, $nQueueKey + $nProcess, $aQueue);
-<a name="l00314"></a>00314     }
+<p><div class="fragment"><pre class="fragment"><a name="l00332"></a>00332     {
+<a name="l00333"></a>00333         <span class="keywordflow">if</span> (!is_array($aQueue)) {
+<a name="l00334"></a>00334             $aQueue = array();
+<a name="l00335"></a>00335         }
+<a name="l00336"></a>00336         <span class="keywordflow">return</span> shm_put_var($this-&gt;_hShm, $nQueueKey + $nProcess, $aQueue);
+<a name="l00337"></a>00337     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -373,7 +375,7 @@ Here is the caller graph for this function:</div>
 <div class="dynsection">
 <div class="center"><img src="class_apns_p_h_p___push___server_aa3dbe08278a5b33b48530f30e2b2872e_icgraph.png" border="0" usemap="#class_apns_p_h_p___push___server_aa3dbe08278a5b33b48530f30e2b2872e_icgraph_map" alt=""></div>
 <map name="class_apns_p_h_p___push___server_aa3dbe08278a5b33b48530f30e2b2872e_icgraph_map" id="class_apns_p_h_p___push___server_aa3dbe08278a5b33b48530f30e2b2872e_icgraph">
-<area shape="rect" id="node3" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop." alt="" coords="291,5,384,35"/><area shape="rect" id="node7" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter&#45;process message queue." alt="" coords="175,31,220,60"/><area shape="rect" id="node10" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b" title="Returns the error message queue." alt="" coords="152,84,243,113"/><area shape="rect" id="node5" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately." alt="" coords="432,5,488,35"/></map>
+<area shape="rect" id="node3" href="class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop." alt="" coords="291,5,384,35"/><area shape="rect" id="node7" href="class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter&#45;process message queue." alt="" coords="175,31,220,60"/><area shape="rect" id="node10" href="class_apns_p_h_p___push___server.html#a768eb6c89cb999d16b9469ca584d7ce9" title="Returns messages not delivered to the end user because one (or more) error occurred..." alt="" coords="155,84,240,113"/><area shape="rect" id="node12" href="class_apns_p_h_p___push___server.html#a28cb5e78a1805b9a1b643142033dc23b" title="Returns messages in the message queue." alt="" coords="152,137,243,167"/><area shape="rect" id="node5" href="class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately." alt="" coords="432,5,488,35"/></map>
 </div>
 </p>
 
@@ -408,9 +410,9 @@ Here is the caller graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_server_8php_source.html#l00209">209</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
 
-<p>References <a class="el" href="_server_8php_source.html#l00290">_getQueue()</a>, and <a class="el" href="_server_8php_source.html#l00308">_setQueue()</a>.</p>
+<p>References <a class="el" href="_server_8php_source.html#l00313">_getQueue()</a>, and <a class="el" href="_server_8php_source.html#l00331">_setQueue()</a>.</p>
 
-<p>Referenced by <a class="el" href="_server_8php_source.html#l00250">_mainLoop()</a>.</p>
+<p>Referenced by <a class="el" href="_server_8php_source.html#l00273">_mainLoop()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00210"></a>00210     {
 <a name="l00211"></a>00211         <span class="keyword">static</span> $n = 0;
@@ -446,6 +448,59 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="a768eb6c89cb999d16b9469ca584d7ce9"></a><!-- doxytag: member="ApnsPHP_Push_Server::getErrors" ref="a768eb6c89cb999d16b9469ca584d7ce9" args="(boolean $bEmpty=true)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array getErrors </td>
+          <td>(</td>
+          <td class="paramtype">boolean $&nbsp;</td>
+          <td class="paramname"> <em>bEmpty</em> = <code>true</code></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Returns messages not delivered to the end user because one (or more) error occurred. </p>
+<dl><dt><b>Parameters:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>$bEmpty</em>&nbsp;</td><td>[optional] Empty message container. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Array of messages not delivered because one or more errors occurred. </dd></dl>
+
+<p>Reimplemented from <a class="el" href="class_apns_p_h_p___push.html#a768eb6c89cb999d16b9469ca584d7ce9">ApnsPHP_Push</a>.</p>
+
+<p>Definition at line <a class="el" href="_server_8php_source.html#l00255">255</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
+
+<p>References <a class="el" href="_server_8php_source.html#l00313">_getQueue()</a>, and <a class="el" href="_server_8php_source.html#l00331">_setQueue()</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00256"></a>00256     {
+<a name="l00257"></a>00257         sem_acquire($this-&gt;_hSem);
+<a name="l00258"></a>00258         $aRet = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY);
+<a name="l00259"></a>00259         <span class="keywordflow">if</span> ($bEmpty) {
+<a name="l00260"></a>00260             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0, array());
+<a name="l00261"></a>00261         }
+<a name="l00262"></a>00262         sem_release($this-&gt;_hSem);
+<a name="l00263"></a>00263         <span class="keywordflow">return</span> $aRet;
+<a name="l00264"></a>00264     }
+</pre></div></p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dynsection">
+<div class="center"><img src="class_apns_p_h_p___push___server_a768eb6c89cb999d16b9469ca584d7ce9_cgraph.png" border="0" usemap="#class_apns_p_h_p___push___server_a768eb6c89cb999d16b9469ca584d7ce9_cgraph_map" alt=""></div>
+<map name="class_apns_p_h_p___push___server_a768eb6c89cb999d16b9469ca584d7ce9_cgraph_map" id="class_apns_p_h_p___push___server_a768eb6c89cb999d16b9469ca584d7ce9_cgraph">
+<area shape="rect" id="node3" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory." alt="" coords="139,5,237,35"/><area shape="rect" id="node5" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory." alt="" coords="140,59,236,88"/></map>
+</div>
+</p>
+
+</div>
+</div>
 <a class="anchor" id="a28cb5e78a1805b9a1b643142033dc23b"></a><!-- doxytag: member="ApnsPHP_Push_Server::getQueue" ref="a28cb5e78a1805b9a1b643142033dc23b" args="(boolean $bEmpty=true)" -->
 <div class="memitem">
 <div class="memproto">
@@ -462,31 +517,34 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Returns the error message queue. </p>
-<p>Error message queue contains all messages not delivered to the end user by all of the server processes.</p>
+<p>Returns messages in the message queue. </p>
+<p>When a message is successful sent or reached the maximum retry time is removed from the message queue and inserted in the Errors container. Use the <a class="el" href="class_apns_p_h_p___push___server.html#a768eb6c89cb999d16b9469ca584d7ce9" title="Returns messages not delivered to the end user because one (or more) error occurred...">getErrors()</a> method to retrive messages with delivery error(s).</p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
     <tr><td valign="top"></td><td valign="top"><em>$bEmpty</em>&nbsp;</td><td>[optional] Empty message queue. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="return"><dt><b>Returns:</b></dt><dd>Array of messages not delivered to the end user. </dd></dl>
+<dl class="return"><dt><b>Returns:</b></dt><dd>Array of messages left on the queue. </dd></dl>
 
 <p>Reimplemented from <a class="el" href="class_apns_p_h_p___push.html#a28cb5e78a1805b9a1b643142033dc23b">ApnsPHP_Push</a>.</p>
 
-<p>Definition at line <a class="el" href="_server_8php_source.html#l00232">232</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
+<p>Definition at line <a class="el" href="_server_8php_source.html#l00233">233</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
 
-<p>References <a class="el" href="_server_8php_source.html#l00290">_getQueue()</a>, and <a class="el" href="_server_8php_source.html#l00308">_setQueue()</a>.</p>
+<p>References <a class="el" href="_server_8php_source.html#l00313">_getQueue()</a>, and <a class="el" href="_server_8php_source.html#l00331">_setQueue()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00233"></a>00233     {
-<a name="l00234"></a>00234         sem_acquire($this-&gt;_hSem);
-<a name="l00235"></a>00235         $aRet = $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY);
-<a name="l00236"></a>00236         <span class="keywordflow">if</span> ($bEmpty) {
-<a name="l00237"></a>00237             $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_ERROR_MESSAGES_QUEUE_KEY, 0, array());
-<a name="l00238"></a>00238         }
-<a name="l00239"></a>00239         sem_release($this-&gt;_hSem);
-<a name="l00240"></a>00240         <span class="keywordflow">return</span> $aRet;
-<a name="l00241"></a>00241     }
+<p><div class="fragment"><pre class="fragment"><a name="l00234"></a>00234     {
+<a name="l00235"></a>00235         $aRet = array();
+<a name="l00236"></a>00236         sem_acquire($this-&gt;_hSem);
+<a name="l00237"></a>00237         <span class="keywordflow">for</span> ($i = 0; $i &lt; $this-&gt;_nProcesses; $i++) {
+<a name="l00238"></a>00238             $aRet = array_merge($aRet, $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#add4bfc6ebbbdbf02245ec8c9d4d53593" title="Returns the queue from the shared memory.">_getQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $i));
+<a name="l00239"></a>00239             <span class="keywordflow">if</span> ($bEmpty) {
+<a name="l00240"></a>00240                 $this-&gt;<a class="code" href="class_apns_p_h_p___push___server.html#aa3dbe08278a5b33b48530f30e2b2872e" title="Store the queue into the shared memory.">_setQueue</a>(self::SHM_MESSAGES_QUEUE_KEY_START, $i);
+<a name="l00241"></a>00241             }
+<a name="l00242"></a>00242         }
+<a name="l00243"></a>00243         sem_release($this-&gt;_hSem);
+<a name="l00244"></a>00244         <span class="keywordflow">return</span> $aRet;
+<a name="l00245"></a>00245     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -718,7 +776,7 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_server_8php_source.html#l00175">175</a> of file <a class="el" href="_server_8php_source.html">Server.php</a>.</p>
 
-<p>References <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_server_8php_source.html#l00250">_mainLoop()</a>, <a class="el" href="_abstract_8php_source.html#l00289">ApnsPHP_Abstract::connect()</a>, and <a class="el" href="_abstract_8php_source.html#l00317">ApnsPHP_Abstract::disconnect()</a>.</p>
+<p>References <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_server_8php_source.html#l00273">_mainLoop()</a>, <a class="el" href="_abstract_8php_source.html#l00289">ApnsPHP_Abstract::connect()</a>, and <a class="el" href="_abstract_8php_source.html#l00317">ApnsPHP_Abstract::disconnect()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00176"></a>00176     {
 <a name="l00177"></a>00177         <span class="keywordflow">for</span> ($i = 0; $i &lt; $this-&gt;_nProcesses; $i++) {
@@ -951,7 +1009,7 @@ Here is the call graph for this function:</div>
 <li>Push/<a class="el" href="_server_8php_source.html">Server.php</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Aug 27 19:49:36 2010 for apns-php by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Fri Aug 27 21:46:11 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
