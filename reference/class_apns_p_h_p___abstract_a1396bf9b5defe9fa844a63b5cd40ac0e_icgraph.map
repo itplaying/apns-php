@@ -1,5 +1,6 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service." alt="" coords="133,5,296,35"/>
-<area shape="rect" id="node7" href="$class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately." alt="" coords="645,32,861,61"/>
-<area shape="rect" id="node5" href="$class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop." alt="" coords="344,5,597,35"/>
+<area shape="rect" id="node3" href="$class_apns_p_h_p___push.html#ac64983c972029732bf49ee8c1ff4c6ee" title="Checks for error message and deletes messages successfully sent from message queue..." alt="" coords="135,5,364,35"/>
+<area shape="rect" id="node9" href="$class_apns_p_h_p___push___server.html#a60de64d75454385b23995437f1d72669" title="Starts the server forking all processes and return immediately." alt="" coords="925,32,1141,61"/>
+<area shape="rect" id="node5" href="$class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service." alt="" coords="413,5,576,35"/>
+<area shape="rect" id="node7" href="$class_apns_p_h_p___push___server.html#a8ef2832f45586e32845c0d866d9e96cf" title="The process main loop." alt="" coords="624,5,877,35"/>
 </map>
