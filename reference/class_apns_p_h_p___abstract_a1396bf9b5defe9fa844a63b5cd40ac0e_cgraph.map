@@ -1,4 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$class_apns_p_h_p___abstract.html#a56e16b11db21be37c5f50850d287ff21" title="Connects to Apple Push Notification service server." alt="" coords="133,5,219,35"/>
-<area shape="rect" id="node5" href="$class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger." alt="" coords="267,32,315,61"/>
+<area shape="rect" id="node3" href="$class_apns_p_h_p___abstract.html#a56e16b11db21be37c5f50850d287ff21" title="Connects to Apple Push Notification service server." alt="" coords="113,5,175,30"/>
+<area shape="rect" id="node5" href="$class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger." alt="" coords="225,30,265,55"/>
 </map>
