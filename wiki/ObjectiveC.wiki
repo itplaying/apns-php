@@ -7,7 +7,7 @@ To send Push Notifications to a device, you need a _device token_. Device token 
 
 = Deprecated =
 
-Please, see the Objective-C Demo Project at [http://code.google.com/p/apns-php/source/browse/#svn/trunk/Objective-C%20Demo]
+Please, see the Objective-C Demo Project at [http://code.google.com/p/apns-php/source/browse/trunk/Objective-C%20Demo]
 
 = Code =
 
