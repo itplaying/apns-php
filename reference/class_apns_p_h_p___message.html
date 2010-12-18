@@ -35,6 +35,13 @@
 </h1><!-- doxytag: class="ApnsPHP_Message" -->
 <p>The Push Notification Message.  
 <a href="#_details">More...</a></p>
+<div class="dynheader">
+Inheritance diagram for ApnsPHP_Message:</div>
+<div class="dynsection">
+<div class="center"><img src="class_apns_p_h_p___message__inherit__graph.png" border="0" usemap="#_apns_p_h_p___message_inherit__map" alt="Inheritance graph"/></div>
+<map name="_apns_p_h_p___message_inherit__map" id="_apns_p_h_p___message_inherit__map">
+<area shape="rect" id="node3" href="class_apns_p_h_p___message___custom.html" title="The Push Notification Custom Message." alt="" coords="21,569,163,789"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr><td colspan="2"><h2>Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#ab37be909b752b407ddc04066ba131b19">__construct</a> (string $sDeviceToken=null)</td></tr>
@@ -86,8 +93,13 @@
 <tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a001bba041871312a31ea7030dec50503">setText</a> (string $sText)</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Set the alert message to display to the user.  <a href="#a001bba041871312a31ea7030dec50503"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Data Fields</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">const&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a850080ac36b303288c15bc3113b114a4">APPLE_RESERVED_NAMESPACE</a> = 'aps'</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><b>string</b> The Apple-reserved aps namespace.  <a href="#a850080ac36b303288c15bc3113b114a4"></a><br/></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">const&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#ac293b67346928eb668a67938a0305e33">PAYLOAD_MAXIMUM_SIZE</a> = 256</td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight"><b>integer</b> The maximum size allowed for a notification payload.  <a href="#ac293b67346928eb668a67938a0305e33"></a><br/></td></tr>
+<tr><td colspan="2"><h2>Protected Member Functions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">array&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a53ac522f77fabca771da91294220be5d">_getPayload</a> ()</td></tr>
+<tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Get the payload dictionary.  <a href="#a53ac522f77fabca771da91294220be5d"></a><br/></td></tr>
 <tr><td colspan="2"><h2>Protected Attributes</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">mixed&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apns_p_h_p___message.html#a09681716774bc1b6903ccee4a9242c89">$_aCustomProperties</a></td></tr>
 <tr><td class="mdescLeft">&nbsp;</td><td class="mdescRight">Custom properties container.  <a href="#a09681716774bc1b6903ccee4a9242c89"></a><br/></td></tr>
@@ -137,15 +149,15 @@
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00057">57</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00058">58</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>References <a class="el" href="_message_8php_source.html#l00071">addRecipient()</a>.</p>
+<p>References <a class="el" href="_message_8php_source.html#l00072">addRecipient()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00058"></a>00058     {
-<a name="l00059"></a>00059         <span class="keywordflow">if</span> (isset($sDeviceToken)) {
-<a name="l00060"></a>00060             $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#af6b94ce5fff30e5ec79aec4110395270" title="Add a recipient device token.">addRecipient</a>($sDeviceToken);
-<a name="l00061"></a>00061         }
-<a name="l00062"></a>00062     }
+<p><div class="fragment"><pre class="fragment"><a name="l00059"></a>00059     {
+<a name="l00060"></a>00060         <span class="keywordflow">if</span> (isset($sDeviceToken)) {
+<a name="l00061"></a>00061             $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#af6b94ce5fff30e5ec79aec4110395270" title="Add a recipient device token.">addRecipient</a>($sDeviceToken);
+<a name="l00062"></a>00062         }
+<a name="l00063"></a>00063     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -179,18 +191,18 @@ Here is the call graph for this function:</div>
 <p>When an object is "converted" to a string, JSON-encoded payload is returned.</p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>JSON-encoded payload. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00295">295</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00296">296</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>References <a class="el" href="_message_8php_source.html#l00312">getPayload()</a>.</p>
+<p>References <a class="el" href="_message_8php_source.html#l00341">getPayload()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00296"></a>00296     {
-<a name="l00297"></a>00297         <span class="keywordflow">try</span> {
-<a name="l00298"></a>00298             $sJSONPayload = $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON-encoded payload.">getPayload</a>();
-<a name="l00299"></a>00299         } <span class="keywordflow">catch</span> (<a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a> $e) {
-<a name="l00300"></a>00300             $sJSONPayload = <span class="stringliteral">&#39;&#39;</span>;
-<a name="l00301"></a>00301         }
-<a name="l00302"></a>00302         <span class="keywordflow">return</span> $sJSONPayload;
-<a name="l00303"></a>00303     }
+<p><div class="fragment"><pre class="fragment"><a name="l00297"></a>00297     {
+<a name="l00298"></a>00298         <span class="keywordflow">try</span> {
+<a name="l00299"></a>00299             $sJSONPayload = $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON-encoded payload.">getPayload</a>();
+<a name="l00300"></a>00300         } <span class="keywordflow">catch</span> (<a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a> $e) {
+<a name="l00301"></a>00301             $sJSONPayload = <span class="stringliteral">&#39;&#39;</span>;
+<a name="l00302"></a>00302         }
+<a name="l00303"></a>00303         <span class="keywordflow">return</span> $sJSONPayload;
+<a name="l00304"></a>00304     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -198,7 +210,65 @@ Here is the call graph for this function:</div>
 <div class="dynsection">
 <div class="center"><img src="class_apns_p_h_p___message_afcde9cf027709d7d475480f9bf5ddf7f_cgraph.png" border="0" usemap="#class_apns_p_h_p___message_afcde9cf027709d7d475480f9bf5ddf7f_cgraph_map" alt=""></div>
 <map name="class_apns_p_h_p___message_afcde9cf027709d7d475480f9bf5ddf7f_cgraph_map" id="class_apns_p_h_p___message_afcde9cf027709d7d475480f9bf5ddf7f_cgraph">
-<area shape="rect" id="node3" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON&#45;encoded payload." alt="" coords="125,5,197,30"/></map>
+<area shape="rect" id="node3" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON&#45;encoded payload." alt="" coords="125,5,197,30"/><area shape="rect" id="node5" href="class_apns_p_h_p___message.html#a53ac522f77fabca771da91294220be5d" title="Get the payload dictionary." alt="" coords="245,5,323,30"/></map>
+</div>
+</p>
+
+</div>
+</div>
+<a class="anchor" id="a53ac522f77fabca771da91294220be5d"></a><!-- doxytag: member="ApnsPHP_Message::_getPayload" ref="a53ac522f77fabca771da91294220be5d" args="()" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">array _getPayload </td>
+          <td>(</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td><code> [protected]</code></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Get the payload dictionary. </p>
+<dl class="return"><dt><b>Returns:</b></dt><dd>The payload dictionary. </dd></dl>
+
+<p>Reimplemented in <a class="el" href="class_apns_p_h_p___message___custom.html#a53ac522f77fabca771da91294220be5d">ApnsPHP_Message_Custom</a>.</p>
+
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00311">311</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+
+<p>Referenced by <a class="el" href="_message_8php_source.html#l00341">getPayload()</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00312"></a>00312     {
+<a name="l00313"></a>00313         $aPayload[self::APPLE_RESERVED_NAMESPACE] = array();
+<a name="l00314"></a>00314 
+<a name="l00315"></a>00315         <span class="keywordflow">if</span> (isset($this-&gt;_sText)) {
+<a name="l00316"></a>00316             $aPayload[self::APPLE_RESERVED_NAMESPACE][<span class="stringliteral">&#39;alert&#39;</span>] = (string)$this-&gt;_sText;
+<a name="l00317"></a>00317         }
+<a name="l00318"></a>00318         <span class="keywordflow">if</span> (isset($this-&gt;_nBadge) &amp;&amp; $this-&gt;_nBadge &gt; 0) {
+<a name="l00319"></a>00319             $aPayload[self::APPLE_RESERVED_NAMESPACE][<span class="stringliteral">&#39;badge&#39;</span>] = (int)$this-&gt;_nBadge;
+<a name="l00320"></a>00320         }
+<a name="l00321"></a>00321         <span class="keywordflow">if</span> (isset($this-&gt;_sSound)) {
+<a name="l00322"></a>00322             $aPayload[self::APPLE_RESERVED_NAMESPACE][<span class="stringliteral">&#39;sound&#39;</span>] = (string)$this-&gt;_sSound;
+<a name="l00323"></a>00323         }
+<a name="l00324"></a>00324 
+<a name="l00325"></a>00325         <span class="keywordflow">if</span> (is_array($this-&gt;_aCustomProperties)) {
+<a name="l00326"></a>00326             <span class="keywordflow">foreach</span>($this-&gt;_aCustomProperties as $sPropertyName =&gt; $mPropertyValue) {
+<a name="l00327"></a>00327                 $aPayload[$sPropertyName] = $mPropertyValue;
+<a name="l00328"></a>00328             }
+<a name="l00329"></a>00329         }
+<a name="l00330"></a>00330 
+<a name="l00331"></a>00331         <span class="keywordflow">return</span> $aPayload;
+<a name="l00332"></a>00332     }
+</pre></div></p>
+
+<p><div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dynsection">
+<div class="center"><img src="class_apns_p_h_p___message_a53ac522f77fabca771da91294220be5d_icgraph.png" border="0" usemap="#class_apns_p_h_p___message_a53ac522f77fabca771da91294220be5d_icgraph_map" alt=""></div>
+<map name="class_apns_p_h_p___message_a53ac522f77fabca771da91294220be5d_icgraph_map" id="class_apns_p_h_p___message_a53ac522f77fabca771da91294220be5d_icgraph">
+<area shape="rect" id="node3" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON&#45;encoded payload." alt="" coords="131,29,203,54"/><area shape="rect" id="node5" href="class_apns_p_h_p___message.html#afcde9cf027709d7d475480f9bf5ddf7f" title="PHP Magic Method." alt="" coords="272,5,341,30"/><area shape="rect" id="node7" href="class_apns_p_h_p___push.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the message queue." alt="" coords="252,53,361,78"/></map>
 </div>
 </p>
 
@@ -234,18 +304,18 @@ Here is the call graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00071">71</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00072">72</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_message_8php_source.html#l00057">__construct()</a>.</p>
+<p>Referenced by <a class="el" href="_message_8php_source.html#l00058">__construct()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00072"></a>00072     {
-<a name="l00073"></a>00073         <span class="keywordflow">if</span> (!preg_match(<span class="stringliteral">&#39;~[a-f0-9]{64}~i&#39;</span>, $sDeviceToken)) {
-<a name="l00074"></a>00074             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00075"></a>00075                 <span class="stringliteral">&quot;Invalid device token &#39;{$sDeviceToken}&#39;&quot;</span>
-<a name="l00076"></a>00076             );
-<a name="l00077"></a>00077         }
-<a name="l00078"></a>00078         $this-&gt;_aDeviceTokens[] = $sDeviceToken;
-<a name="l00079"></a>00079     }
+<p><div class="fragment"><pre class="fragment"><a name="l00073"></a>00073     {
+<a name="l00074"></a>00074         <span class="keywordflow">if</span> (!preg_match(<span class="stringliteral">&#39;~[a-f0-9]{64}~i&#39;</span>, $sDeviceToken)) {
+<a name="l00075"></a>00075             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00076"></a>00076                 <span class="stringliteral">&quot;Invalid device token &#39;{$sDeviceToken}&#39;&quot;</span>
+<a name="l00077"></a>00077             );
+<a name="l00078"></a>00078         }
+<a name="l00079"></a>00079         $this-&gt;_aDeviceTokens[] = $sDeviceToken;
+<a name="l00080"></a>00080     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -277,11 +347,11 @@ Here is the caller graph for this function:</div>
 <p>Get the auto-adjust long payload value. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The auto-adjust long payload value. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00284">284</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00285">285</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00285"></a>00285     {
-<a name="l00286"></a>00286         <span class="keywordflow">return</span> $this-&gt;_bAutoAdjustLongPayload;
-<a name="l00287"></a>00287     }
+<p><div class="fragment"><pre class="fragment"><a name="l00286"></a>00286     {
+<a name="l00287"></a>00287         <span class="keywordflow">return</span> $this-&gt;_bAutoAdjustLongPayload;
+<a name="l00288"></a>00288     }
 </pre></div></p>
 
 </div>
@@ -304,11 +374,11 @@ Here is the caller graph for this function:</div>
 <p>Get the number to badge the application icon with. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The number to badge the application icon with. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00161">161</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00162">162</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00162"></a>00162     {
-<a name="l00163"></a>00163         <span class="keywordflow">return</span> $this-&gt;_nBadge;
-<a name="l00164"></a>00164     }
+<p><div class="fragment"><pre class="fragment"><a name="l00163"></a>00163     {
+<a name="l00164"></a>00164         <span class="keywordflow">return</span> $this-&gt;_nBadge;
+<a name="l00165"></a>00165     }
 </pre></div></p>
 
 </div>
@@ -331,11 +401,11 @@ Here is the caller graph for this function:</div>
 <p>Get the custom message identifier. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The custom message identifier. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00406">406</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00421">421</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00407"></a>00407     {
-<a name="l00408"></a>00408         <span class="keywordflow">return</span> $this-&gt;_mCustomIdentifier;
-<a name="l00409"></a>00409     }
+<p><div class="fragment"><pre class="fragment"><a name="l00422"></a>00422     {
+<a name="l00423"></a>00423         <span class="keywordflow">return</span> $this-&gt;_mCustomIdentifier;
+<a name="l00424"></a>00424     }
 </pre></div></p>
 
 </div>
@@ -371,16 +441,16 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The custom property value. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00258">258</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00259">259</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00259"></a>00259     {
-<a name="l00260"></a>00260         <span class="keywordflow">if</span> (!array_key_exists($sName, $this-&gt;_aCustomProperties)) {
-<a name="l00261"></a>00261             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00262"></a>00262                 <span class="stringliteral">&quot;No property exists with the specified name &#39;{$sName}&#39;.&quot;</span>
-<a name="l00263"></a>00263             );
-<a name="l00264"></a>00264         }
-<a name="l00265"></a>00265         <span class="keywordflow">return</span> $this-&gt;_aCustomProperties[$sName];
-<a name="l00266"></a>00266     }
+<p><div class="fragment"><pre class="fragment"><a name="l00260"></a>00260     {
+<a name="l00261"></a>00261         <span class="keywordflow">if</span> (!array_key_exists($sName, $this-&gt;_aCustomProperties)) {
+<a name="l00262"></a>00262             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00263"></a>00263                 <span class="stringliteral">&quot;No property exists with the specified name &#39;{$sName}&#39;.&quot;</span>
+<a name="l00264"></a>00264             );
+<a name="l00265"></a>00265         }
+<a name="l00266"></a>00266         <span class="keywordflow">return</span> $this-&gt;_aCustomProperties[$sName];
+<a name="l00267"></a>00267     }
 </pre></div></p>
 
 </div>
@@ -404,15 +474,15 @@ Here is the caller graph for this function:</div>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000001">Deprecated:</a></b></dt><dd>Use <a class="el" href="class_apns_p_h_p___message.html#a586deb3dfe662151276c1e792cad025c" title="Get all custom properties names.">getCustomPropertyNames()</a> instead.</dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The first custom property name. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00212">212</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00213">213</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00213"></a>00213     {
-<a name="l00214"></a>00214         <span class="keywordflow">if</span> (!is_array($this-&gt;_aCustomProperties)) {
-<a name="l00215"></a>00215             <span class="keywordflow">return</span>;
-<a name="l00216"></a>00216         }
-<a name="l00217"></a>00217         $aKeys = array_keys($this-&gt;_aCustomProperties);
-<a name="l00218"></a>00218         <span class="keywordflow">return</span> $aKeys[0];
-<a name="l00219"></a>00219     }
+<p><div class="fragment"><pre class="fragment"><a name="l00214"></a>00214     {
+<a name="l00215"></a>00215         <span class="keywordflow">if</span> (!is_array($this-&gt;_aCustomProperties)) {
+<a name="l00216"></a>00216             <span class="keywordflow">return</span>;
+<a name="l00217"></a>00217         }
+<a name="l00218"></a>00218         $aKeys = array_keys($this-&gt;_aCustomProperties);
+<a name="l00219"></a>00219         <span class="keywordflow">return</span> $aKeys[0];
+<a name="l00220"></a>00220     }
 </pre></div></p>
 
 </div>
@@ -435,14 +505,14 @@ Here is the caller graph for this function:</div>
 <p>Get all custom properties names. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>All properties names. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00242">242</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00243">243</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00243"></a>00243     {
-<a name="l00244"></a>00244         <span class="keywordflow">if</span> (!is_array($this-&gt;_aCustomProperties)) {
-<a name="l00245"></a>00245             <span class="keywordflow">return</span> array();
-<a name="l00246"></a>00246         }
-<a name="l00247"></a>00247         <span class="keywordflow">return</span> array_keys($this-&gt;_aCustomProperties);
-<a name="l00248"></a>00248     }
+<p><div class="fragment"><pre class="fragment"><a name="l00244"></a>00244     {
+<a name="l00245"></a>00245         <span class="keywordflow">if</span> (!is_array($this-&gt;_aCustomProperties)) {
+<a name="l00246"></a>00246             <span class="keywordflow">return</span> array();
+<a name="l00247"></a>00247         }
+<a name="l00248"></a>00248         <span class="keywordflow">return</span> array_keys($this-&gt;_aCustomProperties);
+<a name="l00249"></a>00249     }
 </pre></div></p>
 
 </div>
@@ -466,15 +536,15 @@ Here is the caller graph for this function:</div>
 <dl class="deprecated"><dt><b><a class="el" href="deprecated.html#_deprecated000002">Deprecated:</a></b></dt><dd>Use <a class="el" href="class_apns_p_h_p___message.html#a6df8c2d9e868a707bf66fd8995827fdb" title="Get the custom property value.">getCustomProperty()</a> instead.</dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The first custom property value. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00228">228</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00229">229</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00229"></a>00229     {
-<a name="l00230"></a>00230         <span class="keywordflow">if</span> (!is_array($this-&gt;_aCustomProperties)) {
-<a name="l00231"></a>00231             <span class="keywordflow">return</span>;
-<a name="l00232"></a>00232         }
-<a name="l00233"></a>00233         $aKeys = array_keys($this-&gt;_aCustomProperties);
-<a name="l00234"></a>00234         <span class="keywordflow">return</span> $this-&gt;_aCustomProperties[$aKeys[0]];
-<a name="l00235"></a>00235     }
+<p><div class="fragment"><pre class="fragment"><a name="l00230"></a>00230     {
+<a name="l00231"></a>00231         <span class="keywordflow">if</span> (!is_array($this-&gt;_aCustomProperties)) {
+<a name="l00232"></a>00232             <span class="keywordflow">return</span>;
+<a name="l00233"></a>00233         }
+<a name="l00234"></a>00234         $aKeys = array_keys($this-&gt;_aCustomProperties);
+<a name="l00235"></a>00235         <span class="keywordflow">return</span> $this-&gt;_aCustomProperties[$aKeys[0]];
+<a name="l00236"></a>00236     }
 </pre></div></p>
 
 </div>
@@ -497,13 +567,13 @@ Here is the caller graph for this function:</div>
 <p>Get the expiry value. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The expire message value (in seconds). </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00379">379</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00394">394</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 <p>Referenced by <a class="el" href="_push_8php_source.html#l00090">ApnsPHP_Push::add()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00380"></a>00380     {
-<a name="l00381"></a>00381         <span class="keywordflow">return</span> $this-&gt;_nExpiryValue;
-<a name="l00382"></a>00382     }
+<p><div class="fragment"><pre class="fragment"><a name="l00395"></a>00395     {
+<a name="l00396"></a>00396         <span class="keywordflow">return</span> $this-&gt;_nExpiryValue;
+<a name="l00397"></a>00397     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -541,55 +611,52 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>JSON-encoded payload. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00312">312</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00341">341</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p>Referenced by <a class="el" href="_message_8php_source.html#l00295">__toString()</a>, and <a class="el" href="_push_8php_source.html#l00090">ApnsPHP_Push::add()</a>.</p>
+<p>References <a class="el" href="_message_8php_source.html#l00311">_getPayload()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00313"></a>00313     {
-<a name="l00314"></a>00314         $aPayload[<span class="stringliteral">&#39;aps&#39;</span>] = array();
-<a name="l00315"></a>00315 
-<a name="l00316"></a>00316         <span class="keywordflow">if</span> (isset($this-&gt;_sText)) {
-<a name="l00317"></a>00317             $aPayload[<span class="stringliteral">&#39;aps&#39;</span>][<span class="stringliteral">&#39;alert&#39;</span>] = (string)$this-&gt;_sText;
-<a name="l00318"></a>00318         }
-<a name="l00319"></a>00319         <span class="keywordflow">if</span> (isset($this-&gt;_nBadge) &amp;&amp; $this-&gt;_nBadge &gt; 0) {
-<a name="l00320"></a>00320             $aPayload[<span class="stringliteral">&#39;aps&#39;</span>][<span class="stringliteral">&#39;badge&#39;</span>] = (int)$this-&gt;_nBadge;
-<a name="l00321"></a>00321         }
-<a name="l00322"></a>00322         <span class="keywordflow">if</span> (isset($this-&gt;_sSound)) {
-<a name="l00323"></a>00323             $aPayload[<span class="stringliteral">&#39;aps&#39;</span>][<span class="stringliteral">&#39;sound&#39;</span>] = (string)$this-&gt;_sSound;
-<a name="l00324"></a>00324         }
-<a name="l00325"></a>00325 
-<a name="l00326"></a>00326         <span class="keywordflow">if</span> (is_array($this-&gt;_aCustomProperties)) {
-<a name="l00327"></a>00327             <span class="keywordflow">foreach</span>($this-&gt;_aCustomProperties as $sPropertyName =&gt; $mPropertyValue) {
-<a name="l00328"></a>00328                 $aPayload[$sPropertyName] = $mPropertyValue;
-<a name="l00329"></a>00329             }
-<a name="l00330"></a>00330         }
-<a name="l00331"></a>00331 
-<a name="l00332"></a>00332         $sJSONPayload = json_encode($aPayload, JSON_FORCE_OBJECT);
-<a name="l00333"></a>00333         $nJSONPayloadLen = strlen($sJSONPayload);
-<a name="l00334"></a>00334 
-<a name="l00335"></a>00335         <span class="keywordflow">if</span> ($nJSONPayloadLen &gt; self::PAYLOAD_MAXIMUM_SIZE) {
-<a name="l00336"></a>00336             <span class="keywordflow">if</span> ($this-&gt;_bAutoAdjustLongPayload) {
-<a name="l00337"></a>00337                 $nTextLen = strlen($this-&gt;_sText);
-<a name="l00338"></a>00338                 <span class="keywordflow">if</span> ($nJSONPayloadLen - $nTextLen &lt;= self::PAYLOAD_MAXIMUM_SIZE) {
-<a name="l00339"></a>00339                     $this-&gt;_sText = substr($this-&gt;_sText, 0, $nTextLen - ($nJSONPayloadLen - self::PAYLOAD_MAXIMUM_SIZE));
-<a name="l00340"></a>00340                     <span class="keywordflow">return</span> $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON-encoded payload.">getPayload</a>();
-<a name="l00341"></a>00341                 } <span class="keywordflow">else</span> {
-<a name="l00342"></a>00342                     <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00343"></a>00343                         <span class="stringliteral">&quot;JSON Payload is too long: {$nJSONPayloadLen} bytes. Maximum size is &quot;</span> .
-<a name="l00344"></a>00344                         self::PAYLOAD_MAXIMUM_SIZE . <span class="stringliteral">&quot; bytes. The message text can not be auto-adjusted.&quot;</span>
-<a name="l00345"></a>00345                     );
-<a name="l00346"></a>00346                 }
-<a name="l00347"></a>00347             } <span class="keywordflow">else</span> {
-<a name="l00348"></a>00348                 <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00349"></a>00349                     <span class="stringliteral">&quot;JSON Payload is too long: {$nJSONPayloadLen} bytes. Maximum size is &quot;</span> .
-<a name="l00350"></a>00350                     self::PAYLOAD_MAXIMUM_SIZE . <span class="stringliteral">&quot; bytes&quot;</span>
-<a name="l00351"></a>00351                 );
-<a name="l00352"></a>00352             }
-<a name="l00353"></a>00353         }
-<a name="l00354"></a>00354 
-<a name="l00355"></a>00355         <span class="keywordflow">return</span> $sJSONPayload;
-<a name="l00356"></a>00356     }
+<p>Referenced by <a class="el" href="_message_8php_source.html#l00296">__toString()</a>, and <a class="el" href="_push_8php_source.html#l00090">ApnsPHP_Push::add()</a>.</p>
+
+<p><div class="fragment"><pre class="fragment"><a name="l00342"></a>00342     {
+<a name="l00343"></a>00343         $sJSONPayload = str_replace(
+<a name="l00344"></a>00344             <span class="charliteral">&#39;&quot;&#39;</span> . self::APPLE_RESERVED_NAMESPACE . <span class="stringliteral">&#39;&quot;:[]&#39;</span>,
+<a name="l00345"></a>00345             <span class="charliteral">&#39;&quot;&#39;</span> . self::APPLE_RESERVED_NAMESPACE . <span class="stringliteral">&#39;&quot;:{}&#39;</span>,
+<a name="l00346"></a>00346             json_encode($this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a53ac522f77fabca771da91294220be5d" title="Get the payload dictionary.">_getPayload</a>())
+<a name="l00347"></a>00347         );
+<a name="l00348"></a>00348         $nJSONPayloadLen = strlen($sJSONPayload);
+<a name="l00349"></a>00349 
+<a name="l00350"></a>00350         <span class="keywordflow">if</span> ($nJSONPayloadLen &gt; self::PAYLOAD_MAXIMUM_SIZE) {
+<a name="l00351"></a>00351             <span class="keywordflow">if</span> ($this-&gt;_bAutoAdjustLongPayload) {
+<a name="l00352"></a>00352                 $nTextLen = strlen($this-&gt;_sText);
+<a name="l00353"></a>00353                 <span class="keywordflow">if</span> ($nJSONPayloadLen - $nTextLen &lt;= self::PAYLOAD_MAXIMUM_SIZE) {
+<a name="l00354"></a>00354                     $this-&gt;_sText = substr($this-&gt;_sText, 0, $nTextLen - ($nJSONPayloadLen - self::PAYLOAD_MAXIMUM_SIZE));
+<a name="l00355"></a>00355                     <span class="keywordflow">return</span> $this-&gt;<a class="code" href="class_apns_p_h_p___message.html#a078da3f5c17bd3a909a6d46af58b4879" title="Convert the message in a JSON-encoded payload.">getPayload</a>();
+<a name="l00356"></a>00356                 } <span class="keywordflow">else</span> {
+<a name="l00357"></a>00357                     <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00358"></a>00358                         <span class="stringliteral">&quot;JSON Payload is too long: {$nJSONPayloadLen} bytes. Maximum size is &quot;</span> .
+<a name="l00359"></a>00359                         self::PAYLOAD_MAXIMUM_SIZE . <span class="stringliteral">&quot; bytes. The message text can not be auto-adjusted.&quot;</span>
+<a name="l00360"></a>00360                     );
+<a name="l00361"></a>00361                 }
+<a name="l00362"></a>00362             } <span class="keywordflow">else</span> {
+<a name="l00363"></a>00363                 <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00364"></a>00364                     <span class="stringliteral">&quot;JSON Payload is too long: {$nJSONPayloadLen} bytes. Maximum size is &quot;</span> .
+<a name="l00365"></a>00365                     self::PAYLOAD_MAXIMUM_SIZE . <span class="stringliteral">&quot; bytes&quot;</span>
+<a name="l00366"></a>00366                 );
+<a name="l00367"></a>00367             }
+<a name="l00368"></a>00368         }
+<a name="l00369"></a>00369 
+<a name="l00370"></a>00370         <span class="keywordflow">return</span> $sJSONPayload;
+<a name="l00371"></a>00371     }
 </pre></div></p>
+
+<p><div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dynsection">
+<div class="center"><img src="class_apns_p_h_p___message_a078da3f5c17bd3a909a6d46af58b4879_cgraph.png" border="0" usemap="#class_apns_p_h_p___message_a078da3f5c17bd3a909a6d46af58b4879_cgraph_map" alt=""></div>
+<map name="class_apns_p_h_p___message_a078da3f5c17bd3a909a6d46af58b4879_cgraph_map" id="class_apns_p_h_p___message_a078da3f5c17bd3a909a6d46af58b4879_cgraph">
+<area shape="rect" id="node3" href="class_apns_p_h_p___message.html#a53ac522f77fabca771da91294220be5d" title="Get the payload dictionary." alt="" coords="125,5,203,30"/></map>
+</div>
+</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -633,18 +700,18 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The recipient token at index $nRecipient. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00089">89</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00090">90</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 <p>Referenced by <a class="el" href="_push_8php_source.html#l00090">ApnsPHP_Push::add()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00090"></a>00090     {
-<a name="l00091"></a>00091         <span class="keywordflow">if</span> (!isset($this-&gt;_aDeviceTokens[$nRecipient])) {
-<a name="l00092"></a>00092             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00093"></a>00093                 <span class="stringliteral">&quot;No recipient at index &#39;{$nRecipient}&#39;&quot;</span>
-<a name="l00094"></a>00094             );
-<a name="l00095"></a>00095         }
-<a name="l00096"></a>00096         <span class="keywordflow">return</span> $this-&gt;_aDeviceTokens[$nRecipient];
-<a name="l00097"></a>00097     }
+<p><div class="fragment"><pre class="fragment"><a name="l00091"></a>00091     {
+<a name="l00092"></a>00092         <span class="keywordflow">if</span> (!isset($this-&gt;_aDeviceTokens[$nRecipient])) {
+<a name="l00093"></a>00093             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00094"></a>00094                 <span class="stringliteral">&quot;No recipient at index &#39;{$nRecipient}&#39;&quot;</span>
+<a name="l00095"></a>00095             );
+<a name="l00096"></a>00096         }
+<a name="l00097"></a>00097         <span class="keywordflow">return</span> $this-&gt;_aDeviceTokens[$nRecipient];
+<a name="l00098"></a>00098     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -676,11 +743,11 @@ Here is the caller graph for this function:</div>
 <p>Get all recipients. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Array of all recipients device token. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00114">114</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00115">115</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00115"></a>00115     {
-<a name="l00116"></a>00116         <span class="keywordflow">return</span> $this-&gt;_aDeviceTokens;
-<a name="l00117"></a>00117     }
+<p><div class="fragment"><pre class="fragment"><a name="l00116"></a>00116     {
+<a name="l00117"></a>00117         <span class="keywordflow">return</span> $this-&gt;_aDeviceTokens;
+<a name="l00118"></a>00118     }
 </pre></div></p>
 
 </div>
@@ -703,13 +770,13 @@ Here is the caller graph for this function:</div>
 <p>Get the number of recipients. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>Recipient's number. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00104">104</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00105">105</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 <p>Referenced by <a class="el" href="_push_8php_source.html#l00090">ApnsPHP_Push::add()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00105"></a>00105     {
-<a name="l00106"></a>00106         <span class="keywordflow">return</span> count($this-&gt;_aDeviceTokens);
-<a name="l00107"></a>00107     }
+<p><div class="fragment"><pre class="fragment"><a name="l00106"></a>00106     {
+<a name="l00107"></a>00107         <span class="keywordflow">return</span> count($this-&gt;_aDeviceTokens);
+<a name="l00108"></a>00108     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -741,11 +808,11 @@ Here is the caller graph for this function:</div>
 <p>Get the sound to play. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The sound to play. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00182">182</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00183">183</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00183"></a>00183     {
-<a name="l00184"></a>00184         <span class="keywordflow">return</span> $this-&gt;_sSound;
-<a name="l00185"></a>00185     }
+<p><div class="fragment"><pre class="fragment"><a name="l00184"></a>00184     {
+<a name="l00185"></a>00185         <span class="keywordflow">return</span> $this-&gt;_sSound;
+<a name="l00186"></a>00186     }
 </pre></div></p>
 
 </div>
@@ -768,11 +835,11 @@ Here is the caller graph for this function:</div>
 <p>Get the alert message to display to the user. </p>
 <dl class="return"><dt><b>Returns:</b></dt><dd>The alert message to display to the user. </dd></dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00134">134</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00135">135</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00135"></a>00135     {
-<a name="l00136"></a>00136         <span class="keywordflow">return</span> $this-&gt;_sText;
-<a name="l00137"></a>00137     }
+<p><div class="fragment"><pre class="fragment"><a name="l00136"></a>00136     {
+<a name="l00137"></a>00137         <span class="keywordflow">return</span> $this-&gt;_sText;
+<a name="l00138"></a>00138     }
 </pre></div></p>
 
 </div>
@@ -801,11 +868,11 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00274">274</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00275">275</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00275"></a>00275     {
-<a name="l00276"></a>00276         $this-&gt;_bAutoAdjustLongPayload = (boolean)$bAutoAdjust;
-<a name="l00277"></a>00277     }
+<p><div class="fragment"><pre class="fragment"><a name="l00276"></a>00276     {
+<a name="l00277"></a>00277         $this-&gt;_bAutoAdjustLongPayload = (boolean)$bAutoAdjust;
+<a name="l00278"></a>00278     }
 </pre></div></p>
 
 </div>
@@ -840,16 +907,16 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00146">146</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00147">147</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00147"></a>00147     {
-<a name="l00148"></a>00148         <span class="keywordflow">if</span> (!is_int($nBadge)) {
-<a name="l00149"></a>00149             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00150"></a>00150                 <span class="stringliteral">&quot;Invalid badge number &#39;{$nBadge}&#39;&quot;</span>
-<a name="l00151"></a>00151             );
-<a name="l00152"></a>00152         }
-<a name="l00153"></a>00153         $this-&gt;_nBadge = $nBadge;
-<a name="l00154"></a>00154     }
+<p><div class="fragment"><pre class="fragment"><a name="l00148"></a>00148     {
+<a name="l00149"></a>00149         <span class="keywordflow">if</span> (!is_int($nBadge)) {
+<a name="l00150"></a>00150             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00151"></a>00151                 <span class="stringliteral">&quot;Invalid badge number &#39;{$nBadge}&#39;&quot;</span>
+<a name="l00152"></a>00152             );
+<a name="l00153"></a>00153         }
+<a name="l00154"></a>00154         $this-&gt;_nBadge = $nBadge;
+<a name="l00155"></a>00155     }
 </pre></div></p>
 
 </div>
@@ -879,11 +946,11 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00396">396</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00411">411</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00397"></a>00397     {
-<a name="l00398"></a>00398         $this-&gt;_mCustomIdentifier = $mCustomIdentifier;
-<a name="l00399"></a>00399     }
+<p><div class="fragment"><pre class="fragment"><a name="l00412"></a>00412     {
+<a name="l00413"></a>00413         $this-&gt;_mCustomIdentifier = $mCustomIdentifier;
+<a name="l00414"></a>00414     }
 </pre></div></p>
 
 </div>
@@ -928,16 +995,16 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00195">195</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00196">196</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00196"></a>00196     {
-<a name="l00197"></a>00197         <span class="keywordflow">if</span> ($sName == <span class="stringliteral">&#39;aps&#39;</span>) {
-<a name="l00198"></a>00198             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00199"></a>00199                 <span class="stringliteral">&quot;Property name &#39;aps&#39; can not be used for custom property.&quot;</span>
-<a name="l00200"></a>00200             );
-<a name="l00201"></a>00201         }
-<a name="l00202"></a>00202         $this-&gt;_aCustomProperties[trim($sName)] = $mValue;
-<a name="l00203"></a>00203     }
+<p><div class="fragment"><pre class="fragment"><a name="l00197"></a>00197     {
+<a name="l00198"></a>00198         <span class="keywordflow">if</span> ($sName == self::APPLE_RESERVED_NAMESPACE) {
+<a name="l00199"></a>00199             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00200"></a>00200                 <span class="stringliteral">&quot;Property name &#39;&quot;</span> . self::APPLE_RESERVED_NAMESPACE . <span class="stringliteral">&quot;&#39; can not be used for custom property.&quot;</span>
+<a name="l00201"></a>00201             );
+<a name="l00202"></a>00202         }
+<a name="l00203"></a>00203         $this-&gt;_aCustomProperties[trim($sName)] = $mValue;
+<a name="l00204"></a>00204     }
 </pre></div></p>
 
 </div>
@@ -966,16 +1033,16 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00364">364</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00379">379</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00365"></a>00365     {
-<a name="l00366"></a>00366         <span class="keywordflow">if</span> (!is_int($nExpiryValue)) {
-<a name="l00367"></a>00367             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
-<a name="l00368"></a>00368                 <span class="stringliteral">&quot;Invalid seconds number &#39;{$nExpiryValue}&#39;&quot;</span>
-<a name="l00369"></a>00369             );
-<a name="l00370"></a>00370         }
-<a name="l00371"></a>00371         $this-&gt;_nExpiryValue = $nExpiryValue;
-<a name="l00372"></a>00372     }
+<p><div class="fragment"><pre class="fragment"><a name="l00380"></a>00380     {
+<a name="l00381"></a>00381         <span class="keywordflow">if</span> (!is_int($nExpiryValue)) {
+<a name="l00382"></a>00382             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___message___exception.html" title="Exception class.">ApnsPHP_Message_Exception</a>(
+<a name="l00383"></a>00383                 <span class="stringliteral">&quot;Invalid seconds number &#39;{$nExpiryValue}&#39;&quot;</span>
+<a name="l00384"></a>00384             );
+<a name="l00385"></a>00385         }
+<a name="l00386"></a>00386         $this-&gt;_nExpiryValue = $nExpiryValue;
+<a name="l00387"></a>00387     }
 </pre></div></p>
 
 </div>
@@ -1004,11 +1071,11 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00172">172</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00173">173</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00173"></a>00173     {
-<a name="l00174"></a>00174         $this-&gt;_sSound = $sSound;
-<a name="l00175"></a>00175     }
+<p><div class="fragment"><pre class="fragment"><a name="l00174"></a>00174     {
+<a name="l00175"></a>00175         $this-&gt;_sSound = $sSound;
+<a name="l00176"></a>00176     }
 </pre></div></p>
 
 </div>
@@ -1037,11 +1104,11 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00124">124</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00125">125</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00125"></a>00125     {
-<a name="l00126"></a>00126         $this-&gt;_sText = $sText;
-<a name="l00127"></a>00127     }
+<p><div class="fragment"><pre class="fragment"><a name="l00126"></a>00126     {
+<a name="l00127"></a>00127         $this-&gt;_sText = $sText;
+<a name="l00128"></a>00128     }
 </pre></div></p>
 
 </div>
@@ -1060,7 +1127,7 @@ Here is the caller graph for this function:</div>
 
 <p>Custom properties container. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00046">46</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00047">47</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1077,7 +1144,7 @@ Here is the caller graph for this function:</div>
 
 <p>Recipients device tokens. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00040">40</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00041">41</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1094,7 +1161,7 @@ Here is the caller graph for this function:</div>
 
 <p>If the JSON payload is longer than maximum allowed size, shorts message text. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00038">38</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00039">39</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1111,7 +1178,7 @@ Here is the caller graph for this function:</div>
 
 <p>Custom message identifier. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00050">50</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00051">51</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1128,7 +1195,7 @@ Here is the caller graph for this function:</div>
 
 <p>Number to badge the application icon with. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00043">43</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00044">44</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1145,7 +1212,7 @@ Here is the caller graph for this function:</div>
 
 <p>That message will expire in 604800 seconds (86400 * 7, 7 days) if not successful delivered. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00048">48</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00049">49</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1162,7 +1229,7 @@ Here is the caller graph for this function:</div>
 
 <p>Sound to play. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00044">44</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00045">45</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1179,7 +1246,24 @@ Here is the caller graph for this function:</div>
 
 <p>Alert message to display to the user. </p>
 
-<p>Definition at line <a class="el" href="_message_8php_source.html#l00042">42</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00043">43</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a850080ac36b303288c15bc3113b114a4"></a><!-- doxytag: member="ApnsPHP_Message::APPLE_RESERVED_NAMESPACE" ref="a850080ac36b303288c15bc3113b114a4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="class_apns_p_h_p___message.html#a850080ac36b303288c15bc3113b114a4">APPLE_RESERVED_NAMESPACE</a> = 'aps'</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p><b>string</b> The Apple-reserved aps namespace. </p>
+
+<p>Definition at line <a class="el" href="_message_8php_source.html#l00037">37</a> of file <a class="el" href="_message_8php_source.html">Message.php</a>.</p>
 
 </div>
 </div>
@@ -1204,7 +1288,7 @@ Here is the caller graph for this function:</div>
 <li><a class="el" href="_message_8php_source.html">Message.php</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Tue Dec 14 00:00:01 2010 for apns-php by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Dec 18 19:53:53 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
