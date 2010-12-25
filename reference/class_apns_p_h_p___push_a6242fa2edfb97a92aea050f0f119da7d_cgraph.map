@@ -1,6 +1,6 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger." alt="" coords="545,126,673,152"/>
-<area shape="rect" id="node5" href="$class_apns_p_h_p___push.html#a2fe538ea4442f608db7f2c54948eb6ab" title="Reads and error message (if present) from the main stream." alt="" coords="161,53,268,78"/>
+<area shape="rect" id="node5" href="$class_apns_p_h_p___push.html#a2fe538ea4442f608db7f2c54948eb6ab" title="Reads an error message (if present) from the main stream." alt="" coords="161,53,268,78"/>
 <area shape="rect" id="node9" href="$class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server." alt="" coords="141,101,288,126"/>
 <area shape="rect" id="node15" href="$class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server." alt="" coords="337,198,495,224"/>
 <area shape="rect" id="node7" href="$class_apns_p_h_p___push.html#a381cee411cee3e7d1c3220fa45d47eb2" title="Parses the error message." alt="" coords="361,52,471,77"/>

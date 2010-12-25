@@ -5,8 +5,8 @@
 <area shape="rect" id="node9" href="$class_apns_p_h_p___push___server.html#ac018cd9443834d169616e64dbd91795b" title="Adds a message to the inter&#45;process message queue." alt="" coords="164,93,201,118"/>
 <area shape="rect" id="node13" href="$class_apns_p_h_p___push.html#ae9399f5ec7881c5d18173def8068108e" title="Sends all messages in the message queue to Apple Push Notification Service." alt="" coords="125,191,240,217"/>
 <area shape="rect" id="node16" href="$class_apns_p_h_p___push.html#af366dce8b0b73dc941f0178795ea8547" title="Remove a message from the message queue." alt="" coords="289,191,508,217"/>
-<area shape="rect" id="node18" href="$class_apns_p_h_p___push.html#ac64983c972029732bf49ee8c1ff4c6ee" title="Checks for error message and deletes messages successfully sent from message queue..." alt="" coords="320,266,477,291"/>
-<area shape="rect" id="node21" href="$class_apns_p_h_p___push.html#a2fe538ea4442f608db7f2c54948eb6ab" title="Reads and error message (if present) from the main stream." alt="" coords="557,382,736,407"/>
+<area shape="rect" id="node18" href="$class_apns_p_h_p___push.html#a6242fa2edfb97a92aea050f0f119da7d" title="Checks for error message and deletes messages successfully sent from message queue..." alt="" coords="320,266,477,291"/>
+<area shape="rect" id="node21" href="$class_apns_p_h_p___push.html#a2fe538ea4442f608db7f2c54948eb6ab" title="Reads an error message (if present) from the main stream." alt="" coords="557,382,736,407"/>
 <area shape="rect" id="node25" href="$class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server." alt="" coords="573,266,720,291"/>
 <area shape="rect" id="node31" href="$class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server." alt="" coords="797,341,955,366"/>
 <area shape="rect" id="node23" href="$class_apns_p_h_p___push.html#a381cee411cee3e7d1c3220fa45d47eb2" title="Parses the error message." alt="" coords="785,389,967,414"/>
