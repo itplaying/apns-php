@@ -246,7 +246,7 @@ Here is the caller graph for this function:</div>
 
 <p>References <a class="el" href="_push_8php_source.html#l00280">_parseErrorMessage()</a>.</p>
 
-<p>Referenced by <a class="el" href="_push_8php_source.html#l00323">_updateQueue()</a>.</p>
+<p>Referenced by <a class="el" href="_push_8php_source.html#l00326">_updateQueue()</a>.</p>
 
 <p><div class="fragment"><pre class="fragment"><a name="l00293"></a>00293     {
 <a name="l00294"></a>00294         $sErrorResponse = @fread($this-&gt;_hSocket, self::ERROR_RESPONSE_SIZE);
@@ -332,26 +332,26 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00359">359</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00370">370</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
 <p>Referenced by <a class="el" href="_push_8php_source.html#l00120">send()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00360"></a>00360     {
-<a name="l00361"></a>00361         <span class="keywordflow">if</span> (!is_numeric($nMessageID) || $nMessageID &lt;= 0) {
-<a name="l00362"></a>00362             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
-<a name="l00363"></a>00363                 <span class="stringliteral">&#39;Message ID format is not valid.&#39;</span>
-<a name="l00364"></a>00364             );
-<a name="l00365"></a>00365         }
-<a name="l00366"></a>00366         <span class="keywordflow">if</span> (!isset($this-&gt;_aMessageQueue[$nMessageID])) {
-<a name="l00367"></a>00367             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
-<a name="l00368"></a>00368                 <span class="stringliteral">&quot;The Message ID {$nMessageID} does not exists.&quot;</span>
-<a name="l00369"></a>00369             );
-<a name="l00370"></a>00370         }
-<a name="l00371"></a>00371         <span class="keywordflow">if</span> ($bError) {
-<a name="l00372"></a>00372             $this-&gt;_aErrors[$nMessageID] = $this-&gt;_aMessageQueue[$nMessageID];
-<a name="l00373"></a>00373         }
-<a name="l00374"></a>00374         unset($this-&gt;_aMessageQueue[$nMessageID]);
-<a name="l00375"></a>00375     }
+<p><div class="fragment"><pre class="fragment"><a name="l00371"></a>00371     {
+<a name="l00372"></a>00372         <span class="keywordflow">if</span> (!is_numeric($nMessageID) || $nMessageID &lt;= 0) {
+<a name="l00373"></a>00373             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
+<a name="l00374"></a>00374                 <span class="stringliteral">&#39;Message ID format is not valid.&#39;</span>
+<a name="l00375"></a>00375             );
+<a name="l00376"></a>00376         }
+<a name="l00377"></a>00377         <span class="keywordflow">if</span> (!isset($this-&gt;_aMessageQueue[$nMessageID])) {
+<a name="l00378"></a>00378             <span class="keywordflow">throw</span> <span class="keyword">new</span> <a class="code" href="class_apns_p_h_p___push___exception.html" title="Exception class.">ApnsPHP_Push_Exception</a>(
+<a name="l00379"></a>00379                 <span class="stringliteral">&quot;The Message ID {$nMessageID} does not exists.&quot;</span>
+<a name="l00380"></a>00380             );
+<a name="l00381"></a>00381         }
+<a name="l00382"></a>00382         <span class="keywordflow">if</span> ($bError) {
+<a name="l00383"></a>00383             $this-&gt;_aErrors[$nMessageID] = $this-&gt;_aMessageQueue[$nMessageID];
+<a name="l00384"></a>00384         }
+<a name="l00385"></a>00385         unset($this-&gt;_aMessageQueue[$nMessageID]);
+<a name="l00386"></a>00386     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -384,45 +384,53 @@ Here is the caller graph for this function:</div>
 <p>Checks for error message and deletes messages successfully sent from message queue. </p>
 <dl><dt><b>Parameters:</b></dt><dd>
   <table border="0" cellspacing="2" cellpadding="0">
-    <tr><td valign="top"></td><td valign="top"><em>$aErrorMessage</em>&nbsp;</td><td>[optional] The error message. If null it will be read from the main stream. </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>$aErrorMessage</em>&nbsp;</td><td>[optional] The error message. It will anyway always be read from the main stream. The latest successful message sent is the lower between this error message and the message that was read from the main stream. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="see"><dt><b>See also:</b></dt><dd><a class="el" href="class_apns_p_h_p___push.html#a2fe538ea4442f608db7f2c54948eb6ab" title="Reads an error message (if present) from the main stream.">_readErrorMessage()</a> </dd></dl>
 <dl class="return"><dt><b>Returns:</b></dt><dd>True if an error was received. </dd></dl>
 
-<p>Definition at line <a class="el" href="_push_8php_source.html#l00323">323</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
+<p>Definition at line <a class="el" href="_push_8php_source.html#l00326">326</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
 <p>References <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_push_8php_source.html#l00292">_readErrorMessage()</a>, <a class="el" href="_abstract_8php_source.html#l00289">ApnsPHP_Abstract::connect()</a>, and <a class="el" href="_abstract_8php_source.html#l00317">ApnsPHP_Abstract::disconnect()</a>.</p>
 
 <p>Referenced by <a class="el" href="_push_8php_source.html#l00120">send()</a>.</p>
 
-<p><div class="fragment"><pre class="fragment"><a name="l00324"></a>00324     {
-<a name="l00325"></a>00325         $aErrorMessage = $aErrorMessage ?: $this-&gt;<a class="code" href="class_apns_p_h_p___push.html#a2fe538ea4442f608db7f2c54948eb6ab" title="Reads an error message (if present) from the main stream.">_readErrorMessage</a>();
-<a name="l00326"></a>00326         <span class="keywordflow">if</span> (!isset($aErrorMessage)) {
-<a name="l00327"></a>00327             <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00328"></a>00328         }
-<a name="l00329"></a>00329 
-<a name="l00330"></a>00330         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&#39;ERROR: Unable to send message ID &#39;</span> .
-<a name="l00331"></a>00331             $aErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>] . <span class="stringliteral">&#39;: &#39;</span> .
-<a name="l00332"></a>00332             $aErrorMessage[<span class="stringliteral">&#39;statusMessage&#39;</span>] . <span class="stringliteral">&#39; (&#39;</span> . $aErrorMessage[<span class="stringliteral">&#39;statusCode&#39;</span>] . <span class="stringliteral">&#39;).&#39;</span>);
-<a name="l00333"></a>00333 
-<a name="l00334"></a>00334         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server.">disconnect</a>();
-<a name="l00335"></a>00335 
-<a name="l00336"></a>00336         <span class="keywordflow">foreach</span>($this-&gt;_aMessageQueue as $k =&gt; &amp;$aMessage) {
-<a name="l00337"></a>00337             <span class="keywordflow">if</span> ($k &lt; $aErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>]) {
-<a name="l00338"></a>00338                 unset($this-&gt;_aMessageQueue[$k]);
-<a name="l00339"></a>00339             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($k == $aErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>]) {
-<a name="l00340"></a>00340                 $aMessage[<span class="stringliteral">&#39;ERRORS&#39;</span>][] = $aErrorMessage;
-<a name="l00341"></a>00341             } <span class="keywordflow">else</span> {
-<a name="l00342"></a>00342                 <span class="keywordflow">break</span>;
-<a name="l00343"></a>00343             }
-<a name="l00344"></a>00344         }
-<a name="l00345"></a>00345 
-<a name="l00346"></a>00346         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server.">connect</a>();
-<a name="l00347"></a>00347 
-<a name="l00348"></a>00348         <span class="keywordflow">return</span> <span class="keyword">true</span>;
-<a name="l00349"></a>00349     }
+<p><div class="fragment"><pre class="fragment"><a name="l00327"></a>00327     {
+<a name="l00328"></a>00328         $aStreamErrorMessage = $this-&gt;<a class="code" href="class_apns_p_h_p___push.html#a2fe538ea4442f608db7f2c54948eb6ab" title="Reads an error message (if present) from the main stream.">_readErrorMessage</a>();
+<a name="l00329"></a>00329         <span class="keywordflow">if</span> (!isset($aErrorMessage) &amp;&amp; !isset($aStreamErrorMessage)) {
+<a name="l00330"></a>00330             <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00331"></a>00331         } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (isset($aErrorMessage, $aStreamErrorMessage)) {
+<a name="l00332"></a>00332             <span class="keywordflow">if</span> ($aStreamErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>] &lt;= $aErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>]) {
+<a name="l00333"></a>00333                 $aErrorMessage = $aStreamErrorMessage;
+<a name="l00334"></a>00334                 unset($aStreamErrorMessage);
+<a name="l00335"></a>00335             }
+<a name="l00336"></a>00336         } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (!isset($aErrorMessage) &amp;&amp; isset($aStreamErrorMessage)) {
+<a name="l00337"></a>00337             $aErrorMessage = $aStreamErrorMessage;
+<a name="l00338"></a>00338             unset($aStreamErrorMessage);
+<a name="l00339"></a>00339         }
+<a name="l00340"></a>00340 
+<a name="l00341"></a>00341         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(<span class="stringliteral">&#39;ERROR: Unable to send message ID &#39;</span> .
+<a name="l00342"></a>00342             $aErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>] . <span class="stringliteral">&#39;: &#39;</span> .
+<a name="l00343"></a>00343             $aErrorMessage[<span class="stringliteral">&#39;statusMessage&#39;</span>] . <span class="stringliteral">&#39; (&#39;</span> . $aErrorMessage[<span class="stringliteral">&#39;statusCode&#39;</span>] . <span class="stringliteral">&#39;).&#39;</span>);
+<a name="l00344"></a>00344 
+<a name="l00345"></a>00345         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a7df1b1c18902634d60f5fb06d3c5f4a9" title="Disconnects from Apple Push Notifications service server.">disconnect</a>();
+<a name="l00346"></a>00346 
+<a name="l00347"></a>00347         <span class="keywordflow">foreach</span>($this-&gt;_aMessageQueue as $k =&gt; &amp;$aMessage) {
+<a name="l00348"></a>00348             <span class="keywordflow">if</span> ($k &lt; $aErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>]) {
+<a name="l00349"></a>00349                 unset($this-&gt;_aMessageQueue[$k]);
+<a name="l00350"></a>00350             } <span class="keywordflow">else</span> <span class="keywordflow">if</span> ($k == $aErrorMessage[<span class="stringliteral">&#39;identifier&#39;</span>]) {
+<a name="l00351"></a>00351                 $aMessage[<span class="stringliteral">&#39;ERRORS&#39;</span>][] = $aErrorMessage;
+<a name="l00352"></a>00352             } <span class="keywordflow">else</span> {
+<a name="l00353"></a>00353                 <span class="keywordflow">break</span>;
+<a name="l00354"></a>00354             }
+<a name="l00355"></a>00355         }
+<a name="l00356"></a>00356 
+<a name="l00357"></a>00357         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a1396bf9b5defe9fa844a63b5cd40ac0e" title="Connects to Apple Push Notification service server.">connect</a>();
+<a name="l00358"></a>00358 
+<a name="l00359"></a>00359         <span class="keywordflow">return</span> <span class="keyword">true</span>;
+<a name="l00360"></a>00360     }
 </pre></div></p>
 
 <p><div class="dynheader">
@@ -640,7 +648,7 @@ Here is the call graph for this function:</div>
 
 <p>Definition at line <a class="el" href="_push_8php_source.html#l00120">120</a> of file <a class="el" href="_push_8php_source.html">Push.php</a>.</p>
 
-<p>References <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_push_8php_source.html#l00359">_removeMessageFromQueue()</a>, and <a class="el" href="_push_8php_source.html#l00323">_updateQueue()</a>.</p>
+<p>References <a class="el" href="_abstract_8php_source.html#l00370">ApnsPHP_Abstract::_log()</a>, <a class="el" href="_push_8php_source.html#l00370">_removeMessageFromQueue()</a>, and <a class="el" href="_push_8php_source.html#l00326">_updateQueue()</a>.</p>
 
 <p>Referenced by <a class="el" href="_server_8php_source.html#l00273">ApnsPHP_Push_Server::_mainLoop()</a>.</p>
 
@@ -687,7 +695,7 @@ Here is the call graph for this function:</div>
 <a name="l00161"></a>00161                     }
 <a name="l00162"></a>00162                     <span class="keywordflow">if</span> (($nErrors = count($aMessage[<span class="stringliteral">&#39;ERRORS&#39;</span>])) &gt;= $this-&gt;_nSendRetryTimes) {
 <a name="l00163"></a>00163                         $this-&gt;<a class="code" href="class_apns_p_h_p___abstract.html#a6e9fdc68fece1907733a1e76f667622f" title="Logs a message through the Logger.">_log</a>(
-<a name="l00164"></a>00164                             <span class="stringliteral">&quot;WARNING: Message ID {$k} {$sCustomIdentifier} has too many errors ($nErrors/{$this-&gt;_nSendRetryTimes}), removing from queue...&quot;</span>
+<a name="l00164"></a>00164                             <span class="stringliteral">&quot;WARNING: Message ID {$k} {$sCustomIdentifier} has {$nErrors} errors, removing from queue...&quot;</span>
 <a name="l00165"></a>00165                         );
 <a name="l00166"></a>00166                         $this-&gt;<a class="code" href="class_apns_p_h_p___push.html#af366dce8b0b73dc941f0178795ea8547" title="Remove a message from the message queue.">_removeMessageFromQueue</a>($k, <span class="keyword">true</span>);
 <a name="l00167"></a>00167                         <span class="keywordflow">continue</span>;
@@ -966,7 +974,7 @@ Here is the caller graph for this function:</div>
 <li><a class="el" href="_push_8php_source.html">Push.php</a></li>
 </ul>
 </div>
-<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Dec 25 20:48:30 2010 for apns-php by&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Generated on Sat Dec 25 22:23:03 2010 for apns-php by&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
