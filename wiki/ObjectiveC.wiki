@@ -73,4 +73,4 @@ Please, see the Objective-C Demo Project at [http://code.google.com/p/apns-php/s
 @end
 }}}
 
-==<font color="red">Please, to report an issue use [http://code.google.com/p/apns-php/issues/list Issues] and not a wiki page comment. Thanks!</font>==
+==<font color="red">Please, use [https://groups.google.com/group/apns-php ApnsPHP Google Group] for help requests or to discuss about this project. To report an issue use [http://code.google.com/p/apns-php/issues/list Issues]. Thanks!</font>==
