@@ -94,4 +94,5 @@ Sat, 25 Dec 2010 21:07:10 +0100 ApnsPHP[3873]: INFO: Child 3873 received signal 
 Sat, 25 Dec 2010 21:07:10 +0100 ApnsPHP[3870]: INFO: Parent shutdown, cleaning memory...
 }}}
 
-==<font color="red">Please, to report an issue use [http://code.google.com/p/apns-php/issues/list Issues] and not a wiki page comment. Thanks!</font>==
+
+==<font color="red">Please, use [https://groups.google.com/group/apns-php ApnsPHP Google Group] for help requests or to discuss about this project. To report an issue use [http://code.google.com/p/apns-php/issues/list Issues]. Thanks!</font>==
