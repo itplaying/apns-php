@@ -15,10 +15,10 @@ To generate a certificate on a *Mac OS X*:
   # Download this certificate and double click on {{{aps_developer_identity.cer}}} to import it into your Keychain
   # Launch *Keychain Assistant* (located in Application, Utilities or search for it with Spotlight) and click on My Certificates on the left
   # Expand *Apple Development Push Services* and select Apple Development Push Services *AND* your private key (just under Apple Development Push Services)
-  # Right-click and choose "Export 2 elements..." and save as {{{server_cerificates_bundle_sandbox.p12}}} (don't type a password).
-  # Open *Terminal* and change directory to location used to save {{{server_cerificates_bundle_sandbox.p12}}} and convert the PKCS12 certificate bundle into PEM format using this command (press _enter_ when asked for _Import Password_):
+  # Right-click and choose "Export 2 elements..." and save as {{{server_certificates_bundle_sandbox.p12}}} (don't type a password).
+  # Open *Terminal* and change directory to location used to save {{{server_certificates_bundle_sandbox.p12}}} and convert the PKCS12 certificate bundle into PEM format using this command (press _enter_ when asked for _Import Password_):
 {{{
-openssl pkcs12 -in server_cerificates_bundle_sandbox.p12 -out server_cerificates_bundle_sandbox.pem -nodes -clcerts
+openssl pkcs12 -in server_certificates_bundle_sandbox.p12 -out server_certificates_bundle_sandbox.pem -nodes -clcerts
 }}}
   # Now you can use this PEM file as your certificate in ApnsPHP!
 
