@@ -1,3 +1,5 @@
+#summary The development code has moved to github.
+
 = October, 26 2012 =
 
 == The development code has moved to github: ==
